@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 const Home = lazy(() => import('@/views/Home'));
 const About = lazy(() => import('@/views/About'));
- 
+
 const AppRoutes = () => {
   return (
     <Suspense fallback="Loading...">

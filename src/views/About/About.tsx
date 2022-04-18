@@ -4,7 +4,7 @@ import styles from './about.module.css';
 const AboutView = () => {
   return (
     <div className={styles.about}>
-        {'about view'}
+      {'about view'}
       <Link to="/">Home</Link>
     </div>
   );
