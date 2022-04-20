@@ -20,6 +20,11 @@ body {
   scroll-behavior: smooth;
 }
 
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
 #root {
   height: 100%;
   touch-action: manipulation;
