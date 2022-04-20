@@ -2,10 +2,10 @@
 
 @custom-media --view-xs screen and (max-width: 425px);
 
-@custom-media --view-sm screen and (min-width: 576px);
+@custom-media --view-sm screen and (max-width: 576px);
 
-@custom-media --view-md screen and (min-width: 768px);
+@custom-media --view-md screen and (max-width: 768px);
 
-@custom-media --view-lg screen and (min-width: 1024px);
+@custom-media --view-lg screen and (max-width: 1024px);
 
-@custom-media --view-xl screen and (min-width: 1200px);
+@custom-media --view-xl screen and (max-width: 1200px);

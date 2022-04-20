@@ -10,6 +10,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.19.0
   '@vitejs/plugin-react': ^1.3.0
   autoprefixer: ^10.4.4
+  clsx: ^1.1.1
   eslint: ^8.13.0
   eslint-plugin-react: ^7.29.4
   eslint-plugin-react-hooks: ^4.4.0
@@ -22,14 +23,17 @@ specifiers:
   react: ^18.0.0
   react-dom: ^18.0.0
   react-router-dom: ^6.3.0
+  ress: ^5.0.2
   typescript: ^4.6.3
   vite: ^2.9.2
   vite-plugin-svgr: ^1.1.0
 
 dependencies:
+  clsx: 1.1.1
   react: 18.0.0
   react-dom: 18.0.0_react@18.0.0
   react-router-dom: 6.3.0_react-dom@18.0.0+react@18.0.0
+  ress: 5.0.2
 
 devDependencies:
   '@commitlint/cli': 16.2.3
@@ -1155,6 +1159,11 @@ packages:
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
     dev: true
+
+  /clsx/1.1.1:
+    resolution: {integrity: sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==}
+    engines: {node: '>=6'}
+    dev: false
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
@@ -2982,6 +2991,10 @@ packages:
       is-core-module: 2.8.1
       path-parse: 1.0.7
     dev: true
+
+  /ress/5.0.2:
+    resolution: {integrity: sha512-oHBtOWo/Uc8SzQMbQNIKTcgi8wKmAs7IlNlRywmXudbOtF+c27FlOIq7tnwLDVcTywe6JXYo1pDXHO6kABwNYA==}
+    dev: false
 
   /restore-cursor/3.1.0:
     resolution: {integrity: sha512-l+sSefzHpj5qimhFSE5a8nufZYAM3sBSVMAPtYkmC+4EH2anSGaEMXSD0izRQbu9nfyQ9y5JrVmp7E8oZrUjvA==}

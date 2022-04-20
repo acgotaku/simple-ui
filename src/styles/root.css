@@ -1,0 +1,32 @@
+:root {
+  --color-standard: #fff;
+  --color-standard-border: #cdcdcd;
+  --color-standard-hover: #f3f2f1;
+  --color-container-bg: #faf9f8;
+  --color-primary: #0078d4;
+  --color-primary-text: #fff;
+  --color-primary-hover: #106ebe;
+  --color-danger: #dc3545;
+  --color-danger-text: #fff;
+  --color-danger-hover: #bb2d3b;
+  --color-disabled: #f5f5f5;
+  --color-disabled-text: #bfbfbf;
+  --color-link: #0078d4;
+  --color-link-hover: #004578;
+  --color-shadow: rgba(0, 0, 0, 0.15);
+  --color-switch-bg: #ccc;
+  --color-mask-bg: rgba(0, 0, 0, 0.4);
+  --color-standard-text: #262626;
+  --color-secondary-text: #595959;
+  --font-size-sm: 10px;
+  --font-size-md: 12px;
+  --font-size-lg: 14px;
+  --font-size-xl: 16px;
+  --font-size-xxl: 20px;
+  --font-size-xxxl: 24px;
+  --width-sidebar: 240px;
+  --height-header: 48px;
+  --z-index-popper: 1100;
+  --z-index-message: 1200;
+  --z-index-modal: 1300;
+}
