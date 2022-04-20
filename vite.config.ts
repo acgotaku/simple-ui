@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig(async ({ mode }) => {
@@ -14,7 +15,7 @@ export default defineConfig(async ({ mode }) => {
         '@': resolve(__dirname, 'src')
       }
     },
-    plugins: [react()],
+    plugins: [react(), svgr()],
     build: {
       sourcemap: mode === 'production' ? 'hidden' : true,
       emptyOutDir: true
