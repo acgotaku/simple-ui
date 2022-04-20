@@ -5,24 +5,24 @@
 }
 
 .title {
-  font-size: var(--font-size-xxl);
+  font-size: var(--font-size-xxxxl);
 }
 
 .desc {
   margin: 16px 0;
-  color: var(--color-main-text);
+  color: var(--color-standard-text);
 }
 
 .heading {
   margin: 16px 0;
   padding: 4px 0;
-  font-size: var(--font-size-xl);
-  border-bottom: 1px solid var(--color-border);
+  font-size: var(--font-size-xxxl);
+  border-bottom: 1px solid var(--color-standard-border);
 }
 
 .caption {
   margin: 16px 0;
-  font-size: var(--fontSizes-lg);
+  font-size: var(--font-size-xxl);
 }
 
 .content {
@@ -39,14 +39,14 @@
   }
 
   .title {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-xxxl);
   }
 
   .heading {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xxl);
   }
 
   .caption {
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-xl);
   }
 }

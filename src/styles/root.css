@@ -24,8 +24,10 @@
   --font-size-xl: 16px;
   --font-size-xxl: 20px;
   --font-size-xxxl: 24px;
-  --width-sidebar: 240px;
+  --font-size-xxxxl: 40px;
   --height-header: 48px;
+  --width-sidebar: 240px;
+  --wdith-main: 800px;
   --z-index-popper: 1100;
   --z-index-message: 1200;
   --z-index-modal: 1300;
