@@ -1,0 +1,92 @@
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: var(--height-header);
+  padding: 0 16px;
+  flex: none;
+  background-color: var(--color-standard);
+  border-bottom: 1px solid var(--color-standard-border);
+}
+
+.inner {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  display: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &Icon {
+    position: relative;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-secondary-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+    transform-origin: center;
+
+    &::before,
+    &::after {
+      content: '';
+      width: 100%;
+      height: 2px;
+      position: absolute;
+      background-color: var(--color-secondary-text);
+      transition: inherit;
+      transform-origin: center;
+    }
+
+    &::before {
+      top: -8px;
+      left: 0;
+    }
+
+    &::after {
+      top: 8px;
+      left: 0;
+    }
+
+    &.open {
+      background-color: transparent;
+
+      &::before {
+        top: 0;
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        top: 0;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+.home {
+  height: 32px;
+}
+
+@media (--view-lg) {
+  .home {
+    margin-left: 16px;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    user-select: none;
+  }
+}

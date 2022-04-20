@@ -1,0 +1,17 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-link);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
