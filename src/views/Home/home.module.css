@@ -1,3 +1,14 @@
 .home {
-  display: flex;
+  margin: 0 auto;
+  max-width: var(--wdith-main);
+  padding: 32px;
+}
+
+.title {
+  font-size: var(--font-size-xxxxl);
+}
+
+.desc {
+  margin: 16px 0;
+  color: var(--color-standard-text);
 }
