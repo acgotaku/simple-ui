@@ -12,8 +12,7 @@ const HomeView = () => {
         className={styles.link}
         href="https://github.com/acgotaku/simple-ui"
       >
-        {' '}
-        Github{' '}
+        Github
       </Link>
     </article>
   );
