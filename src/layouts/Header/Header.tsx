@@ -22,6 +22,12 @@ const Header = forwardRef<HTMLElement>((props, ref) => {
         <Link to="/" className={styles.home}>
           Simple UI
         </Link>
+        <Link
+          href="https://github.com/acgotaku/simple-ui"
+          className={styles.github}
+        >
+          Github
+        </Link>
       </div>
     </header>
   );

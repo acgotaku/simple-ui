@@ -14,6 +14,7 @@
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .menu {
@@ -73,6 +74,10 @@
 }
 
 .home {
+  height: 32px;
+}
+
+.github {
   height: 32px;
 }
 

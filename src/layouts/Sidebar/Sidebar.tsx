@@ -20,7 +20,7 @@ const Link = ({ children, to, ...props }: LinkProps) => {
 };
 
 const Sidebar = forwardRef<HTMLElement>((props, ref) => {
-  const { openMenu } = useBaseContext();
+  const { openMenu, setOpenMenu } = useBaseContext();
 
   return (
     <aside
@@ -32,7 +32,7 @@ const Sidebar = forwardRef<HTMLElement>((props, ref) => {
       <div className={styles.inner}>
         <nav className={styles.nav}>
           <h3 className={styles.heading}>Components</h3>
-          <ol className={styles.navList}>
+          <ol className={styles.navList} onClick={() => setOpenMenu(false)}>
             <li className={styles.navItem}>
               <Link to="/button">Button</Link>
             </li>

@@ -12,3 +12,7 @@
   margin: 16px 0;
   color: var(--color-standard-text);
 }
+
+.link {
+  display: inline-flex;
+}
