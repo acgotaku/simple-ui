@@ -1,5 +1,12 @@
 import { Button } from '@/components';
+import Code from '@/components/Code';
 import styles from './button.module.css';
+
+const defaultButtonCode = `<Button>{'Standard'}</Button>`;
+const primaryButtonCode = `<Button color="primary">{'Primary'}</Button>`;
+const dangerButtonCode = `<Button color="danger">{'Danger'}</Button>`;
+const disabledButtonCode = `<Button disabled={true}>{'Disabled'}</Button>`;
+const loadingButtonCode = `<Button loading={true}>{'Loading'}</Button>`;
 
 const ButtonView = () => {
   return (
@@ -15,6 +22,37 @@ const ButtonView = () => {
       <h3 className={styles.caption}>Default Button</h3>
       <div className={styles.content}>
         <Button>{'Standard'}</Button>
+        <div className={styles.code}>
+          <Code code={defaultButtonCode} />
+        </div>
+      </div>
+      <h3 className={styles.caption}>Primary Button</h3>
+      <div className={styles.content}>
+        <Button color="primary">{'Primary'}</Button>
+        <div className={styles.code}>
+          <Code code={primaryButtonCode} />
+        </div>
+      </div>
+      <h3 className={styles.caption}>Danger Button</h3>
+      <div className={styles.content}>
+        <Button color="danger">{'Danger'}</Button>
+        <div className={styles.code}>
+          <Code code={dangerButtonCode} />
+        </div>
+      </div>
+      <h3 className={styles.caption}>Disabled Button</h3>
+      <div className={styles.content}>
+        <Button disabled={true}>{'Disabled'}</Button>
+        <div className={styles.code}>
+          <Code code={disabledButtonCode} />
+        </div>
+      </div>
+      <h3 className={styles.caption}>Loading Button</h3>
+      <div className={styles.content}>
+        <Button loading={true}>{'Loading'}</Button>
+        <div className={styles.code}>
+          <Code code={loadingButtonCode} />
+        </div>
       </div>
     </article>
   );

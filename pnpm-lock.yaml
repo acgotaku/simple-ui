@@ -20,6 +20,7 @@ specifiers:
   postcss-custom-media: ^8.0.0
   postcss-nested: ^5.0.6
   prettier: ^2.6.2
+  prism-react-renderer: ^1.3.1
   react: ^18.0.0
   react-dom: ^18.0.0
   react-router-dom: ^6.3.0
@@ -30,6 +31,7 @@ specifiers:
 
 dependencies:
   clsx: 1.1.1
+  prism-react-renderer: 1.3.1_react@18.0.0
   react: 18.0.0
   react-dom: 18.0.0_react@18.0.0
   react-router-dom: 6.3.0_react-dom@18.0.0+react@18.0.0
@@ -2825,6 +2827,14 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
+
+  /prism-react-renderer/1.3.1_react@18.0.0:
+    resolution: {integrity: sha512-xUeDMEz074d0zc5y6rxiMp/dlC7C+5IDDlaEUlcBOFE2wddz7hz5PNupb087mPwTt7T9BrFmewObfCBuf/LKwQ==}
+    peerDependencies:
+      react: '>=0.14.9'
+    dependencies:
+      react: 18.0.0
+    dev: false
 
   /prop-types/15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}

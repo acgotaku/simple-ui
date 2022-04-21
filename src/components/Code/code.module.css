@@ -1,0 +1,10 @@
+.code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  padding: 12px 0;
+  overflow: auto;
+}
+
+.line {
+  padding: 0 16px;
+}
