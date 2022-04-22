@@ -1,6 +1,6 @@
 import { Link } from '@/components';
 import Code from '@/components/Code';
-import styles from './link.module.css';
+import styles from '@/styles/view.module.css';
 
 const internalLinkCode = `<Link to="/button">Button View</Link>`;
 const externalLinkCode = `<Link href="https://github.com/acgotaku/simple-ui">Github</Link>`;

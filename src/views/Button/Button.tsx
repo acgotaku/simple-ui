@@ -1,6 +1,6 @@
 import { Button } from '@/components';
 import Code from '@/components/Code';
-import styles from './button.module.css';
+import styles from '@/styles/view.module.css';
 
 const defaultButtonCode = `<Button>{'Standard'}</Button>`;
 const primaryButtonCode = `<Button color="primary">{'Primary'}</Button>`;
