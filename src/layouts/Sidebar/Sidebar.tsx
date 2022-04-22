@@ -36,6 +36,9 @@ const Sidebar = forwardRef<HTMLElement>((props, ref) => {
             <li className={styles.navItem}>
               <Link to="/button">Button</Link>
             </li>
+            <li className={styles.navItem}>
+              <Link to="/link">Link</Link>
+            </li>
           </ol>
         </nav>
       </div>
