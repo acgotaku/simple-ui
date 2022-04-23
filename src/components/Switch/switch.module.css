@@ -1,0 +1,40 @@
+.switch {
+  appearance: none;
+  position: relative;
+  display: inline-flex;
+  width: 32px;
+  height: 16px;
+  border-radius: 16px;
+  background-color: var(--color-switch-bg);
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translate3d(0, -50%, 0);
+    content: '';
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-standard);
+    transition: left 0.3s ease-in-out;
+  }
+
+  &:checked {
+    background-color: var(--color-primary);
+    &::before {
+      left: 18px;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
