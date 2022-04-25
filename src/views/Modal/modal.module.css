@@ -1,0 +1,16 @@
+.modal {
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 16px;
+  border-top: 1px solid var(--color-standard-border);
+
+  &Button {
+    margin-left: 16px;
+  }
+}
