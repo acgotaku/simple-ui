@@ -4,6 +4,7 @@ import { BaseLayout } from '@/layouts';
 
 const Home = lazy(() => import('@/views/Home'));
 const Button = lazy(() => import('@/views/Button'));
+const Input = lazy(() => import('@/views/Input'));
 const Link = lazy(() => import('@/views/Link'));
 const Message = lazy(() => import('@/views/Message'));
 const Modal = lazy(() => import('@/views/Modal'));
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <Route path="/" element={<BaseLayout />}>
           <Route index element={<Home />} />
           <Route path="/button" element={<Button />} />
+          <Route path="/input" element={<Input />} />
           <Route path="/link" element={<Link />} />
           <Route path="/message" element={<Message />} />
           <Route path="/modal" element={<Modal />} />
