@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Input } from '@/components';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
@@ -10,6 +11,29 @@ const disabledInputCode = `<Input className={inputStyles.input} defaultValue={'h
 const readOnlyInputCode = `<Input className={inputStyles.input} defaultValue={'hello world'} readOnly />`;
 const placeholderInputCode = `<Input className={inputStyles.input} placeholder={'Please input something...'} />`;
 const suffixIconInputCode = `<Input className={inputStyles.input} suffix={<Calendar className={inputStyles.icon} />} />`;
+
+const Password = () => {
+  const [password, setPassword] = useState('');
+  return (
+    <Input
+      className={inputStyles.input}
+      type="password"
+      value={password}
+      onChange={e => setPassword(e.target.value)}
+    />
+  );
+};
+
+const passwordInputCode = `
+const [password, setPassword] = useState('');
+return (
+  <Input
+    className={inputStyles.input}
+    type="password"
+    value={password}
+    onChange={e => setPassword(e.target.value)}
+  />
+);`;
 
 const InputView = () => {
   return (
@@ -79,6 +103,13 @@ const InputView = () => {
         />
         <div className={styles.code}>
           <Code code={suffixIconInputCode} />
+        </div>
+      </div>
+      <h3 className={styles.caption}>Password</h3>
+      <div className={styles.content}>
+        <Password />
+        <div className={styles.code}>
+          <Code code={passwordInputCode} />
         </div>
       </div>
     </article>

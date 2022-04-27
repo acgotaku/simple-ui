@@ -12,7 +12,7 @@
 
 .toast {
   display: flex;
-  max-width: 640px;
+  max-width: min(640px, 90vw);
   margin-bottom: 16px;
   padding: 14px 16px;
   border-radius: 4px;

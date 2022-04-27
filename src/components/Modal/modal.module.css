@@ -5,7 +5,7 @@
   .inner {
     display: flex;
     flex-direction: column;
-    min-width: 440px;
+    min-width: min(440px, 90vw);
     background-color: var(--color-standard);
     border-radius: 2px;
   }
