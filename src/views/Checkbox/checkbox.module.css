@@ -1,0 +1,9 @@
+.vertical {
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.checkbox {
+  margin: 8px 0;
+}

@@ -78,7 +78,7 @@ const SwitchView = () => {
           <Code code={disabledSwitchCode} />
         </div>
       </div>
-      <h3 className={styles.caption}>Disabled(checked) Switch</h3>
+      <h3 className={styles.caption}>Disabled (checked) Switch</h3>
       <div className={styles.content}>
         <DisabledCheckedSwitch />
         <div className={styles.code}>
