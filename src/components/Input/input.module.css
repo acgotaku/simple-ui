@@ -29,8 +29,11 @@
   &:not(.disabled, .invalid):hover {
     border: 1px solid var(--color-primary);
 
-    .clear {
-      visibility: visible;
+    /* https://gist.github.com/PocketNinjaDesign/689e16e412a88dfd36dd08b26bebcacf */
+    @media (hover: hover) {
+      .clear {
+        visibility: visible;
+      }
     }
   }
 }
