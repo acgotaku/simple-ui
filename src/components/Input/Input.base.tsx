@@ -8,10 +8,11 @@ import React, {
   useCallback
 } from 'react';
 import cls from 'clsx';
-import styles from './input.module.css';
-import { IInputProps } from './Input.types';
+import { useClickOutside } from '@/hooks/useClickOutside';
 import { useTabFoucs } from '@/hooks/useTabFocus';
 import { ReactComponent as Clear } from '@/assets/icons/clear.svg';
+import styles from './input.module.css';
+import { IInputProps } from './Input.types';
 
 const simulateChangeEvent = (
   el: HTMLInputElement,
@@ -42,11 +43,14 @@ const BaseInput = forwardRef<HTMLInputElement, IInputProps>(
     }: IInputProps,
     ref: React.Ref<HTMLInputElement | null>
   ) => {
-    const inputRef = useRef<HTMLInputElement | null>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const clearRef = useRef<HTMLButtonElement>(null);
     const [focus, setFocus] = useState(false);
     const [selfValue, setSelfValue] = useState(defaultValue);
     const isControlledComponent = useMemo(() => value !== undefined, [value]);
+
+    useClickOutside(() => setFocus(false), [wrapperRef.current]);
 
     useImperativeHandle(ref, () => inputRef.current);
 
@@ -93,7 +97,6 @@ const BaseInput = forwardRef<HTMLInputElement, IInputProps>(
 
     const blurHandler = useCallback(
       (event: React.FocusEvent<HTMLInputElement>) => {
-        setFocus(false);
         onBlur && onBlur(event);
       },
       [onBlur]
@@ -128,6 +131,7 @@ const BaseInput = forwardRef<HTMLInputElement, IInputProps>(
           className
         )}
         onKeyDown={keyDownHandler}
+        ref={wrapperRef}
       >
         {prefix && <div className={styles.prefix}>{prefix}</div>}
         <input
