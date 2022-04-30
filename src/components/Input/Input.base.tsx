@@ -143,6 +143,7 @@ const BaseInput = forwardRef<HTMLInputElement, IInputProps>(
         {showClear && (
           <div className={styles.suffix}>
             <button
+              type="button"
               className={cls(styles.button, styles.clear)}
               onClick={clearHandler}
               ref={clearRef}
