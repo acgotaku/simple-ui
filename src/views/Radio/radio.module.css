@@ -1,0 +1,9 @@
+.vertical {
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.radio {
+  margin: 8px 0;
+}
