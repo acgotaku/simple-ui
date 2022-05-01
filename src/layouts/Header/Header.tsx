@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import cls from 'clsx';
 import { Link } from '@/components';
+import { ReactComponent as Logo } from '@/assets/logo.svg';
 import styles from './header.module.css';
 import { useBaseContext } from '../Base/context';
 
@@ -20,7 +21,8 @@ const Header = forwardRef<HTMLElement>((props, ref) => {
           ></span>
         </button>
         <Link to="/" className={styles.home}>
-          Simple UI
+          <Logo className={styles.icon} />
+          <span className={styles.text}>Simple UI</span>
         </Link>
         <Link
           href="https://github.com/acgotaku/simple-ui"

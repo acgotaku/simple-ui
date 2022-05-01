@@ -74,7 +74,23 @@
 }
 
 .home {
-  height: 32px;
+  .icon {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s;
+  }
+
+  .text {
+    margin: 0 8px;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    .icon {
+      transform: rotate(-90deg);
+    }
+  }
 }
 
 .github {
