@@ -1,4 +1,4 @@
-import{j as a,a as e,C as n,r}from"./index.41b6b3a2.js";import{s as c,C as t}from"./view.module.f5d0bd5f.js";const h="_vertical_xx7zc_1",i="_checkbox_xx7zc_7";var d={vertical:h,checkbox:i};const b="<Checkbox label={'Unchecked Checkbox (uncontrolled)'} />",u=()=>{const[l,s]=r.exports.useState(!0);return e(n,{label:"Checked Checkbox",checked:l,onChange:o=>s(o.target.checked)})},p=`
+import{j as a,a as e,C as n,r}from"./index.ba455cb6.js";import{s as c,C as t}from"./view.module.3eb233ab.js";const h="_vertical_xx7zc_1",i="_checkbox_xx7zc_7";var d={vertical:h,checkbox:i};const b="<Checkbox label={'Unchecked Checkbox (uncontrolled)'} />",u=()=>{const[l,s]=r.exports.useState(!0);return e(n,{label:"Checked Checkbox",checked:l,onChange:o=>s(o.target.checked)})},p=`
 const [checked, setChecked] = useState(true);
 return (
   <Checkbox

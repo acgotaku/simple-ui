@@ -1,4 +1,4 @@
-import{j as o,a as e,r as t,h as l}from"./index.41b6b3a2.js";import{s as a,C as d}from"./view.module.f5d0bd5f.js";const c="_vertical_v80de_1",u="_radio_v80de_7";var i={vertical:c,radio:u};const n=()=>{const[r,s]=t.exports.useState("");return o(l.Group,{value:r,onChange:s,children:[e(l,{value:"Apple",children:"Apple"}),e(l,{value:"Pear",children:"Pear"}),e(l,{value:"Orange",label:"Orange"})]})},p=`
+import{j as o,a as e,r as t,h as l}from"./index.ba455cb6.js";import{s as a,C as d}from"./view.module.3eb233ab.js";const c="_vertical_v80de_1",u="_radio_v80de_7";var i={vertical:c,radio:u};const n=()=>{const[r,s]=t.exports.useState("");return o(l.Group,{value:r,onChange:s,children:[e(l,{value:"Apple",children:"Apple"}),e(l,{value:"Pear",children:"Pear"}),e(l,{value:"Orange",label:"Orange"})]})},p=`
 const [value, setValue] = useState<RadioValueType>('');
 return (
   <Radio.Group value={value} onChange={setValue}>
