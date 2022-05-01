@@ -1,4 +1,4 @@
-import{j as o,a as e,r as t,h as l}from"./index.ba455cb6.js";import{s as a,C as d}from"./view.module.3eb233ab.js";const c="_vertical_v80de_1",u="_radio_v80de_7";var i={vertical:c,radio:u};const n=()=>{const[r,s]=t.exports.useState("");return o(l.Group,{value:r,onChange:s,children:[e(l,{value:"Apple",children:"Apple"}),e(l,{value:"Pear",children:"Pear"}),e(l,{value:"Orange",label:"Orange"})]})},p=`
+import{j as o,a as e,r as t,h as l}from"./index.c38a09e7.js";import{s as a,C as d}from"./view.module.2ff36782.js";const c="_vertical_v80de_1",u="_radio_v80de_7";var i={vertical:c,radio:u};const n=()=>{const[r,s]=t.exports.useState("");return o(l.Group,{value:r,onChange:s,children:[e(l,{value:"Apple",children:"Apple"}),e(l,{value:"Pear",children:"Pear"}),e(l,{value:"Orange",label:"Orange"})]})},p=`
 const [value, setValue] = useState<RadioValueType>('');
 return (
   <Radio.Group value={value} onChange={setValue}>
@@ -16,7 +16,7 @@ return (
     <Radio value={'Orange'} label={'Orange'} />
   </Radio.Group>
 );
-`,h=()=>{const[r,s]=t.exports.useState("");return o(l.Group,{value:r,onChange:s,className:i.vertical,children:[e(l,{value:"React",className:i.radio,children:"React"}),e(l,{value:"Vue",className:i.radio,children:"Vue"}),e(l,{value:"Angular",label:"Angular",className:i.radio})]})},m=`
+`,h=()=>{const[r,s]=t.exports.useState("");return o(l.Group,{value:r,onChange:s,className:i.vertical,children:[e(l,{value:"React",className:i.radio,children:"React"}),e(l,{value:"Vue",className:i.radio,children:"Vue"}),e(l,{value:"Angular",label:"Angular",className:i.radio,disabled:!0})]})},m=`
 const [value, setValue] = useState<RadioValueType>('');
 return (
   <Radio.Group
@@ -34,6 +34,7 @@ return (
       value={'Angular'}
       label={'Angular'}
       className={radioStyles.radio}
+      disabled
     />
   </Radio.Group>
 );
