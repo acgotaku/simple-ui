@@ -67,6 +67,7 @@ const RadioGroupVertical = () => {
         value={'Angular'}
         label={'Angular'}
         className={radioStyles.radio}
+        disabled
       />
     </Radio.Group>
   );
@@ -90,6 +91,7 @@ return (
       value={'Angular'}
       label={'Angular'}
       className={radioStyles.radio}
+      disabled
     />
   </Radio.Group>
 );

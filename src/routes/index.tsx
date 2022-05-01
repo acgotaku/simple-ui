@@ -11,6 +11,7 @@ const Message = lazy(() => import('@/views/Message'));
 const Modal = lazy(() => import('@/views/Modal'));
 const Radio = lazy(() => import('@/views/Radio'));
 const Switch = lazy(() => import('@/views/Switch'));
+const Tabs = lazy(() => import('@/views/Tabs'));
 
 const AppRoutes = () => {
   return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
           <Route path="/modal" element={<Modal />} />
           <Route path="/radio" element={<Radio />} />
           <Route path="/switch" element={<Switch />} />
+          <Route path="/tabs" element={<Tabs />} />
         </Route>
       </Routes>
     </Suspense>
