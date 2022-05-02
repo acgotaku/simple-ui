@@ -1,4 +1,4 @@
-import { Tabs } from '@/components';
+import { Tabs, Link } from '@/components';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 import tabsStyles from './tabs.module.css';
@@ -134,6 +134,37 @@ const TabsView = () => {
         <div className={styles.code}>
           <Code code={disabledTabsCode} />
         </div>
+      </div>
+      <h2 className={styles.heading}>Accessibility</h2>
+      <h3 className={styles.caption}>Keyboard Interaction</h3>
+      <div className={styles.content}>
+        <p className={styles.detail}>For the tab list:</p>
+        <p className={styles.detail}>
+          <b>Tab</b>: When focus moves into the tab list, places focus on the
+          active tab element.
+        </p>
+        <p className={styles.detail}>
+          When the tab list contains the focus, moves focus to the next element
+          in the page tab sequence outside the tablist, which is the tabpanel
+          unless the first element containing meaningful content inside the
+          tabpanel is focusable.
+        </p>
+        <p className={styles.detail}>
+          When focus is on a tab element in a horizontal tab list:
+        </p>
+        <p className={styles.detail}>
+          <b>Left Arrow</b>: moves focus to the previous tab. If focus is on the
+          first tab, moves focus to the last tab. Optionally, activates the
+          newly focused tab.
+        </p>
+        <p className={styles.detail}>
+          <b>Right Arrow</b>: Moves focus to the next tab. If focus is on the
+          last tab element, moves focus to the first tab. Optionally, activates
+          the newly focused tab.
+        </p>
+        <Link href="https://www.w3.org/TR/wai-aria-practices/#tabpanel">
+          WAI-ARIA Authoring Practices - 3.24 Tabs
+        </Link>
       </div>
     </article>
   );
