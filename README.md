@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/acgotaku/simple-ui" target="_blank" rel="noopener noreferrer">
+  <a href="https://simple-ui.icehoney.me/" target="_blank" rel="noopener noreferrer">
     <img width="180" src="./src/assets/logo.svg" alt="Simple UI logo">
   </a>
 </p>
