@@ -40,6 +40,9 @@ const Sidebar = forwardRef<HTMLElement>((props, ref) => {
               <Link to="/checkbox">Checkbox</Link>
             </li>
             <li className={styles.navItem}>
+              <Link to="/collapse">Collapse</Link>
+            </li>
+            <li className={styles.navItem}>
               <Link to="/input">Input</Link>
             </li>
             <li className={styles.navItem}>

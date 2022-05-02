@@ -1,0 +1,9 @@
+.collapse {
+  margin: 24px 0;
+}
+
+.panel {
+  padding: 16px 8px;
+  white-space: pre-line;
+  background-color: var(--color-container-bg);
+}

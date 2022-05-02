@@ -4,6 +4,7 @@ import { BaseLayout } from '@/layouts';
 
 const Home = lazy(() => import('@/views/Home'));
 const Checkbox = lazy(() => import('@/views/Checkbox'));
+const Collapse = lazy(() => import('@/views/Collapse'));
 const Button = lazy(() => import('@/views/Button'));
 const Input = lazy(() => import('@/views/Input'));
 const Link = lazy(() => import('@/views/Link'));
@@ -21,6 +22,7 @@ const AppRoutes = () => {
           <Route index element={<Home />} />
           <Route path="/button" element={<Button />} />
           <Route path="/checkbox" element={<Checkbox />} />
+          <Route path="/collapse" element={<Collapse />} />
           <Route path="/input" element={<Input />} />
           <Route path="/link" element={<Link />} />
           <Route path="/message" element={<Message />} />

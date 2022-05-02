@@ -1,0 +1,51 @@
+.collapse {
+  display: block;
+}
+
+.panel {
+  border-bottom: 1px solid var(--color-standard-border);
+
+  &Header {
+    display: block;
+  }
+
+  &Button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 0;
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &Text {
+    text-align: left;
+  }
+
+  &Icon {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease-in-out;
+
+    &.expanded {
+      transform: rotate(180deg);
+    }
+  }
+
+  &Body {
+    height: 0;
+    opacity: 0;
+    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    overflow: hidden;
+
+    &.expanded {
+      height: var(--height-panel);
+      opacity: 1;
+    }
+  }
+}
