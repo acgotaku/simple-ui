@@ -3,7 +3,8 @@
 }
 
 .panel {
-  padding: 16px 8px;
+  margin-bottom: 8px;
+  padding: 8px;
   white-space: pre-line;
   background-color: var(--color-container-bg);
 }
