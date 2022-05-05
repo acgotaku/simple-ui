@@ -27,6 +27,7 @@
 
 .content {
   margin: 8px 0;
+  overflow: auto;
 }
 
 .detail {
