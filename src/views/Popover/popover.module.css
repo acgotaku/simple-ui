@@ -1,0 +1,43 @@
+.popover {
+  position: relative;
+  min-width: 480px;
+}
+
+.button {
+  width: 120px;
+}
+
+.wrapper {
+  margin: 16px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  position: absolute;
+  top: 72px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (--view-md) {
+  .button {
+    width: auto;
+  }
+}
