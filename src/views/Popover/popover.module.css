@@ -1,4 +1,8 @@
 .popover {
+  overflow: auto;
+}
+
+.inner {
   position: relative;
   min-width: 480px;
 }

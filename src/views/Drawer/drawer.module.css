@@ -1,0 +1,53 @@
+.inner {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.close {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-standard-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &Icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.button {
+  margin-right: 16px;
+}
+
+.left {
+  width: 320px;
+}
+
+.right {
+  width: 600px;
+}
+
+.top {
+  height: 320px;
+}
+
+.bottom {
+  height: 160px;
+}

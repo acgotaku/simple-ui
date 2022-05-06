@@ -104,73 +104,75 @@ const PopoverView = () => {
       <h3 className={styles.caption}>Popover (All Placement)</h3>
       <div className={styles.content}>
         <div className={popoverStyles.popover}>
-          <div className={popoverStyles.top}>
-            <PopoverWithPosition
-              buttonText="TOP-L"
-              popoverText="Popover content"
-              placement="top-start"
-            />
-            <PopoverWithPosition
-              buttonText="TOP"
-              popoverText="Popover content"
-              placement="top"
-            />
-            <PopoverWithPosition
-              buttonText="TOP-R"
-              popoverText="Popover content"
-              placement="top-end"
-            />
-          </div>
-          <div className={popoverStyles.left}>
-            <PopoverWithPosition
-              buttonText="LEFT-T"
-              popoverText="Popover content"
-              placement="left-start"
-            />
-            <PopoverWithPosition
-              buttonText="LEFT"
-              popoverText="Popover content"
-              placement="left"
-            />
-            <PopoverWithPosition
-              buttonText="LEFT-B"
-              popoverText="Popover content"
-              placement="left-end"
-            />
-          </div>
-          <div className={popoverStyles.right}>
-            <PopoverWithPosition
-              buttonText="RIGHT-T"
-              popoverText="Popover content"
-              placement="right-start"
-            />
-            <PopoverWithPosition
-              buttonText="RIGHT"
-              popoverText="Popover content"
-              placement="right"
-            />
-            <PopoverWithPosition
-              buttonText="RIGHT-B"
-              popoverText="Popover content"
-              placement="right-end"
-            />
-          </div>
-          <div className={popoverStyles.bottom}>
-            <PopoverWithPosition
-              buttonText="BOTTOM-L"
-              popoverText="Popover content"
-              placement="bottom-start"
-            />
-            <PopoverWithPosition
-              buttonText="BOTTOM"
-              popoverText="Popover content"
-              placement="bottom"
-            />
-            <PopoverWithPosition
-              buttonText="BOTTOM-R"
-              popoverText="Popover content"
-              placement="bottom-end"
-            />
+          <div className={popoverStyles.inner}>
+            <div className={popoverStyles.top}>
+              <PopoverWithPosition
+                buttonText="TOP-L"
+                popoverText="Popover content"
+                placement="top-start"
+              />
+              <PopoverWithPosition
+                buttonText="TOP"
+                popoverText="Popover content"
+                placement="top"
+              />
+              <PopoverWithPosition
+                buttonText="TOP-R"
+                popoverText="Popover content"
+                placement="top-end"
+              />
+            </div>
+            <div className={popoverStyles.left}>
+              <PopoverWithPosition
+                buttonText="LEFT-T"
+                popoverText="Popover content"
+                placement="left-start"
+              />
+              <PopoverWithPosition
+                buttonText="LEFT"
+                popoverText="Popover content"
+                placement="left"
+              />
+              <PopoverWithPosition
+                buttonText="LEFT-B"
+                popoverText="Popover content"
+                placement="left-end"
+              />
+            </div>
+            <div className={popoverStyles.right}>
+              <PopoverWithPosition
+                buttonText="RIGHT-T"
+                popoverText="Popover content"
+                placement="right-start"
+              />
+              <PopoverWithPosition
+                buttonText="RIGHT"
+                popoverText="Popover content"
+                placement="right"
+              />
+              <PopoverWithPosition
+                buttonText="RIGHT-B"
+                popoverText="Popover content"
+                placement="right-end"
+              />
+            </div>
+            <div className={popoverStyles.bottom}>
+              <PopoverWithPosition
+                buttonText="BOTTOM-L"
+                popoverText="Popover content"
+                placement="bottom-start"
+              />
+              <PopoverWithPosition
+                buttonText="BOTTOM"
+                popoverText="Popover content"
+                placement="bottom"
+              />
+              <PopoverWithPosition
+                buttonText="BOTTOM-R"
+                popoverText="Popover content"
+                placement="bottom-end"
+              />
+            </div>
           </div>
         </div>
       </div>

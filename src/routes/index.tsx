@@ -3,9 +3,10 @@ import { Routes, Route } from 'react-router-dom';
 import { BaseLayout } from '@/layouts';
 
 const Home = lazy(() => import('@/views/Home'));
+const Button = lazy(() => import('@/views/Button'));
 const Checkbox = lazy(() => import('@/views/Checkbox'));
 const Collapse = lazy(() => import('@/views/Collapse'));
-const Button = lazy(() => import('@/views/Button'));
+const Drawer = lazy(() => import('@/views/Drawer'));
 const Input = lazy(() => import('@/views/Input'));
 const Link = lazy(() => import('@/views/Link'));
 const Message = lazy(() => import('@/views/Message'));
@@ -24,6 +25,7 @@ const AppRoutes = () => {
           <Route path="/button" element={<Button />} />
           <Route path="/checkbox" element={<Checkbox />} />
           <Route path="/collapse" element={<Collapse />} />
+          <Route path="/drawer" element={<Drawer />} />
           <Route path="/input" element={<Input />} />
           <Route path="/link" element={<Link />} />
           <Route path="/message" element={<Message />} />
