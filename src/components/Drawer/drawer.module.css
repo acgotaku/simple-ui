@@ -2,6 +2,8 @@
   position: absolute;
   width: fit-content;
   height: fit-content;
+  max-width: 100vw;
+  max-height: 100vh;
   background-color: var(--color-standard);
   transition: transform 0.3s;
 

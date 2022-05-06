@@ -33,7 +33,7 @@
 }
 
 .button {
-  margin-right: 16px;
+  margin: 0 16px 16px 0;
 }
 
 .left {
@@ -41,7 +41,7 @@
 }
 
 .right {
-  width: 600px;
+  width: 240px;
 }
 
 .top {
@@ -49,5 +49,5 @@
 }
 
 .bottom {
-  height: 160px;
+  height: 400px;
 }
