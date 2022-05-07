@@ -1,0 +1,57 @@
+.wrapper {
+  display: flex;
+}
+
+.inner {
+  margin: 0 16px 16px 0;
+}
+
+.button {
+  margin: 0;
+}
+
+.dropdown {
+  width: 100%;
+
+  &Button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    padding: 0 16px;
+    background-color: var(--color-standard);
+
+    &:not([disabled]):hover,
+    &:not([disabled]):focus {
+      background-color: var(--color-standard-hover);
+    }
+
+    &:disabled {
+      color: var(--color-disabled-text);
+      cursor: not-allowed;
+    }
+  }
+
+  &Link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    padding: 0 16px;
+    color: var(--color-standard-text);
+    background-color: var(--color-standard);
+
+    &:hover,
+    &:focus {
+      color: var(--color-standard-text);
+      text-decoration: none;
+      background-color: var(--color-standard-hover);
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}

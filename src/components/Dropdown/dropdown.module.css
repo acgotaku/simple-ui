@@ -1,0 +1,20 @@
+.ref {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.dropdown {
+  display: block;
+
+  &Menu {
+    list-style: none;
+    max-height: 200px;
+    background-color: var(--color-standard);
+    overflow: auto;
+  }
+
+  &Item {
+    width: 100%;
+    height: 40px;
+  }
+}
