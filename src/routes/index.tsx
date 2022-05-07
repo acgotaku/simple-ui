@@ -7,6 +7,7 @@ const Button = lazy(() => import('@/views/Button'));
 const Checkbox = lazy(() => import('@/views/Checkbox'));
 const Collapse = lazy(() => import('@/views/Collapse'));
 const Drawer = lazy(() => import('@/views/Drawer'));
+const Dropdown = lazy(() => import('@/views/Dropdown'));
 const Input = lazy(() => import('@/views/Input'));
 const Link = lazy(() => import('@/views/Link'));
 const Message = lazy(() => import('@/views/Message'));
@@ -26,6 +27,7 @@ const AppRoutes = () => {
           <Route path="/checkbox" element={<Checkbox />} />
           <Route path="/collapse" element={<Collapse />} />
           <Route path="/drawer" element={<Drawer />} />
+          <Route path="/dropdown" element={<Dropdown />} />
           <Route path="/input" element={<Input />} />
           <Route path="/link" element={<Link />} />
           <Route path="/message" element={<Message />} />
