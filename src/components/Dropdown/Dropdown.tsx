@@ -10,6 +10,7 @@ import {
   IDropdownItemProps
 } from './Dropdown.types';
 import { DropdownContext, useDropdownContext } from './context';
+import { isTouchDevice } from '@/utils/context';
 import Popper from '../Popper';
 
 const isAdvancedProps = (
@@ -31,7 +32,10 @@ const BasicDropdown: React.FC<IBasicDropdownProps> = ({
     useState<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
   const onClose = useCallback((visible = false) => setVisible(visible), []);
-  const hoverTrigger = useMemo(() => trigger === 'hover', [trigger]);
+  const hoverTrigger = useMemo(
+    () => trigger === 'hover' && !isTouchDevice,
+    [trigger]
+  );
   const handleClick = useCallback(() => {
     setVisible(visible => !visible);
   }, []);
