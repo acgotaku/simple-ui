@@ -260,12 +260,8 @@ const DropdownView = () => {
       <h3 className={styles.caption}>Basic Dropdown</h3>
       <div className={styles.content}>
         <div className={dropdownStyles.wrapper}>
-          <div className={dropdownStyles.inner}>
-            <BasicClickDropdown />
-          </div>
-          <div className={dropdownStyles.inner}>
-            <BasicHoverDropdown />
-          </div>
+          <BasicClickDropdown />
+          <BasicHoverDropdown />
         </div>
         <div className={styles.code}>
           <Code code={basicClickDropdownCode} />
@@ -275,9 +271,7 @@ const DropdownView = () => {
       <h3 className={styles.caption}>Advanced Dropdown</h3>
       <div className={styles.content}>
         <div className={dropdownStyles.wrapper}>
-          <div className={dropdownStyles.inner}>
-            <AdvancedDropdown />
-          </div>
+          <AdvancedDropdown />
         </div>
         <div className={styles.code}>
           <Code code={advancedDropdownCode} />

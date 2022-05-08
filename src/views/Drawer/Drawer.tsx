@@ -144,10 +144,12 @@ const DrawerView = () => {
       </div>
       <h3 className={styles.caption}>Drawer Position</h3>
       <div className={styles.content}>
-        <LeftDrawer />
-        <RightDrawer />
-        <TopDrawer />
-        <BottomDrawer />
+        <div className={drawerStyles.wrapper}>
+          <LeftDrawer />
+          <RightDrawer />
+          <TopDrawer />
+          <BottomDrawer />
+        </div>
       </div>
     </article>
   );
