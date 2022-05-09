@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Placement } from '@popperjs/core';
+import { Placement } from '@floating-ui/react-dom';
 import { Button, Link, Popover } from '@/components';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
@@ -9,14 +9,22 @@ const HoverPopover = () => {
   const refButton = useMemo(() => {
     return <Button>{'Hover me'}</Button>;
   }, []);
-  return <Popover target={refButton}>{'Popover content'}</Popover>;
+  return (
+    <Popover target={refButton}>
+      <p>{'Popover content'}</p>
+    </Popover>
+  );
 };
 
 const hoverPopoverCode = `
 const refButton = useMemo(() => {
   return <Button>{'Hover me'}</Button>;
 }, []);
-return <Popover target={refButton}>{'Popover content'}</Popover>;
+return (
+  <Popover target={refButton}>
+    <p>{'Popover content'}</p>
+  </Popover>
+);
 `;
 
 const ClickPopover = () => {
@@ -25,7 +33,7 @@ const ClickPopover = () => {
   }, []);
   return (
     <Popover target={refButton} trigger={'click'}>
-      {'Popover content'}
+      <p>{'Popover content'}</p>
     </Popover>
   );
 };
@@ -36,7 +44,7 @@ const refButton = useMemo(() => {
 }, []);
 return (
   <Popover target={refButton} trigger={'click'}>
-    {'Popover content'}
+    <p>{'Popover content'}</p>
   </Popover>
 );
 `;
@@ -72,7 +80,7 @@ const PopoverWithPosition: React.FC<IPopoverProps> = ({
         placement={placement}
         onClose={() => setVisible(false)}
       >
-        {popoverText}
+        <p>{popoverText}</p>
       </Popover>
     </div>
   );

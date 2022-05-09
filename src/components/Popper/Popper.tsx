@@ -1,9 +1,18 @@
-import React, { useMemo, useState, useRef } from 'react';
-import { usePopper } from 'react-popper';
+import React, { useLayoutEffect, useRef, useCallback } from 'react';
+import {
+  useFloating,
+  autoUpdate,
+  shift,
+  flip,
+  offset,
+  size,
+  hide,
+  arrow
+} from '@floating-ui/react-dom';
 import { CSSTransition } from 'react-transition-group';
 import cls from 'clsx';
 import styles from './popper.module.css';
-import { IPopperProps, ExtendedModifiers } from './Popper.types';
+import { IPopperProps } from './Popper.types';
 import PopperContainer from './PopperContainer';
 import { useClickOutside } from '@/hooks/useClickOutside';
 
@@ -18,55 +27,52 @@ const Popper: React.FC<IPopperProps> = ({
   sameWidth,
   className = ''
 }) => {
-  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
-    null
-  );
-
-  const [x, y] = useMemo(() => {
-    if (withArrow) {
-      return [0, 8];
-    } else {
-      return [0, 0];
-    }
-  }, [withArrow]);
-
-  const modifiers: ExtendedModifiers = useMemo(
-    () => [
-      {
-        name: 'offset',
-        options: {
-          offset: [x, y]
+  const arrowRef = useRef<HTMLDivElement | null>(null);
+  const {
+    x,
+    y,
+    refs,
+    reference,
+    floating,
+    strategy,
+    placement: renderPlacement,
+    middlewareData
+  } = useFloating({
+    whileElementsMounted: autoUpdate,
+    placement: placement,
+    middleware: [
+      offset(withArrow ? 8 : 0),
+      shift(),
+      flip(),
+      size({
+        apply({ availableWidth, availableHeight, elements, rects }) {
+          Object.assign(elements.floating.style, {
+            maxWidth: `${availableWidth}px`,
+            maxHeight: `${availableHeight}px`,
+            width: sameWidth ? `${rects.reference.width}px` : 'auto'
+          });
         }
-      },
-      {
-        name: 'sameWidth',
-        enabled: sameWidth,
-        fn: ({ state }) => {
-          state.styles.popper.width = `${state.rects.reference.width}px`;
-        },
-        effect: ({ state }) => {
-          state.elements.popper.style.width = `${
-            (state.elements.reference as HTMLDivElement).offsetWidth
-          }px`;
-        },
-        phase: 'beforeWrite',
-        requires: ['computeStyles']
-      }
-    ],
-    [x, y, sameWidth]
-  );
+      }),
+      arrow({
+        element: arrowRef
+      }),
+      hide()
+    ]
+  });
 
-  const { styles: popperStyles, attributes } = usePopper(
-    referenceElement,
-    popperElement,
-    {
-      modifiers,
-      placement: placement
-    }
-  );
+  useLayoutEffect(() => {
+    reference(referenceElement);
+  }, [referenceElement, reference]);
 
-  useClickOutside(onClose, [referenceElement, popperElement]);
+  useClickOutside(onClose, [referenceElement, refs.floating.current]);
   const nodeRef = useRef<HTMLDivElement | null>(null);
+  const stableRef = useCallback(
+    (ref: HTMLDivElement | null) => {
+      floating(ref);
+      nodeRef.current = ref;
+    },
+    [floating, nodeRef]
+  );
 
   return (
     <CSSTransition
@@ -83,16 +89,27 @@ const Popper: React.FC<IPopperProps> = ({
     >
       <PopperContainer withinPortal={withinPortal}>
         <div
-          ref={ref => {
-            setPopperElement(ref);
-            nodeRef.current = ref;
-          }}
+          ref={stableRef}
           role="dialog"
           className={styles.popper}
-          style={popperStyles.popper}
-          {...attributes.popper}
+          style={{
+            position: strategy,
+            top: y ?? '',
+            left: x ?? ''
+          }}
+          data-popper-placement={renderPlacement}
+          data-popper-reference-hidden={middlewareData.hide?.referenceHidden}
         >
-          {withArrow && <div className={styles.arrow} />}
+          {withArrow && (
+            <div
+              className={styles.arrow}
+              ref={arrowRef}
+              style={{
+                top: middlewareData.arrow?.y ?? '',
+                left: middlewareData.arrow?.x ?? ''
+              }}
+            />
+          )}
           <div className={cls(styles.popperInner, className)}>{children}</div>
         </div>
       </PopperContainer>

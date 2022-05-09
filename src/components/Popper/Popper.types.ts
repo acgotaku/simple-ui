@@ -1,5 +1,4 @@
-import { Modifier, StrictModifier } from 'react-popper';
-import { Placement } from '@popperjs/core';
+import { Placement } from '@floating-ui/react-dom';
 
 export interface IPopperProps {
   children: React.ReactNode;
@@ -17,7 +16,3 @@ export interface IPopperContainerProps {
   children: React.ReactNode;
   withinPortal: boolean;
 }
-
-export type SameWidthModifier = Modifier<'sameWidth'>;
-
-export type ExtendedModifiers = Array<SameWidthModifier | StrictModifier>;
