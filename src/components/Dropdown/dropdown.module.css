@@ -8,9 +8,7 @@
 
   &Menu {
     list-style: none;
-    max-height: 200px;
     background-color: var(--color-standard);
-    overflow: auto;
   }
 
   &Item {

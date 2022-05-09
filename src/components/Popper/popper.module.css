@@ -1,4 +1,6 @@
 .popper {
+  display: flex;
+  flex-direction: column;
   border-radius: 2px;
   box-shadow: var(--color-shadow) 0 2px 4px 0;
   z-index: var(--z-index-popper);
@@ -24,6 +26,7 @@
   &Inner {
     position: relative;
     background-color: var(--color-standard);
+    overflow: auto;
   }
 
   &[data-popper-reference-hidden='true'] {
@@ -37,44 +40,11 @@
       transform: rotate(-45deg);
     }
   }
-  &[data-popper-placement='top'] {
-    .arrow {
-      left: calc(50% - 4px);
-    }
-  }
-  &[data-popper-placement='top-start'] {
-    .arrow {
-      left: 8px;
-    }
-  }
-  &[data-popper-placement='top-end'] {
-    .arrow {
-      right: 8px;
-    }
-  }
 
   &[data-popper-placement^='right'] {
     .arrow {
       left: -4px;
       transform: rotate(45deg);
-    }
-  }
-
-  &[data-popper-placement='right'] {
-    .arrow {
-      top: calc(50% - 4px);
-    }
-  }
-
-  &[data-popper-placement='right-start'] {
-    .arrow {
-      top: 8px;
-    }
-  }
-
-  &[data-popper-placement='right-end'] {
-    .arrow {
-      bottom: 8px;
     }
   }
 
@@ -84,44 +54,11 @@
       transform: rotate(135deg);
     }
   }
-  &[data-popper-placement='bottom'] {
-    .arrow {
-      left: calc(50% - 4px);
-    }
-  }
-  &[data-popper-placement='bottom-start'] {
-    .arrow {
-      left: 8px;
-    }
-  }
-  &[data-popper-placement='bottom-end'] {
-    .arrow {
-      right: 8px;
-    }
-  }
 
   &[data-popper-placement^='left'] {
     .arrow {
       right: -4px;
       transform: rotate(-45deg);
-    }
-  }
-
-  &[data-popper-placement='left'] {
-    .arrow {
-      top: calc(50% - 4px);
-    }
-  }
-
-  &[data-popper-placement='left-start'] {
-    .arrow {
-      top: 8px;
-    }
-  }
-
-  &[data-popper-placement='left-end'] {
-    .arrow {
-      bottom: 8px;
     }
   }
 }
