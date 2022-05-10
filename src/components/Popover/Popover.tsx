@@ -124,9 +124,9 @@ const AdvancedPopover: React.FC<IAdvancedPopoverProps> = ({
 
 const Popover: React.FC<IPopoverProps> = props => {
   if (isAdvancedProps(props)) {
-    return <AdvancedPopover {...props}>{props.children}</AdvancedPopover>;
+    return <AdvancedPopover {...props} />;
   } else {
-    return <BasicPopover {...props}>{props.children}</BasicPopover>;
+    return <BasicPopover {...props} />;
   }
 };
 

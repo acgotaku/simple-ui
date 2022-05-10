@@ -1,0 +1,145 @@
+.ref {
+  display: inline-flex;
+  position: relative;
+  height: 40px;
+  width: 100%;
+  min-width: 112px;
+  border-radius: 2px;
+  color: var(--color-standard-text);
+  border: 1px solid var(--color-standard-border);
+  background-color: var(--color-standard);
+  cursor: pointer;
+
+  &.focus {
+    border: 1px solid var(--color-primary);
+    .clear {
+      visibility: visible;
+    }
+  }
+
+  &.invalid {
+    border: 1px solid var(--color-danger);
+  }
+
+  &.disabled {
+    color: var(--color-disabled-text);
+    border: 1px solid var(--color-disabled);
+    background-color: var(--color-disabled);
+    cursor: not-allowed;
+  }
+
+  &:not(.disabled, .invalid):hover {
+    border: 1px solid var(--color-primary);
+    .clear {
+      visibility: visible;
+    }
+  }
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding-left: 8px;
+  width: calc(100% - 24px);
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.text {
+  font-size: var(--font-size-lg);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  flex: none;
+}
+
+.clear {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+
+  &:hover,
+  &:focus {
+    visibility: visible;
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--color-primary);
+    outline-offset: 1px;
+  }
+
+  &Icon {
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-standard);
+  }
+}
+
+.search {
+  width: 20px;
+  height: 20px;
+  margin-right: 4px;
+}
+
+.down {
+  width: 16px;
+  height: 16px;
+}
+
+.select {
+  width: 100%;
+}
+
+.input {
+  padding: 4px;
+}
+
+.checkbox {
+  margin-right: 8px;
+}
+
+.menu {
+  list-style: none;
+  max-height: 208px;
+  background-color: var(--color-standard);
+  overflow: auto;
+
+  &Item {
+    width: 100%;
+    height: 40px;
+
+    &Button {
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      color: var(--color-standard-text);
+      font-size: var(--font-size-lg);
+      width: 100%;
+      height: 100%;
+
+      &:disabled {
+        cursor: not-allowed;
+        color: var(--color-disabled-text);
+      }
+
+      &:not([disabled]):hover,
+      &:not([disabled]):focus {
+        background-color: var(--color-standard-hover);
+      }
+
+      &.selected {
+        color: var(--color-primary);
+      }
+    }
+  }
+}

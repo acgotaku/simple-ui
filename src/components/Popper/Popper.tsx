@@ -47,8 +47,14 @@ const Popper: React.FC<IPopperProps> = ({
       size({
         apply({ availableWidth, availableHeight, elements, rects }) {
           Object.assign(elements.floating.style, {
-            maxWidth: `${availableWidth}px`,
-            maxHeight: `${availableHeight}px`,
+            maxWidth:
+              rects.floating.width >= availableWidth
+                ? `${availableWidth}px`
+                : 'none',
+            maxHeight:
+              rects.floating.height >= availableHeight
+                ? `${availableHeight}px`
+                : 'none',
             width: sameWidth ? `${rects.reference.width}px` : 'auto'
           });
         }
