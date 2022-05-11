@@ -30,8 +30,10 @@
 
   &:not(.disabled, .invalid):hover {
     border: 1px solid var(--color-primary);
-    .clear {
-      visibility: visible;
+    @media (hover: hover) {
+      .clear {
+        visibility: visible;
+      }
     }
   }
 }
@@ -41,6 +43,10 @@
   align-items: center;
   padding-left: 8px;
   width: calc(100% - 24px);
+
+  &:focus {
+    outline: none;
+  }
 
   &:disabled {
     cursor: not-allowed;
@@ -67,11 +73,6 @@
   display: flex;
   align-items: center;
   visibility: hidden;
-
-  &:hover,
-  &:focus {
-    visibility: visible;
-  }
 
   &:focus-visible {
     outline: 1px solid var(--color-primary);

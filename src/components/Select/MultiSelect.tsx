@@ -3,6 +3,7 @@ import cls from 'clsx';
 import { noop } from '@/utils/misc';
 import { useTabFoucs } from '@/hooks/useTabFocus';
 import { useListKeyboardNav } from '@/hooks/useListKeyboardNav';
+import { useClickOutside } from '@/hooks/useClickOutside';
 import styles from './select.module.css';
 import {
   IMultiSelectProps,
@@ -49,6 +50,7 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
   const [search, setSearch] = useState('');
   const onClose = useCallback(() => setVisible(false), []);
   const [handleKeyDown, setPopperRef] = useListKeyboardNav(visible, onClose);
+  useClickOutside(() => setFocus(false), [referenceElement]);
 
   const handleClick = useCallback(
     (optionValue: SelectValueType) => {
@@ -112,6 +114,11 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
     },
     [onSelect]
   );
+
+  const handleButtonClick = useCallback(() => {
+    setVisible(visible => !visible);
+    setFocus(true);
+  }, []);
 
   const selectOptions = useMemo(() => {
     if (filterable && search) {
@@ -199,9 +206,8 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
           ref={buttonRef}
           className={styles.button}
           onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
           disabled={disabled}
-          onClick={() => setVisible(visible => !visible)}
+          onClick={handleButtonClick}
           onKeyDown={handleKeyDown}
         >
           <span className={styles.text}>{selectedLabel}</span>
