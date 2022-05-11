@@ -43,6 +43,7 @@
 
   &:hover,
   &:focus {
+    outline: none;
     background-color: var(--color-standard-hover);
   }
 
