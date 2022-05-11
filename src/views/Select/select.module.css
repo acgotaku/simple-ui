@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.select {
+  width: 180px;
+}
+
+.country {
+  width: 208px;
+
+  &Item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    color: var(--color-standard-text);
+    font-size: var(--font-size-lg);
+    width: 100%;
+    height: 100%;
+
+    &:disabled {
+      color: var(--color-disabled-text);
+    }
+
+    &:not([disabled]):hover,
+    &:not([disabled]):focus {
+      background-color: var(--color-standard-hover);
+    }
+
+    &.selected {
+      color: var(--color-primary);
+    }
+  }
+}

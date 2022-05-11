@@ -9,5 +9,6 @@ export { default as message } from './message';
 export { default as Modal } from './Modal';
 export { default as Popover } from './Popover';
 export { default as Radio } from './Radio';
+export { default as Select } from './Select';
 export { default as Switch } from './Switch';
 export { default as Tabs } from './Tabs';

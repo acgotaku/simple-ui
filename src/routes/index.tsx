@@ -14,6 +14,7 @@ const Message = lazy(() => import('@/views/Message'));
 const Modal = lazy(() => import('@/views/Modal'));
 const Popover = lazy(() => import('@/views/Popover'));
 const Radio = lazy(() => import('@/views/Radio'));
+const Select = lazy(() => import('@/views/Select'));
 const Switch = lazy(() => import('@/views/Switch'));
 const Tabs = lazy(() => import('@/views/Tabs'));
 
@@ -34,6 +35,7 @@ const AppRoutes = () => {
           <Route path="/modal" element={<Modal />} />
           <Route path="/popover" element={<Popover />} />
           <Route path="/radio" element={<Radio />} />
+          <Route path="/select" element={<Select />} />
           <Route path="/switch" element={<Switch />} />
           <Route path="/tabs" element={<Tabs />} />
         </Route>

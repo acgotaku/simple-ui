@@ -32,7 +32,7 @@ const ClickPopover = () => {
     return <Button>{'Click me'}</Button>;
   }, []);
   return (
-    <Popover target={refButton} trigger={'click'}>
+    <Popover target={refButton} trigger={'click'} withinPortal={false}>
       <p>{'Popover content'}</p>
     </Popover>
   );
@@ -43,7 +43,7 @@ const refButton = useMemo(() => {
   return <Button>{'Click me'}</Button>;
 }, []);
 return (
-  <Popover target={refButton} trigger={'click'}>
+  <Popover target={refButton} trigger={'click'} withinPortal={false}>
     <p>{'Popover content'}</p>
   </Popover>
 );

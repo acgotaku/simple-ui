@@ -164,9 +164,9 @@ const AdvancedDropdown: React.FC<IAdvancedDropdownProps> = ({
 
 const Dropdown: React.FC<IDropdownProps> = props => {
   if (isAdvancedProps(props)) {
-    return <AdvancedDropdown {...props}>{props.children}</AdvancedDropdown>;
+    return <AdvancedDropdown {...props} />;
   } else {
-    return <BasicDropdown {...props}>{props.children}</BasicDropdown>;
+    return <BasicDropdown {...props} />;
   }
 };
 
