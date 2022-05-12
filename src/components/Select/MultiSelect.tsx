@@ -14,9 +14,8 @@ import {
 import Popper from '../Popper';
 import Input from '../Input';
 import Option from './Option';
-import { FixedSizeList as List } from 'react-window';
 import Checkbox from '../Checkbox';
-import VirtualRow from './VirtualRow';
+import VirtualScroll from './VirtualScroll';
 import { LIST_HEIGHT, LIST_SIZE } from './Select.constants';
 import { ReactComponent as Down } from '@/assets/icons/caret-down.svg';
 import { ReactComponent as Clear } from '@/assets/icons/clear.svg';
@@ -157,15 +156,12 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
       ));
       if (virtualScroll) {
         return (
-          <List
+          <VirtualScroll
             itemCount={selectOptions.length}
             height={LIST_HEIGHT}
-            itemSize={LIST_SIZE}
-            width={'100%'}
+            childHeight={LIST_SIZE}
             itemData={itemData}
-          >
-            {VirtualRow}
-          </List>
+          />
         );
       } else {
         return itemData;

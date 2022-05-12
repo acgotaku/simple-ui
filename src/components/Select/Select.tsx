@@ -4,7 +4,6 @@ import { noop } from '@/utils/misc';
 import { useTabFoucs } from '@/hooks/useTabFocus';
 import { useListKeyboardNav } from '@/hooks/useListKeyboardNav';
 import { useClickOutside } from '@/hooks/useClickOutside';
-import { FixedSizeList as List } from 'react-window';
 import styles from './select.module.css';
 import {
   ISelectProps,
@@ -18,7 +17,7 @@ import Popper from '../Popper';
 import Input from '../Input';
 import Option from './Option';
 import MultiSelect from './MultiSelect';
-import VirtualRow from './VirtualRow';
+import VirtualScroll from './VirtualScroll';
 import { LIST_HEIGHT, LIST_SIZE } from './Select.constants';
 import { ReactComponent as Down } from '@/assets/icons/caret-down.svg';
 import { ReactComponent as Clear } from '@/assets/icons/clear.svg';
@@ -142,15 +141,12 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
 
       if (virtualScroll) {
         return (
-          <List
+          <VirtualScroll
             itemCount={selectOptions.length}
             height={LIST_HEIGHT}
-            itemSize={LIST_SIZE}
-            width={'100%'}
+            childHeight={LIST_SIZE}
             itemData={itemData}
-          >
-            {VirtualRow}
-          </List>
+          />
         );
       } else {
         return itemData;

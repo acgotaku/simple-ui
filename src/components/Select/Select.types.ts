@@ -69,8 +69,9 @@ export interface IOptionProps {
   style?: React.CSSProperties;
 }
 
-export interface IVirtualRowProps {
-  index: number;
-  data: Array<React.ReactNode>;
-  style?: React.CSSProperties;
+export interface IVirtualScrollProps {
+  itemCount: number;
+  height: number;
+  childHeight: number;
+  itemData: Array<React.ReactNode>;
 }
