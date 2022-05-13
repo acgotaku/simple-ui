@@ -1,0 +1,11 @@
+.form {
+  width: min(100%, 380px);
+}
+
+.country {
+  width: 100%;
+}
+
+.submit {
+  margin-bottom: 0;
+}
