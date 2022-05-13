@@ -1,0 +1,36 @@
+.form {
+  display: block;
+
+  &Item {
+    font-size: var(--font-size-lg);
+    margin-bottom: 24px;
+
+    &.showMessage {
+      margin-bottom: 0;
+    }
+
+    &Label {
+      display: flex;
+      padding: 4px 0;
+    }
+
+    &Body {
+      width: 100%;
+    }
+  }
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-md);
+  padding-top: 4px;
+  height: 24px;
+  color: var(--color-danger);
+
+  &Text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}

@@ -3,6 +3,7 @@ export { default as Checkbox } from './Checkbox';
 export { default as Collapse } from './Collapse';
 export { default as Drawer } from './Drawer';
 export { default as Dropdown } from './Dropdown';
+export { default as Form } from './Form';
 export { default as Input } from './Input';
 export { default as Link } from './Link';
 export { default as message } from './message';
