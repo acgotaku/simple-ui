@@ -6,6 +6,7 @@ const Home = lazy(() => import('@/views/Home'));
 const Button = lazy(() => import('@/views/Button'));
 const Checkbox = lazy(() => import('@/views/Checkbox'));
 const Collapse = lazy(() => import('@/views/Collapse'));
+const DatePicker = lazy(() => import('@/views/DatePicker'));
 const Drawer = lazy(() => import('@/views/Drawer'));
 const Dropdown = lazy(() => import('@/views/Dropdown'));
 const Form = lazy(() => import('@/views/Form'));
@@ -28,6 +29,7 @@ const AppRoutes = () => {
           <Route path="/button" element={<Button />} />
           <Route path="/checkbox" element={<Checkbox />} />
           <Route path="/collapse" element={<Collapse />} />
+          <Route path="/datepicker" element={<DatePicker />} />
           <Route path="/drawer" element={<Drawer />} />
           <Route path="/dropdown" element={<Dropdown />} />
           <Route path="/form" element={<Form />} />
