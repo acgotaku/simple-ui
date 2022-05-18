@@ -7,7 +7,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
-    "lint": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore"
+    "lint": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@floating-ui/react-dom": "^0.7.0",
@@ -25,6 +26,9 @@
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
+    "@sucrase/jest-plugin": "^2.2.1",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
     "@types/node": "^17.0.24",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
@@ -37,6 +41,10 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
     "husky": "^7.0.4",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
+    "jest-transform-stub": "^2.0.0",
     "lint-staged": "^12.3.8",
     "postcss": "^8.4.12",
     "postcss-custom-media": "^8.0.0",
@@ -44,6 +52,6 @@
     "prettier": "^2.6.2",
     "typescript": "^4.6.3",
     "vite": "^2.9.2",
-    "vite-plugin-svgr": "^1.1.0"
+    "vite-plugin-svgr": "^2.1.0"
   }
 }
