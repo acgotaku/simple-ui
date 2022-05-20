@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import MessageComp from './Message';
 import Portal from '../Portal';
 import { IMessageRef, ToastType } from './Message.types';
@@ -38,11 +38,11 @@ class Message {
 
     return new Promise((resolve, reject) => {
       try {
-        ReactDOM.render(
+        const root = createRoot(container);
+        root.render(
           <Portal>
             <MessageComp ref={resolve} />
-          </Portal>,
-          container
+          </Portal>
         );
       } catch (err) {
         reject(err);
