@@ -24,9 +24,11 @@ const Form: React.FC<IFormProps> = ({
   ...props
 }) => {
   const items = useRef<Record<string, IFormItemRef>>({});
-  const initErrors: Record<string, string> = {};
-  Object.keys(values).forEach(field => (initErrors[field] = ''));
-  const [errors, setErrors] = useState(initErrors);
+  const [errors, setErrors] = useState(() => {
+    const initErrors: Record<string, string> = {};
+    Object.keys(values).forEach(field => (initErrors[field] = ''));
+    return initErrors;
+  });
   const updated = useDidUpdate();
 
   const updateErrors = useCallback((field: string, error: string) => {
