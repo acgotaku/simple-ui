@@ -24,6 +24,7 @@
   display: block;
 
   &List {
+    list-style: none;
     font-size: var(--font-size-lg);
   }
 
