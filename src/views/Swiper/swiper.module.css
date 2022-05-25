@@ -1,0 +1,14 @@
+.swiper {
+  height: 400px;
+
+  @media (--view-lg) {
+    height: 288px;
+  }
+}
+
+.image {
+  display: flex;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+}
