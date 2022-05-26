@@ -162,8 +162,8 @@ const TabsView = () => {
           last tab element, moves focus to the first tab. Optionally, activates
           the newly focused tab.
         </p>
-        <Link href="https://www.w3.org/TR/wai-aria-practices/#tabpanel">
-          WAI-ARIA Authoring Practices - 3.24 Tabs
+        <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/">
+          Tabs
         </Link>
       </div>
     </article>

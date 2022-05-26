@@ -196,8 +196,8 @@ const PopoverView = () => {
         <p className={styles.detail}>
           <b>Escape</b>: Dismisses the Popover.
         </p>
-        <Link href="https://www.w3.org/TR/wai-aria-practices/#tooltip">
-          WAI-ARIA Authoring Practices - 3.26 Tooltip Widget
+        <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/">
+          Tooltip Widget
         </Link>
       </div>
     </article>

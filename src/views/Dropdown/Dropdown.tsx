@@ -298,8 +298,8 @@ const DropdownView = () => {
           <b>Escape</b>: Close the menu that contains focus and return focus to
           the element or context.
         </p>
-        <Link href="https://www.w3.org/TR/wai-aria-practices/#menubutton">
-          WAI-ARIA Authoring Practices - 3.16 Menu Button
+        <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/menubutton/">
+          Menu Button
         </Link>
       </div>
     </article>

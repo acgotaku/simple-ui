@@ -130,8 +130,8 @@ const CollapseView = () => {
           <b>Space</b>: activates the disclosure control and toggles the
           visibility of the disclosure content.
         </p>
-        <Link href="https://www.w3.org/TR/wai-aria-practices/#disclosure">
-          WAI-ARIA Authoring Practices - 3.10 Disclosure (Show/Hide)
+        <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/">
+          Disclosure (Show/Hide)
         </Link>
       </div>
     </article>
