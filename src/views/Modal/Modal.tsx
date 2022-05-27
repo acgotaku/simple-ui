@@ -179,8 +179,8 @@ const ModalView = () => {
         <p className={styles.detail}>
           <b>Escape</b>: Closes the dialog.
         </p>
-        <Link href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal">
-          WAI-ARIA Authoring Practices - 3.9 Dialog (Modal)
+        <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/">
+          Dialog (Modal)
         </Link>
       </div>
     </article>
