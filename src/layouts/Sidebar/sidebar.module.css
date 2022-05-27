@@ -18,14 +18,14 @@
 .heading {
   padding: 8px 16px;
   color: var(--color-secondary-text);
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-xs);
 }
 .nav {
   display: block;
 
   &List {
     list-style: none;
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-sm);
   }
 
   &Item {

@@ -2,7 +2,7 @@
   display: block;
 
   &Item {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-sm);
     margin-bottom: 24px;
 
     &.showMessage {
@@ -23,7 +23,7 @@
 .message {
   display: flex;
   align-items: center;
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-xs);
   padding-top: 4px;
   height: 24px;
   color: var(--color-danger);
