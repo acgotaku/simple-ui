@@ -19,7 +19,7 @@
 }
 
 .dateTable {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-sm);
   color: var(--color-secondary-text);
 
   &Header {
@@ -130,7 +130,7 @@
 }
 
 .yearTable {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-sm);
   color: var(--color-secondary-text);
 
   &Header {
@@ -222,7 +222,7 @@
 }
 
 .monthTable {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-sm);
   color: var(--color-secondary-text);
 
   &Header {

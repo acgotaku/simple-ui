@@ -64,7 +64,7 @@
 
 .label {
   padding: 0 8px;
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-sm);
   line-height: 16px;
   cursor: pointer;
 }
