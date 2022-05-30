@@ -138,7 +138,6 @@ const BaseInput = forwardRef<HTMLInputElement, IInputProps>(
           ref={inputRef}
           className={styles.input}
           disabled={disabled}
-          value={value}
           {...inputProps}
           onChange={changeHandler}
           onFocus={focusHandler}
