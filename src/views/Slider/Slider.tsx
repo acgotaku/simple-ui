@@ -16,7 +16,7 @@ const StandardSlider = () => {
       minValue={20}
       maxValue={200}
       step={5}
-      onChange={e => setValue(Number(e.target.value))}
+      onChange={setValue}
     />
   );
 };
@@ -41,7 +41,7 @@ const DisabledSlider = () => {
       value={value}
       minValue={40}
       maxValue={100}
-      onChange={e => setValue(Number(e.target.value))}
+      onChange={setValue}
       disabled
     />
   );

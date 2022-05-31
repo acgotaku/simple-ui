@@ -80,7 +80,7 @@ const Slider: React.FC<ISliderProps> = ({
       const value = Number(event.target.value);
       setRangeValue(value);
       setInputValue(value);
-      onChange && onChange(event);
+      onChange && onChange(value);
     },
     [onChange]
   );
