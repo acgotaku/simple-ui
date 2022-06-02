@@ -50,7 +50,6 @@ const Slider: React.FC<ISliderProps> = ({
   );
   const checkInputValue = useCallback(() => {
     if (validInputValue) {
-      setInputValue(Number(inputValue));
       setRangeValue(Number(inputValue));
     } else {
       setInputValue(rangeValue);
