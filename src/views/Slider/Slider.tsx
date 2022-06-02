@@ -60,6 +60,52 @@ return (
 );
 `;
 
+const StandardRangeSlider = () => {
+  const [value, setValue] = useState({
+    start: 20,
+    end: 80
+  });
+  return (
+    <Slider.Range
+      label={'Price range'}
+      value={value}
+      step={2}
+      onChange={setValue}
+    />
+  );
+};
+
+const standardRangeSliderCode = `
+const [value, setValue] = useState({
+  start: 20,
+  end: 80
+});
+return (
+  <Slider.Range
+    label={'Price range'}
+    value={value}
+    step={2}
+    onChange={setValue}
+  />
+);
+`;
+
+const DisabledRangeSlider = () => {
+  const [value, setValue] = useState({
+    start: 20,
+    end: 80
+  });
+  return (
+    <Slider.Range
+      label={'Price range'}
+      value={value}
+      step={2}
+      onChange={setValue}
+      disabled
+    />
+  );
+};
+
 const SliderView = () => {
   return (
     <article className={styles.article}>
@@ -89,6 +135,20 @@ const SliderView = () => {
         <DisabledSlider />
         <div className={styles.code}>
           <Code code={disabledSliderCode} />
+        </div>
+      </div>
+      <h3 className={styles.caption}>Range Slider</h3>
+      <div className={styles.content}>
+        <StandardRangeSlider />
+        <div className={styles.code}>
+          <Code code={standardRangeSliderCode} />
+        </div>
+      </div>
+      <h3 className={styles.caption}>Disabled Range Slider</h3>
+      <div className={styles.content}>
+        <DisabledRangeSlider />
+        <div className={styles.code}>
+          <Code code={standardRangeSliderCode} />
         </div>
       </div>
     </article>

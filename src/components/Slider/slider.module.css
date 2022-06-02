@@ -40,6 +40,14 @@
     background-color: var(--color-disabled);
     cursor: not-allowed;
   }
+
+  &Wrapper {
+    display: flex;
+  }
+}
+
+.separator {
+  margin: 0 4px;
 }
 
 .range {
@@ -49,6 +57,7 @@
   width: 100%;
   height: 4px;
   appearance: none;
+  pointer-events: none;
   z-index: 2;
 
   &:disabled {
@@ -74,6 +83,7 @@
     border-radius: 50%;
     border: solid 2px var(--color-primary);
     background-color: var(--color-standard);
+    pointer-events: auto;
     cursor: pointer;
   }
 
@@ -106,6 +116,12 @@
       border-radius: 2px 0 0 2px;
       background-color: var(--color-primary);
       z-index: 1;
+    }
+
+    &.dual {
+      &::before {
+        margin-left: var(--left);
+      }
     }
 
     &::after {
