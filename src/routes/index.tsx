@@ -14,6 +14,7 @@ const Input = lazy(() => import('@/views/Input'));
 const Link = lazy(() => import('@/views/Link'));
 const Message = lazy(() => import('@/views/Message'));
 const Modal = lazy(() => import('@/views/Modal'));
+const Pagination = lazy(() => import('@/views/Pagination'));
 const Popover = lazy(() => import('@/views/Popover'));
 const Radio = lazy(() => import('@/views/Radio'));
 const Select = lazy(() => import('@/views/Select'));
@@ -39,6 +40,7 @@ const AppRoutes = () => {
           <Route path="/link" element={<Link />} />
           <Route path="/message" element={<Message />} />
           <Route path="/modal" element={<Modal />} />
+          <Route path="/pagination" element={<Pagination />} />
           <Route path="/popover" element={<Popover />} />
           <Route path="/radio" element={<Radio />} />
           <Route path="/select" element={<Select />} />

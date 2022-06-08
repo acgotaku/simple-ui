@@ -67,6 +67,9 @@ const Sidebar = forwardRef<HTMLElement>((props, ref) => {
               <Link to="/modal">Modal</Link>
             </li>
             <li className={styles.navItem}>
+              <Link to="/pagination">Pagination</Link>
+            </li>
+            <li className={styles.navItem}>
               <Link to="/popover">Popover</Link>
             </li>
             <li className={styles.navItem}>
