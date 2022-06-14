@@ -28,6 +28,8 @@
   --height-header: 48px;
   --width-sidebar: 240px;
   --wdith-main: 800px;
+  --z-index-header: 1000;
+  --z-index-sidebar: 1010;
   --z-index-popper: 1100;
   --z-index-message: 1200;
   --z-index-modal: 1300;

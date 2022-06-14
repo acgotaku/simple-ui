@@ -4,6 +4,7 @@
   flex: none;
   background-color: var(--color-standard);
   border-right: 1px solid var(--color-standard-border);
+  z-index: var(--z-index-sidebar);
 }
 
 .inner {
@@ -59,7 +60,6 @@
     left: 0;
     top: 0;
     bottom: 0;
-    z-index: 1;
     transition: transform 0.3s ease;
     transform: translate3d(-100%, 0, 0);
 
