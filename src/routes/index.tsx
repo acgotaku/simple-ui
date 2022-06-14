@@ -18,6 +18,7 @@ const Pagination = lazy(() => import('@/views/Pagination'));
 const Popover = lazy(() => import('@/views/Popover'));
 const Radio = lazy(() => import('@/views/Radio'));
 const Select = lazy(() => import('@/views/Select'));
+const Skeleton = lazy(() => import('@/views/Skeleton'));
 const Slider = lazy(() => import('@/views/Slider'));
 const Swiper = lazy(() => import('@/views/Swiper'));
 const Switch = lazy(() => import('@/views/Switch'));
@@ -44,6 +45,7 @@ const AppRoutes = () => {
           <Route path="/popover" element={<Popover />} />
           <Route path="/radio" element={<Radio />} />
           <Route path="/select" element={<Select />} />
+          <Route path="/skeleton" element={<Skeleton />} />
           <Route path="/slider" element={<Slider />} />
           <Route path="/swiper" element={<Swiper />} />
           <Route path="/switch" element={<Switch />} />

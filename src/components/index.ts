@@ -13,6 +13,7 @@ export { default as Pagination } from './Pagination';
 export { default as Popover } from './Popover';
 export { default as Radio } from './Radio';
 export { default as Select } from './Select';
+export { default as Skeleton } from './Skeleton';
 export { default as Slider } from './Slider';
 export { default as Swiper } from './Swiper';
 export { default as Switch } from './Switch';
