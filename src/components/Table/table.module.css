@@ -1,7 +1,10 @@
+.wrapper {
+  width: 100%;
+}
+
 .table {
   display: grid;
   border-collapse: collapse;
-  min-width: 100%;
   grid-template-columns: repeat(var(--count-column), auto);
   font-size: var(--font-size-sm);
   overflow: auto;
@@ -41,4 +44,9 @@
     padding: 12px;
     border-bottom: 1px solid var(--color-standard-border);
   }
+}
+
+.pagination {
+  margin-top: 16px;
+  justify-content: flex-end;
 }
