@@ -17,4 +17,5 @@ export { default as Skeleton } from './Skeleton';
 export { default as Slider } from './Slider';
 export { default as Swiper } from './Swiper';
 export { default as Switch } from './Switch';
+export { default as Table } from './Table';
 export { default as Tabs } from './Tabs';

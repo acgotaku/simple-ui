@@ -22,6 +22,7 @@ const Skeleton = lazy(() => import('@/views/Skeleton'));
 const Slider = lazy(() => import('@/views/Slider'));
 const Swiper = lazy(() => import('@/views/Swiper'));
 const Switch = lazy(() => import('@/views/Switch'));
+const Table = lazy(() => import('@/views/Table'));
 const Tabs = lazy(() => import('@/views/Tabs'));
 
 const AppRoutes = () => {
@@ -49,6 +50,7 @@ const AppRoutes = () => {
           <Route path="/slider" element={<Slider />} />
           <Route path="/swiper" element={<Swiper />} />
           <Route path="/switch" element={<Switch />} />
+          <Route path="/table" element={<Table />} />
           <Route path="/tabs" element={<Tabs />} />
         </Route>
       </Routes>

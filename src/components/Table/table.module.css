@@ -1,0 +1,44 @@
+.table {
+  display: grid;
+  border-collapse: collapse;
+  min-width: 100%;
+  grid-template-columns: repeat(var(--count-column), auto);
+  font-size: var(--font-size-sm);
+  overflow: auto;
+}
+
+.head {
+  display: contents;
+
+  &Row {
+    display: contents;
+  }
+
+  &Cell {
+    position: sticky;
+    top: 0;
+    padding: 12px;
+    text-align: left;
+    background-color: var(--color-table-header-bg);
+    border-bottom: 1px solid var(--color-standard-border);
+  }
+}
+
+.body {
+  display: contents;
+
+  &Row {
+    display: contents;
+
+    &:nth-child(even) {
+      .bodyCell {
+        background-color: var(--color-table-even-bg);
+      }
+    }
+  }
+
+  &Cell {
+    padding: 12px;
+    border-bottom: 1px solid var(--color-standard-border);
+  }
+}
