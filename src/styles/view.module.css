@@ -35,6 +35,8 @@
 
 .code {
   margin: 16px 0;
+  max-height: 400px;
+  overflow: auto;
 }
 
 @media (--view-md) {

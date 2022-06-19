@@ -1,0 +1,18 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  width: 24px;
+  height: 24px;
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-standard-hover);
+  }
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
