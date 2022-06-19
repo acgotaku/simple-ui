@@ -95,9 +95,9 @@ const FixedHeaderTable = () => {
   ];
 
   const dataSource = Array.from(Array(30).keys()).map(key => ({
-    name: `Jim Green ${key}`,
+    name: `Jim Green ${key + 1}`,
     age: 36,
-    address: `London No. ${key} Lake Park`
+    address: `London No. ${key + 1} Lake Park`
   }));
   return (
     <Table
@@ -127,9 +127,9 @@ const columns = [
 ];
 
 const dataSource = Array.from(Array(30).keys()).map(key => ({
-  name: \`Jim Green \${key}\`,
+  name: \`Jim Green \${key + 1}\`,
   age: 36,
-  address: \`London No. \${key} Lake Park\`
+  address: \`London No. \${key + 1} Lake Park\`
 }));
 return (
   <Table
@@ -144,9 +144,9 @@ return (
 
 const ActionTable = () => {
   const dataSource = Array.from(Array(10).keys()).map(key => ({
-    name: `Jim Green ${key}`,
+    name: `Jim Green ${key + 1}`,
     age: 36,
-    address: `London No. ${key} Lake Park`
+    address: `London No. ${key + 1} Lake Park`
   }));
   const [data, setData] = useState(dataSource);
 
@@ -193,9 +193,9 @@ const ActionTable = () => {
 
 const actionTableCode = `
 const dataSource = Array.from(Array(10).keys()).map(key => ({
-  name: \`Jim Green \${key}\`,
+  name: \`Jim Green \${key + 1}\`,
   age: 36,
-  address: \`London No. \${key} Lake Park\`
+  address: \`London No. \${key + 1} Lake Park\`
 }));
 const [data, setData] = useState(dataSource);
 
@@ -240,6 +240,72 @@ const columns = [
 return <Table columns={columns} dataSource={data} />;
 `;
 
+const PaginationTable = () => {
+  const columns = [
+    {
+      name: 'name',
+      label: 'Name'
+    },
+    {
+      name: 'age',
+      label: 'Age'
+    },
+    {
+      name: 'address',
+      label: 'Address'
+    }
+  ];
+
+  const dataSource = Array.from(Array(108).keys()).map(key => ({
+    name: `Jim Green ${key + 1}`,
+    age: 36,
+    address: `London No. ${key + 1} Lake Park`
+  }));
+  return (
+    <Table
+      columns={columns}
+      dataSource={dataSource}
+      pagination={{
+        pageSize: 5,
+        currentPage: 3
+      }}
+    />
+  );
+};
+
+const paginationTableCode = `
+const columns = [
+  {
+    name: 'name',
+    label: 'Name'
+  },
+  {
+    name: 'age',
+    label: 'Age'
+  },
+  {
+    name: 'address',
+    label: 'Address'
+  }
+];
+
+const dataSource = Array.from(Array(108).keys()).map(key => ({
+  name: \`Jim Green \${key + 1}\`,
+  age: 36,
+  address: \`London No. \${key + 1} Lake Park\`
+}));
+return (
+  <Table
+    columns={columns}
+    dataSource={dataSource}
+    pagination={{
+      pageSize: 5,
+      currentPage: 3
+    }}
+  />
+);
+`;
+
 const TableView = () => {
   return (
     <article className={styles.article}>
@@ -268,6 +334,13 @@ const TableView = () => {
         <ActionTable />
         <div className={styles.code}>
           <Code code={actionTableCode} />
+        </div>
+      </div>
+      <h3 className={styles.caption}>Table with Pagination</h3>
+      <div className={styles.content}>
+        <PaginationTable />
+        <div className={styles.code}>
+          <Code code={paginationTableCode} />
         </div>
       </div>
     </article>

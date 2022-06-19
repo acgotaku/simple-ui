@@ -11,11 +11,17 @@ export interface Scroll {
   y?: number | string;
 }
 
+export interface IPagination {
+  pageSize: number;
+  currentPage?: number;
+}
+
 export interface ITableProps {
   columns: Array<Column>;
   dataSource: Array<RecordType>;
   className?: string;
   scroll?: Scroll;
+  pagination?: boolean | IPagination;
 }
 
 export interface ITableHeaderProps {
