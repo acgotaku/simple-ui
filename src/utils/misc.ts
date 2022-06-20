@@ -90,6 +90,9 @@ export function looseEqual(a: any, b: any): boolean {
 }
 
 export function deepClone<T>(val: T): T {
+  if (!isObject(val)) {
+    return val;
+  }
   if (Array.isArray(val)) {
     return val.map(deepClone) as typeof val;
   }
@@ -105,12 +108,8 @@ export function deepClone<T>(val: T): T {
   if (isRegExp(val)) {
     return new RegExp(val.source, val.flags) as typeof val;
   }
-  if (isPlainObject(val)) {
-    return Object.keys(val).reduce((acc, key) => {
-      acc[key as keyof T] = deepClone(val[key as keyof T]);
-      return acc;
-    }, {} as T);
-  } else {
-    return val;
-  }
+  return Object.keys(val).reduce((acc, key) => {
+    acc[key as keyof T] = deepClone(val[key as keyof T]);
+    return acc;
+  }, {} as T);
 }

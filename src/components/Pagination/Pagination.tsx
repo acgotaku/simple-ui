@@ -49,7 +49,7 @@ const Pagination: React.FC<IPaginationProps> = ({
           className={styles.button}
           onClick={navPrev}
         >
-          <Prev />
+          <Prev className={styles.icon} />
         </button>
       )}
       {pages.map(page => (
@@ -71,7 +71,7 @@ const Pagination: React.FC<IPaginationProps> = ({
           className={styles.button}
           onClick={navNext}
         >
-          <Next />
+          <Next className={styles.icon} />
         </button>
       )}
     </div>
