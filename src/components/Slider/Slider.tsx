@@ -74,7 +74,7 @@ const Slider: React.FC<ISliderProps> = ({
     [rangeValue, checkInputValue]
   );
 
-  const changeReangeHandler = useCallback(
+  const changeRangeHandler = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = Number(event.target.value);
       setRangeValue(value);
@@ -118,7 +118,7 @@ const Slider: React.FC<ISliderProps> = ({
           disabled={disabled}
           value={rangeValue}
           {...rest}
-          onChange={changeReangeHandler}
+          onChange={changeRangeHandler}
         />
       </div>
     </div>
