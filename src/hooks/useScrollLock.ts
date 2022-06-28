@@ -1,16 +1,18 @@
-import { useEffect } from 'react';
-import { lockBody, unlockBody } from '@/utils/scrollLock';
+import { useEffect, useRef } from 'react';
+import { lockScroll, unlockScroll } from '@/utils/scrollLock';
 
 export function useScrollLock(visible: boolean) {
+  const style = useRef<HTMLStyleElement | null>(null);
+
   useEffect(() => {
     if (visible) {
-      lockBody();
+      lockScroll(style);
     } else {
-      unlockBody();
+      unlockScroll(style);
     }
 
     return () => {
-      unlockBody();
+      unlockScroll(style);
     };
   }, [visible]);
 }
