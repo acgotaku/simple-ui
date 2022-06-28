@@ -34,6 +34,6 @@
   --z-index-sidebar: 1010;
   --z-index-popper: 1100;
   --z-index-message: 1200;
-  --z-index-modal: 1300;
-  --z-index-drawer: 1400;
+  --z-index-drawer: 1300;
+  --z-index-modal: 1400;
 }
