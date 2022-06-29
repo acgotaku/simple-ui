@@ -20,6 +20,7 @@ const Radio = lazy(() => import('@/views/Radio'));
 const Select = lazy(() => import('@/views/Select'));
 const Skeleton = lazy(() => import('@/views/Skeleton'));
 const Slider = lazy(() => import('@/views/Slider'));
+const Steps = lazy(() => import('@/views/Steps'));
 const Swiper = lazy(() => import('@/views/Swiper'));
 const Switch = lazy(() => import('@/views/Switch'));
 const Table = lazy(() => import('@/views/Table'));
@@ -48,6 +49,7 @@ const AppRoutes = () => {
           <Route path="/select" element={<Select />} />
           <Route path="/skeleton" element={<Skeleton />} />
           <Route path="/slider" element={<Slider />} />
+          <Route path="/steps" element={<Steps />} />
           <Route path="/swiper" element={<Swiper />} />
           <Route path="/switch" element={<Switch />} />
           <Route path="/table" element={<Table />} />
