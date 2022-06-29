@@ -1,0 +1,12 @@
+.steps {
+  padding: 16px;
+  background-color: var(--color-container-bg);
+}
+
+.action {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
