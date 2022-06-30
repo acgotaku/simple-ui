@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button, Drawer, Link } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import { ReactComponent as Close } from '@/assets/icons/close.svg';
 import styles from '@/styles/view.module.css';
@@ -128,6 +129,8 @@ const BottomDrawer = () => {
 };
 
 const DrawerView = () => {
+  useTitle('Drawer | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Drawer</h1>

@@ -1,4 +1,5 @@
 import { Skeleton } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 import skeletonStyles from './skeleton.module.css';
@@ -19,6 +20,8 @@ const CircleSkeleton = () => {
 const circleSkeletonCode = `<Skeleton className={skeletonStyles.circle} />`;
 
 const SkeletonView = () => {
+  useTitle('Skeleton | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Skeleton</h1>

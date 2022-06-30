@@ -1,4 +1,5 @@
 import { Button } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 
@@ -9,6 +10,8 @@ const disabledButtonCode = `<Button disabled={true}>{'Disabled'}</Button>`;
 const loadingButtonCode = `<Button loading={true}>{'Loading'}</Button>`;
 
 const ButtonView = () => {
+  useTitle('Button | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Button</h1>

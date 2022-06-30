@@ -1,4 +1,5 @@
 import { Link } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 
@@ -6,6 +7,8 @@ const internalLinkCode = `<Link to="/button">Button View</Link>`;
 const externalLinkCode = `<Link href="https://github.com/acgotaku/simple-ui">Github</Link>`;
 
 const LinkView = () => {
+  useTitle('Link | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Link</h1>

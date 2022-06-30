@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Switch } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 
@@ -49,6 +50,8 @@ return (
 `;
 
 const SwitchView = () => {
+  useTitle('Switch | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Switch</h1>

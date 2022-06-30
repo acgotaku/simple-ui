@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Button, Dropdown, Link } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 import dropdownStyles from './dropdown.module.css';
@@ -249,6 +250,8 @@ return (
 `;
 
 const DropdownView = () => {
+  useTitle('Dropdown | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Dropdown</h1>

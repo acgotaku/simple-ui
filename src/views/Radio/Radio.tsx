@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Radio } from '@/components';
 import { RadioValueType } from '@/components/Radio';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 import radioStyles from './radio.module.css';
@@ -98,6 +99,8 @@ return (
 `;
 
 const RadioView = () => {
+  useTitle('Radio | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Radio</h1>

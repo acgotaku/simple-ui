@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button, Modal, Link } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 import modalStyles from './modal.module.css';
@@ -131,6 +132,8 @@ return (
 `;
 
 const ModalView = () => {
+  useTitle('Modal | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Modal</h1>

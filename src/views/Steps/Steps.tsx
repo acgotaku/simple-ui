@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Steps, Button } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 import stepsStyles from './steps.module.css';
@@ -51,6 +52,8 @@ return (
 `;
 
 const StepsView = () => {
+  useTitle('Steps | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Steps</h1>

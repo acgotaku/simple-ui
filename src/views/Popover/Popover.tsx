@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Placement } from '@floating-ui/react-dom';
 import { Button, Link, Popover } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 import popoverStyles from './popover.module.css';
@@ -87,6 +88,8 @@ const PopoverWithPosition: React.FC<IPopoverProps> = ({
 };
 
 const PopoverView = () => {
+  useTitle('Popover | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Popover</h1>

@@ -1,4 +1,5 @@
 import { Collapse, Link } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 import collapseStyles from './collapse.module.css';
@@ -96,6 +97,8 @@ return (
 `;
 
 const CollapseView = () => {
+  useTitle('Collapse | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Collapse</h1>

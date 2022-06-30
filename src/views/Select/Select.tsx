@@ -2,6 +2,7 @@ import { useState } from 'react';
 import cls from 'clsx';
 import { Select } from '@/components';
 import { SelectValueType } from '@/components/Select';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 import selectStyles from './select.module.css';
@@ -400,6 +401,8 @@ return (
 `;
 
 const SelectView = () => {
+  useTitle('Select | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Select</h1>

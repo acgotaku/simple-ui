@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { DatePicker } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import { DatePickerValueType } from '@/components/DatePicker';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
@@ -50,6 +51,8 @@ return (
 `;
 
 const DatePickerView = () => {
+  useTitle('DatePicker | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>DatePicker</h1>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Pagination } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 import paginationStyles from './pagination.module.css';
@@ -49,6 +50,8 @@ return (
 `;
 
 const PaginationView = () => {
+  useTitle('Pagination | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Pagination</h1>

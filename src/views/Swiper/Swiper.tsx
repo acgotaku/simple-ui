@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { Swiper } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import swiperStyles from './swiper.module.css';
 import styles from '@/styles/view.module.css';
@@ -102,6 +103,8 @@ return (
 `;
 
 const SwiperView = () => {
+  useTitle('Swiper | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Swiper</h1>

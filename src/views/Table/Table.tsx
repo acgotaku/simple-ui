@@ -1,4 +1,5 @@
 import { Table } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import { RecordType } from '@/components/Table';
 import { ReactComponent as Delete } from '@/assets/icons/delete.svg';
@@ -307,6 +308,8 @@ return (
 `;
 
 const TableView = () => {
+  useTitle('Table | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Table</h1>
