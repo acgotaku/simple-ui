@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Checkbox } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import { CheckboxValueType } from '@/components/Checkbox';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
@@ -131,6 +132,8 @@ return (
 `;
 
 const CheckboxView = () => {
+  useTitle('Checkbox | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Checkbox</h1>

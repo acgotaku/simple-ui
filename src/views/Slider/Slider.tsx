@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Slider } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 
@@ -107,6 +108,8 @@ const DisabledRangeSlider = () => {
 };
 
 const SliderView = () => {
+  useTitle('Slider | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Slider</h1>

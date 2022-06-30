@@ -1,4 +1,5 @@
 import { Button, message } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 import { useCallback } from 'react';
@@ -16,6 +17,8 @@ message.info(
 `;
 
 const MessageView = () => {
+  useTitle('Message | Simple UI');
+
   const showInfoMessage = useCallback(() => {
     message.info('This is info message.');
   }, []);

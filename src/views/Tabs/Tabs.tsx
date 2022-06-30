@@ -1,4 +1,5 @@
 import { Tabs, Link } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
 import tabsStyles from './tabs.module.css';
@@ -105,6 +106,8 @@ return (
 `;
 
 const TabsView = () => {
+  useTitle('Tabs | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Tabs</h1>

@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { Form, Input, Select, message, Button } from '@/components';
+import { useTitle } from '@/hooks/useTitle';
 import { FormValues, Rules } from '@/components/Form';
 import Code from '@/components/Code';
 import styles from '@/styles/view.module.css';
@@ -195,6 +196,8 @@ return (
 );
 `;
 const FormView = () => {
+  useTitle('Form | Simple UI');
+
   return (
     <article className={styles.article}>
       <h1 className={styles.title}>Form</h1>
