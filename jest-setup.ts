@@ -6,3 +6,9 @@ import '@testing-library/jest-dom';
 import React from 'react';
 
 window.React = React;
+
+window.ResizeObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn()
+}));
