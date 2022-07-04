@@ -22,6 +22,7 @@
     width: 100%;
     height: 100%;
     padding: 0 16px;
+    color: var(--color-standard-text);
     background-color: var(--color-standard);
 
     &:not([disabled]):hover,

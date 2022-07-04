@@ -36,6 +36,7 @@
     border-radius: 2px;
     width: 32px;
     height: 32px;
+    color: var(--color-standard-text);
 
     &:hover,
     &:focus {
@@ -105,6 +106,7 @@
       width: 32px;
       height: 32px;
       border-radius: 2px;
+      color: var(--color-standard-text);
 
       &.today {
         color: var(--color-primary);
@@ -147,6 +149,7 @@
     border-radius: 2px;
     width: 32px;
     height: 32px;
+    color: var(--color-standard-text);
 
     &:hover,
     &:focus {
@@ -202,6 +205,7 @@
       width: 60px;
       height: 32px;
       border-radius: 2px;
+      color: var(--color-standard-text);
 
       &.current {
         color: var(--color-primary);
@@ -239,6 +243,7 @@
     border-radius: 2px;
     width: 32px;
     height: 32px;
+    color: var(--color-standard-text);
 
     &:hover,
     &:focus {
@@ -294,6 +299,7 @@
       width: 60px;
       height: 32px;
       border-radius: 2px;
+      color: var(--color-standard-text);
 
       &.current {
         color: var(--color-primary);

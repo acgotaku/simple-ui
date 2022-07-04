@@ -43,6 +43,7 @@
   align-items: center;
   padding-left: 8px;
   width: calc(100% - 24px);
+  color: var(--color-standard-text);
 
   &:focus {
     outline: none;
