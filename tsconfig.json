@@ -19,7 +19,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vite-plugin-svgr/client"]
+    "types": ["vite-plugin-svgr/client", "jest", "@testing-library/jest-dom"]
   },
   "include": ["src", "jest-setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
