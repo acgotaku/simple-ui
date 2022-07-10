@@ -1,6 +1,0 @@
-import{r as c,i as l,t as i}from"./index.2587f82c.js";import{u as a}from"./useWindowEvent.ef30faf7.js";function f(){const e=document.createElement("style");return e.setAttribute("scroll-lock",""),e}function d(e){(document.head||document.getElementsByTagName("head")[0]).appendChild(e)}function m(e,t){e.innerHTML=t}function h(){return window.innerWidth-document.documentElement.clientWidth}const p=()=>{const e=h();return`body {
-        touch-action: none;
-        overflow: hidden !important;
-        position: relative !important;
-        ${e?`padding-right: ${e}px !important;`:""}
-        `};function y(e){const t=f();m(t,p()),d(t),e.current=t}function u(e){e.current&&(e.current.remove(),e.current=null)}function g(e){const t=c.exports.useRef(null);c.exports.useEffect(()=>(e?y(t):u(t),()=>{u(t)}),[e])}function b(e,t){if(t.key!==l.Tab)return;t.preventDefault();const n=i(e);if(!n.length)return;const o=n.findIndex(s=>s.isSameNode(document.activeElement));let r=0;o>=0&&(t.shiftKey?r=o>0?o-1:n.length-1:r=o<n.length-1?o+1:0),n[r].focus()}function E(e=!0){const t=c.exports.useRef(),n=c.exports.useRef();return a("keydown",r=>{t.current&&b(t.current,r)}),c.exports.useCallback(r=>{var s;if(!e){(s=n.current)==null||s.focus();return}r?(n.current=document.activeElement,t.current=r):t.current=null},[e])}export{E as a,g as u};
