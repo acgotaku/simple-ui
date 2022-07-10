@@ -7,6 +7,7 @@ export { default as Dropdown } from './Dropdown';
 export { default as Form } from './Form';
 export { default as Input } from './Input';
 export { default as Link } from './Link';
+export { default as Loading } from './Loading';
 export { default as message } from './message';
 export { default as Modal } from './Modal';
 export { default as Pagination } from './Pagination';
