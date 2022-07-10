@@ -1,6 +1,5 @@
 .steps {
   display: flex;
-  align-items: center;
   width: 100%;
 }
 
@@ -9,6 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
   flex: 1 1 100%;
 
   &:last-child {
