@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Loader from './Loader';
 import { BaseLayout } from '@/layouts';
 
 const Home = lazy(() => import('@/views/Home'));
@@ -12,6 +13,7 @@ const Dropdown = lazy(() => import('@/views/Dropdown'));
 const Form = lazy(() => import('@/views/Form'));
 const Input = lazy(() => import('@/views/Input'));
 const Link = lazy(() => import('@/views/Link'));
+const Loading = lazy(() => import('@/views/Loading'));
 const Message = lazy(() => import('@/views/Message'));
 const Modal = lazy(() => import('@/views/Modal'));
 const Pagination = lazy(() => import('@/views/Pagination'));
@@ -28,7 +30,7 @@ const Tabs = lazy(() => import('@/views/Tabs'));
 
 const AppRoutes = () => {
   return (
-    <Suspense fallback="Loading...">
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<BaseLayout />}>
           <Route index element={<Home />} />
@@ -41,6 +43,7 @@ const AppRoutes = () => {
           <Route path="/form" element={<Form />} />
           <Route path="/input" element={<Input />} />
           <Route path="/link" element={<Link />} />
+          <Route path="/loading" element={<Loading />} />
           <Route path="/message" element={<Message />} />
           <Route path="/modal" element={<Modal />} />
           <Route path="/pagination" element={<Pagination />} />

@@ -61,7 +61,7 @@
   height: 16px;
   margin-right: 8px;
   color: var(--color-disabled-text);
-  animation: loading 1s linear infinite;
+  animation: loading 1.3s cubic-bezier(0.53, 0.21, 0.29, 0.67) infinite;
 }
 
 @keyframes loading {
