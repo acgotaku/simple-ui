@@ -181,16 +181,13 @@ const Swiper: React.FC<ISwiperProps> = ({
       const interval = isObject(autoplay)
         ? (autoplay as IAutoPlay).interval || DEFAULT_INTERVAL
         : DEFAULT_INTERVAL;
+      // keep only one interval
+      stop();
       intervalRef.current = setInterval(() => {
         nextSlide();
       }, interval);
     }
-  }, [visible, autoplay, nextSlide]);
-
-  const delayAutoPlay = useCallback(() => {
-    stop();
-    play();
-  }, [stop, play]);
+  }, [visible, autoplay, nextSlide, stop]);
 
   const slidesChildren = useMemo(() => {
     const slides = React.Children.toArray(
@@ -217,33 +214,38 @@ const Swiper: React.FC<ISwiperProps> = ({
     }
   }, [children, space, loop, loopedSlides]);
 
-  const handleMouseEnter = useCallback(() => {
+  const handlePointerEnter = useCallback(() => {
     if (hoverToPause) {
       stop();
     }
   }, [hoverToPause, stop]);
 
-  const handleMouseLeave = useCallback(() => {
+  const handlePointerLeave = useCallback(() => {
     if (hoverToPause) {
       play();
     }
   }, [hoverToPause, play]);
 
-  const handleTouchStart = useCallback((event: React.TouchEvent) => {
-    touchStartXRef.current = event.touches[0].clientX;
-    touchDeltaXRef.current = 0;
-  }, []);
-
-  const handleTouchMove = useCallback((event: React.TouchEvent) => {
-    if (event.touches && event.touches.length > 1) {
+  const handlePointerDown = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      touchStartXRef.current = event.clientX;
       touchDeltaXRef.current = 0;
-    } else {
-      touchDeltaXRef.current =
-        event.touches[0].clientX - touchStartXRef.current;
-    }
-  }, []);
+    },
+    []
+  );
 
-  const handleTouchEnd = useCallback(() => {
+  const handlePointerMove = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      if (event.isPrimary) {
+        touchDeltaXRef.current = event.clientX - touchStartXRef.current;
+      } else {
+        touchDeltaXRef.current = 0;
+      }
+    },
+    []
+  );
+
+  const handlePointerUp = useCallback(() => {
     const touchDeltaX = touchDeltaXRef.current;
 
     if (Math.abs(touchDeltaX) > SWIPER_THRESHOLD) {
@@ -292,12 +294,12 @@ const Swiper: React.FC<ISwiperProps> = ({
         className={cls(styles.inner, {
           [styles.visible]: visible
         })}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={delayAutoPlay}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        onPointerEnter={handlePointerEnter}
+        onPointerLeave={handlePointerLeave}
+        onClick={play}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
       >
         <ul
           ref={containerRef}
