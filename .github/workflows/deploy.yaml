@@ -30,8 +30,12 @@ jobs:
           cd dist
           ln -s index.html 404.html
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.3.0
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          BRANCH: gh-pages
-          FOLDER: dist
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
