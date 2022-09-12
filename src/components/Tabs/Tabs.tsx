@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import cls from 'clsx';
+import { TabsContext } from './context';
 import styles from './tabs.module.css';
-import { ITabsProps } from './Tabs.types';
+import { ITabsProps, TabButton } from './Tabs.types';
 import { useTabsKeyboardNav } from './useTabsKeyboardNav';
 
 const Tabs: React.FC<ITabsProps> = ({
@@ -10,23 +11,36 @@ const Tabs: React.FC<ITabsProps> = ({
   activeTab = ''
 }) => {
   const [currentTab, setCurrentTab] = useState(activeTab);
+  const [tabButtons, setTabButtons] = useState<TabButton[]>([]);
   const [handleKeyDown, setTabsRef] = useTabsKeyboardNav();
+
+  const context = useMemo(
+    () => ({
+      currentTab,
+      tabButtons,
+      updateButtons: setTabButtons,
+      updateTab: setCurrentTab
+    }),
+    [currentTab, tabButtons]
+  );
 
   useEffect(() => {
     if (!activeTab) {
-      const firstChild = React.Children.toArray(children)[0];
-      if (firstChild && React.isValidElement(firstChild)) {
-        setCurrentTab(firstChild.props.name);
+      const firstChild = tabButtons[0];
+      if (firstChild && firstChild.name) {
+        setCurrentTab(firstChild.name);
       }
+    } else {
+      setCurrentTab(activeTab);
     }
-  }, [children, activeTab]);
+  }, [tabButtons, activeTab]);
 
   return (
     <div className={cls(styles.tabs, className)}>
-      <div className={styles.nav} ref={setTabsRef} onKeyDown={handleKeyDown}>
-        {React.Children.map(children, child => {
-          if (React.isValidElement(child)) {
-            const { name, label, disabled } = child.props;
+      <TabsContext.Provider value={context}>
+        <div className={styles.nav} ref={setTabsRef} onKeyDown={handleKeyDown}>
+          {tabButtons.map(button => {
+            const { name, label, disabled } = button;
             const active = name === currentTab;
             return (
               <button
@@ -44,23 +58,10 @@ const Tabs: React.FC<ITabsProps> = ({
                 {label}
               </button>
             );
-          } else {
-            return null;
-          }
-        })}
-      </div>
-      {React.Children.map(children, child => {
-        if (React.isValidElement(child)) {
-          const { name } = child.props;
-          if (name === currentTab) {
-            return child;
-          } else {
-            return null;
-          }
-        } else {
-          return null;
-        }
-      })}
+          })}
+        </div>
+        {children}
+      </TabsContext.Provider>
     </div>
   );
 };
