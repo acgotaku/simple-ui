@@ -1,4 +1,4 @@
-import { useState, useImperativeHandle, forwardRef } from 'react';
+import { useState, useImperativeHandle, forwardRef, useCallback } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { randomId } from '@/utils/random';
 import styles from './message.module.css';
@@ -13,18 +13,19 @@ const Message = forwardRef<IMessageRef>((props, ref) => {
     remove
   }));
 
-  const add = (config: ToastConfig) => {
-    setToasts(toasts => [...toasts, { ...config, key: randomId() }]);
-  };
-  const remove = (key: string) => {
-    setToasts(toasts.filter(toast => toast.key !== key));
-  };
+  const add = useCallback((config: ToastConfig) => {
+    setToasts(toasts => [...toasts, { ...config, toastId: randomId() }]);
+  }, []);
+
+  const remove = useCallback((toastId: string) => {
+    setToasts(toasts => toasts.filter(toast => toast.toastId !== toastId));
+  }, []);
 
   return (
     <TransitionGroup className={styles.message}>
       {toasts.map(toast => (
         <CSSTransition
-          key={toast.key}
+          key={toast.toastId}
           timeout={300}
           classNames={{
             enter: styles['toast-enter'],
@@ -33,7 +34,7 @@ const Message = forwardRef<IMessageRef>((props, ref) => {
             exitActive: styles['toast-exit-active']
           }}
         >
-          <Toast {...toast} key={toast.key} onClose={() => remove(toast.key)} />
+          <Toast {...toast} remove={remove} />
         </CSSTransition>
       ))}
     </TransitionGroup>
