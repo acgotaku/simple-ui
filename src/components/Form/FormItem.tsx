@@ -142,7 +142,7 @@ const FormItem = forwardRef<IFormItemRef, IFormItemProps>((props, ref) => {
     if (field && React.isValidElement(children)) {
       switch (children.type) {
         case Input: {
-          return React.cloneElement(children, {
+          return React.cloneElement(children as React.ReactElement, {
             value: fieldValue,
             invalid: !!errorMessage,
             disabled,
@@ -151,7 +151,7 @@ const FormItem = forwardRef<IFormItemRef, IFormItemProps>((props, ref) => {
           });
         }
         case Select: {
-          return React.cloneElement(children, {
+          return React.cloneElement(children as React.ReactElement, {
             value: fieldValue,
             invalid: !!errorMessage,
             disabled,
