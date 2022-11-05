@@ -95,7 +95,7 @@ const Form: React.FC<IFormProps> = ({
           if (React.isValidElement(child) && child.type === FormItem) {
             const { field } = child.props;
             if (field) {
-              return React.cloneElement(child, {
+              return React.cloneElement(child as React.ReactElement, {
                 ref: (ref: IFormItemRef) => {
                   items.current[field] = ref;
                 },

@@ -157,7 +157,9 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
         if (React.isValidElement(child)) {
           const { value } = child.props;
           if (selectOptions.some(option => option.value === value)) {
-            return React.cloneElement(child, { onClick: handleClick });
+            return React.cloneElement(child as React.ReactElement, {
+              onClick: handleClick
+            });
           }
         }
       });

@@ -191,7 +191,7 @@ const DropdownItem: React.FC<IDropdownItemProps> = ({
 
   const childrenWithClose = useMemo(() => {
     if (React.isValidElement(children)) {
-      return React.cloneElement(children, {
+      return React.cloneElement(children as React.ReactElement, {
         onClick: (event: MouseEvent) => {
           onClose();
           if (typeof children.props.onClick === 'function') {

@@ -26,7 +26,7 @@ const Steps: React.FC<IStepsProps> = ({
     <div className={cls(styles.steps, className)}>
       {React.Children.map(children, (child, index) => {
         if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
+          return React.cloneElement(child as React.ReactElement, {
             index,
             status: stepStatus(index)
           });

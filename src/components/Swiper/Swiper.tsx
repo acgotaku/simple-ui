@@ -193,7 +193,10 @@ const Swiper: React.FC<ISwiperProps> = ({
     const slides = React.Children.toArray(
       React.Children.map(children, (child, index) => {
         if (React.isValidElement(child)) {
-          return React.cloneElement(child, { index, space });
+          return React.cloneElement(child as React.ReactElement, {
+            index,
+            space
+          });
         }
       })
     );
