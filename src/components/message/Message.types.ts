@@ -6,16 +6,15 @@ export interface IToastProps {
   type: ToastType;
   content: React.ReactNode;
   duration: number;
-  onClose: () => void;
+  remove: (key: string) => void;
+  toastId: string;
 }
 
-export type ToastConfig = Omit<IToastProps, 'onClose'>;
+export type ToastState = Omit<IToastProps, 'remove'>;
 
-export interface ToastState extends ToastConfig {
-  key: string;
-}
+export type ToastConfig = Omit<ToastState, 'toastId'>;
 
 export interface IMessageRef {
   add: (config: ToastConfig) => void;
-  remove: (key: string) => void;
+  remove: (toastId: string) => void;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import styles from './message.module.css';
 import { IToastProps } from './Message.types';
 import { ReactComponent as Info } from '@/assets/icons/info.svg';
@@ -16,11 +16,21 @@ const typeToIcon = {
   loading: Loading
 };
 
-const Toast: React.FC<IToastProps> = ({ content, type, duration, onClose }) => {
+const Toast: React.FC<IToastProps> = ({
+  content,
+  type,
+  duration,
+  remove,
+  toastId
+}) => {
   const IconComponent = typeToIcon[type];
+  const onClose = useCallback(() => {
+    remove(toastId);
+  }, [remove, toastId]);
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | null = null;
+
     if (duration) {
       timer = setTimeout(onClose, duration * 1000);
     }
@@ -28,7 +38,7 @@ const Toast: React.FC<IToastProps> = ({ content, type, duration, onClose }) => {
     return () => {
       if (timer) clearTimeout(timer);
     };
-  });
+  }, [duration, onClose]);
 
   const canClose = useMemo(() => duration === 0 || duration > 5, [duration]);
 
@@ -48,4 +58,4 @@ const Toast: React.FC<IToastProps> = ({ content, type, duration, onClose }) => {
     </div>
   );
 };
-export default Toast;
+export default memo(Toast);
