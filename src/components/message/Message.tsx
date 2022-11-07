@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { randomId } from '@/utils/random';
-
+import { flushPromises } from '@/utils/misc';
 import styles from './message.module.css';
 import Toast from './Toast';
 import { IMessageRef, ToastState, ToastConfig } from './Message.types';
@@ -33,19 +33,18 @@ const Message = forwardRef<IMessageRef>((props, ref) => {
     setToasts(toasts => toasts.filter(toast => toast.toastId !== toastId));
   }, []);
 
-  useEffect(() => {
-    if (toasts.length === 0) {
-      prevRects.current = {};
-      toastRefs.current = {};
+  const recordToast = useCallback(() => {
+    for (const [toastId, dom] of Object.entries(toastRefs.current)) {
+      if (dom) {
+        const rect = dom.getBoundingClientRect();
+        prevRects.current[toastId] = rect;
+      }
     }
-  }, [toasts]);
+  }, []);
 
   const flipToast = useCallback(async () => {
     for (const [toastId, dom] of Object.entries(toastRefs.current)) {
       if (dom) {
-        await Promise.allSettled(
-          dom.getAnimations().map(animation => animation.finished)
-        );
         const rect = dom.getBoundingClientRect();
         const prevRect = prevRects.current[toastId];
         if (prevRect) {
@@ -60,42 +59,74 @@ const Message = forwardRef<IMessageRef>((props, ref) => {
               ],
               {
                 duration: TIMEOUT,
-                easing: 'ease'
+                easing: 'linear',
+                fill: 'both'
               }
             );
           }
         }
-
-        prevRects.current[toastId] = rect;
       }
     }
   }, []);
 
-  const onEnter = useCallback(
-    async (node: HTMLElement) => {
-      node.animate(
-        [
-          {
-            opacity: '0',
-            transform: 'translate(0, 24px)'
-          },
-          { opacity: '1', transform: 'translate(0, 0)' }
-        ],
-        {
-          duration: TIMEOUT,
-          easing: 'ease'
+  const callbackFunction: MutationCallback = useCallback(
+    mutations => {
+      for (const mutation of mutations) {
+        if (mutation.type === 'childList' && mutation.removedNodes.length > 0) {
+          flipToast();
         }
-      );
-      await Promise.allSettled(
-        node.getAnimations().map(animation => animation.finished)
-      );
-      flipToast();
+      }
     },
     [flipToast]
   );
 
+  useEffect(() => {
+    if (toasts.length === 0) {
+      prevRects.current = {};
+      toastRefs.current = {};
+    }
+  }, [toasts]);
+
+  useEffect(() => {
+    const observer = new MutationObserver(callbackFunction);
+    observer.observe(
+      document.querySelector(`.${styles.message}`) as HTMLElement,
+      {
+        childList: true
+      }
+    );
+
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, [callbackFunction]);
+
+  const onEnter = useCallback(async (node: HTMLElement) => {
+    node.animate(
+      [
+        {
+          opacity: '0',
+          transform: 'translate(0, 24px)'
+        },
+        { opacity: '1', transform: 'translate(0, 0)' }
+      ],
+      {
+        duration: TIMEOUT,
+        easing: 'ease'
+      }
+    );
+    await Promise.allSettled(
+      node.getAnimations().map(animation => animation.finished)
+    );
+  }, []);
+
   const onExit = useCallback(
     async (node: HTMLElement) => {
+      await flushPromises();
+      recordToast();
+      node.getAnimations().forEach(animation => animation.finish());
       node.animate(
         [
           {
@@ -106,15 +137,15 @@ const Message = forwardRef<IMessageRef>((props, ref) => {
         ],
         {
           duration: TIMEOUT,
-          easing: 'ease'
+          easing: 'ease',
+          fill: 'both'
         }
       );
       await Promise.allSettled(
         node.getAnimations().map(animation => animation.finished)
       );
-      flipToast();
     },
-    [flipToast]
+    [recordToast]
   );
 
   return (

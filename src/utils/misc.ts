@@ -114,6 +114,11 @@ export function deepClone<T>(val: T): T {
   }, {} as T);
 }
 
+export const sleep = (ms: number) =>
+  new Promise(resolve => setTimeout(resolve, ms));
+
+export const flushPromises = () => sleep(0);
+
 export function debounce<F extends AnyToVoidFunction>(
   fn: F,
   ms: number,
