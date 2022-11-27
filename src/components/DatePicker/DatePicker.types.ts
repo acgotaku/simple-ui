@@ -1,4 +1,4 @@
-import { Placement } from '@floating-ui/react-dom';
+import { Placement } from '@/floating';
 
 export type DatePickerValueType = string | number | Date;
 export type PanelView = 'date' | 'month' | 'year';

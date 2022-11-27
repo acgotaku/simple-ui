@@ -4,13 +4,13 @@ const DEFAULT_EVENTS = ['mousedown', 'touchstart'];
 
 export function useClickOutside(
   handler: () => void,
-  nodes?: Array<HTMLElement | null>
+  nodes?: Array<Node | null>
 ) {
   useEffect(() => {
     const listener = (event: Event) => {
       if (Array.isArray(nodes)) {
         const shouldTrigger = nodes.every(
-          node => !!node && !node.contains(event.target as HTMLElement)
+          node => !!node && !node.contains(event.target as Node)
         );
         shouldTrigger && handler();
       }

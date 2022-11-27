@@ -1,8 +1,8 @@
-import { Placement } from '@floating-ui/react-dom';
+import { Placement, ReferenceElement } from '@/floating';
 
 export interface IPopperProps {
   children: React.ReactNode;
-  referenceElement: HTMLDivElement | null;
+  referenceElement: ReferenceElement | null;
   visible: boolean;
   onClose: () => void;
   placement: Placement;
