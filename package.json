@@ -11,7 +11,6 @@
     "test": "jest --coverage"
   },
   "dependencies": {
-    "@floating-ui/react-dom": "^0.7.0",
     "async-validator": "^4.1.1",
     "clsx": "^1.1.1",
     "i18next": "^21.8.2",

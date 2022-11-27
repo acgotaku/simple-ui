@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Placement } from '@floating-ui/react-dom';
+import { Placement } from '@/floating';
 import { Button, Link, Popover } from '@/components';
 import { useTitle } from '@/hooks/useTitle';
 import Code from '@/components/Code';

@@ -2,13 +2,14 @@ import React, { useLayoutEffect, useRef, useCallback } from 'react';
 import {
   useFloating,
   autoUpdate,
+  offset,
   shift,
   flip,
-  offset,
   size,
+  arrow,
   hide,
-  arrow
-} from '@floating-ui/react-dom';
+  isElement
+} from '@/floating';
 import { CSSTransition } from 'react-transition-group';
 import cls from 'clsx';
 import styles from './popper.module.css';
@@ -36,11 +37,11 @@ const Popper: React.FC<IPopperProps> = ({
     floating,
     strategy,
     placement: renderPlacement,
-    middlewareData
+    pluginData
   } = useFloating({
     whileElementsMounted: autoUpdate,
     placement: placement,
-    middleware: [
+    plugin: [
       offset(withArrow ? 8 : 0),
       shift(),
       flip(),
@@ -55,7 +56,7 @@ const Popper: React.FC<IPopperProps> = ({
               rects.floating.height >= availableHeight
                 ? `${availableHeight}px`
                 : 'none',
-            width: sameWidth ? `${rects.reference.width}px` : 'auto'
+            width: sameWidth ? `${rects.reference.width}px` : 'max-content'
           });
         }
       }),
@@ -70,7 +71,10 @@ const Popper: React.FC<IPopperProps> = ({
     reference(referenceElement);
   }, [referenceElement, reference]);
 
-  useClickOutside(onClose, [referenceElement, refs.floating.current]);
+  useClickOutside(onClose, [
+    ...(isElement(referenceElement) ? [referenceElement] : []),
+    refs.floating.current
+  ]);
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const stableRef = useCallback(
     (ref: HTMLDivElement | null) => {
@@ -104,15 +108,15 @@ const Popper: React.FC<IPopperProps> = ({
             left: x ?? ''
           }}
           data-popper-placement={renderPlacement}
-          data-popper-reference-hidden={middlewareData.hide?.referenceHidden}
+          data-popper-reference-hidden={pluginData.hide?.referenceHidden}
         >
           {withArrow && (
             <div
               className={styles.arrow}
               ref={arrowRef}
               style={{
-                top: middlewareData.arrow?.y ?? '',
-                left: middlewareData.arrow?.x ?? ''
+                top: pluginData.arrow?.y ?? '',
+                left: pluginData.arrow?.x ?? ''
               }}
             />
           )}

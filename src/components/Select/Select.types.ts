@@ -1,5 +1,5 @@
 import React from 'react';
-import { Placement } from '@floating-ui/react-dom';
+import { Placement } from '@/floating';
 
 export type SelectValueType = string | number;
 export type SelectLabelType = string | React.ReactNode | number;

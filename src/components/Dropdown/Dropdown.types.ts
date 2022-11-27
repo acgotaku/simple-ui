@@ -1,5 +1,5 @@
 import React from 'react';
-import { Placement } from '@floating-ui/react-dom';
+import { Placement } from '@/floating';
 
 export type Trigger = 'click' | 'hover';
 
