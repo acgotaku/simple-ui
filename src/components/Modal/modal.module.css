@@ -1,11 +1,11 @@
 .modal {
   max-height: 100vh;
+  min-width: min(440px, 90vw);
   transition: transform 0.3s;
 
   .inner {
     display: flex;
     flex-direction: column;
-    min-width: min(440px, 90vw);
     background-color: var(--color-standard);
     border-radius: 2px;
   }
@@ -14,7 +14,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-weight: 600;
+    font-weight: var(--font-weight-semi-bold);
     padding: 8px 16px;
     border-bottom: 1px solid var(--color-standard-border);
   }
