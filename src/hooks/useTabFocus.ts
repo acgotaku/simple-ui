@@ -6,7 +6,7 @@ type ReturnType = [
   (event: React.KeyboardEvent<HTMLInputElement>) => void
 ];
 
-export function useTabFoucs(
+export function useTabFocus(
   active: boolean,
   main: React.RefObject<HTMLElement>,
   clearButton: React.RefObject<HTMLButtonElement>

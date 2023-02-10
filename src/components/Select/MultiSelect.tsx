@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useMemo, useState } from 'react';
 import cls from 'clsx';
 import { noop } from '@/utils/misc';
-import { useTabFoucs } from '@/hooks/useTabFocus';
+import { useTabFocus } from '@/hooks/useTabFocus';
 import { useListKeyboardNav } from '@/hooks/useListKeyboardNav';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import styles from './select.module.css';
@@ -99,7 +99,7 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
     () => clearable && !!selectedLabel,
     [clearable, selectedLabel]
   );
-  const [tabFocus, keyDownHandler] = useTabFoucs(
+  const [tabFocus, keyDownHandler] = useTabFocus(
     showClear,
     buttonRef,
     clearRef
