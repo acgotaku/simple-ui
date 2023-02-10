@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import cls from 'clsx';
 import { useClickOutside } from '@/hooks/useClickOutside';
-import { useTabFoucs } from '@/hooks/useTabFocus';
+import { useTabFocus } from '@/hooks/useTabFocus';
 import { ReactComponent as Clear } from '@/assets/icons/clear.svg';
 import styles from './input.module.css';
 import { IInputProps } from './Input.types';
@@ -73,7 +73,7 @@ const BaseInput = forwardRef<HTMLInputElement, IInputProps>(
       () => clearable && !!selfValue,
       [clearable, selfValue]
     );
-    const [tabFocus, keyDownHandler] = useTabFoucs(
+    const [tabFocus, keyDownHandler] = useTabFocus(
       showClear,
       inputRef,
       clearRef
