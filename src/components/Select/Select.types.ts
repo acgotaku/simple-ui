@@ -69,9 +69,8 @@ export interface IOptionProps {
   style?: React.CSSProperties;
 }
 
-export interface IVirtualScrollProps {
-  itemCount: number;
-  height: number;
-  childHeight: number;
-  itemData: Array<React.ReactNode>;
+export interface ITagProps {
+  children: React.ReactNode;
+  disabled?: boolean;
+  onClose?: () => void;
 }

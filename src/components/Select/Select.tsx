@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useMemo, useState } from 'react';
+import React, { memo, useCallback, useRef, useMemo, useState } from 'react';
 import cls from 'clsx';
 import { noop } from '@/utils/misc';
 import { useTabFocus } from '@/hooks/useTabFocus';
@@ -17,7 +17,7 @@ import Popper from '../Popper';
 import Input from '../Input';
 import Option from './Option';
 import MultiSelect from './MultiSelect';
-import VirtualScroll from './VirtualScroll';
+import VirtualScroll from '../VirtualScroll';
 import { LIST_HEIGHT, LIST_SIZE } from './Select.constants';
 import { ReactComponent as Down } from '@/assets/icons/caret-down.svg';
 import { ReactComponent as Clear } from '@/assets/icons/clear.svg';
@@ -255,4 +255,4 @@ const Select: React.FC<ISelectProps> = props => {
   }
 };
 
-export default Select;
+export default memo(Select);

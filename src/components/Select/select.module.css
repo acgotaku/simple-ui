@@ -1,7 +1,7 @@
 .ref {
   display: inline-flex;
   position: relative;
-  height: 40px;
+  min-height: 40px;
   width: 100%;
   min-width: 112px;
   border-radius: 2px;
@@ -41,7 +41,9 @@
 .button {
   display: inline-flex;
   align-items: center;
-  padding-left: 8px;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px 0 4px 8px;
   width: calc(100% - 24px);
   color: var(--color-standard-text);
 
@@ -143,5 +145,49 @@
         color: var(--color-primary);
       }
     }
+  }
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  color: var(--color-standard-text);
+  border-radius: 2px;
+  border: 1px solid var(--color-standard-border);
+  background-color: var(--color-standard);
+  font-size: var(--font-size-xs);
+  overflow: hidden;
+
+  &.disabled {
+    color: var(--color-disabled-text);
+    background-color: var(--color-disabled);
+  }
+
+  &Text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &Close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+    flex: none;
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-standard-hover);
+    }
+  }
+
+  &Icon {
+    width: 12px;
+    height: 12px;
   }
 }
