@@ -1,9 +1,10 @@
-import React, { useCallback, useRef, useMemo, useState } from 'react';
+import React, { memo, useCallback, useRef, useMemo, useState } from 'react';
 import cls from 'clsx';
 import { noop } from '@/utils/misc';
 import { useTabFocus } from '@/hooks/useTabFocus';
 import { useListKeyboardNav } from '@/hooks/useListKeyboardNav';
 import { useClickOutside } from '@/hooks/useClickOutside';
+import { eventKey } from '@/constants/keyboard';
 import styles from './select.module.css';
 import {
   IMultiSelectProps,
@@ -15,7 +16,8 @@ import Popper from '../Popper';
 import Input from '../Input';
 import Option from './Option';
 import Checkbox from '../Checkbox';
-import VirtualScroll from './VirtualScroll';
+import Tag from './Tag';
+import VirtualScroll from '../VirtualScroll';
 import { LIST_HEIGHT, LIST_SIZE } from './Select.constants';
 import { ReactComponent as Down } from '@/assets/icons/caret-down.svg';
 import { ReactComponent as Clear } from '@/assets/icons/clear.svg';
@@ -42,7 +44,7 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
   } = props;
   const [referenceElement, setReferenceElement] =
     useState<HTMLDivElement | null>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const selectedRef = useRef<HTMLDivElement>(null);
   const clearRef = useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = useState(false);
   const [focus, setFocus] = useState(false);
@@ -86,22 +88,18 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
     }
   }, [props]);
 
-  const selectedLabel = useMemo(
-    () =>
-      mergedOptions
-        .filter(option => value.includes(option.value))
-        .map(option => option.label)
-        .join(', '),
+  const selectedOptions = useMemo(
+    () => mergedOptions.filter(option => value.includes(option.value)),
     [mergedOptions, value]
   );
 
   const showClear = useMemo(
-    () => clearable && !!selectedLabel,
-    [clearable, selectedLabel]
+    () => clearable && !!selectedOptions.length,
+    [clearable, selectedOptions]
   );
   const [tabFocus, keyDownHandler] = useTabFocus(
     showClear,
-    buttonRef,
+    selectedRef,
     clearRef
   );
 
@@ -109,21 +107,45 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
       onSelect([]);
-      buttonRef.current?.focus();
+      selectedRef.current?.focus();
     },
     [onSelect]
   );
 
-  const handleButtonClick = useCallback(() => {
+  const handleSelectedClick = useCallback(() => {
     setVisible(visible => !visible);
     setFocus(true);
   }, []);
 
+  const handleSelectedKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLElement>) => {
+      handleKeyDown(event);
+      if (event.key === eventKey.Enter) {
+        handleSelectedClick();
+      }
+    },
+    [handleKeyDown, handleSelectedClick]
+  );
+
+  const removeOption = useCallback(
+    (optionValue: SelectValueType) => {
+      const newValue = value.filter(key => key !== optionValue);
+      onSelect(newValue);
+    },
+    [onSelect, value]
+  );
+
   const selectOptions = useMemo(() => {
     if (filterable && search) {
-      return mergedOptions.filter(option =>
-        option.label?.toString().toLowerCase().includes(search.toLowerCase())
-      );
+      const keywords = search.split(' ').filter(x => x);
+      if (keywords.length) {
+        return mergedOptions.filter(option => {
+          const label = option.label?.toString().toLowerCase() || '';
+          return keywords.some(key => label.includes(key));
+        });
+      } else {
+        return mergedOptions;
+      }
     } else {
       return mergedOptions;
     }
@@ -196,20 +218,27 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
         )}
         onKeyDown={keyDownHandler}
       >
-        <button
-          type="button"
+        <div
+          tabIndex={0}
           role="combobox"
           aria-expanded={visible}
           aria-haspopup="listbox"
-          ref={buttonRef}
+          ref={selectedRef}
           className={styles.button}
           onFocus={() => setFocus(true)}
-          disabled={disabled}
-          onClick={handleButtonClick}
-          onKeyDown={handleKeyDown}
+          onClick={handleSelectedClick}
+          onKeyDown={handleSelectedKeyDown}
         >
-          <span className={styles.text}>{selectedLabel}</span>
-        </button>
+          {selectedOptions.map(option => (
+            <Tag
+              key={option.value}
+              disabled={disabled}
+              onClose={() => removeOption(option.value)}
+            >
+              {option.label}
+            </Tag>
+          ))}
+        </div>
         <div className={styles.icon}>
           <Down className={styles.down} />
           {showClear && (
@@ -259,4 +288,4 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
   );
 };
 
-export default MultiSelect;
+export default memo(MultiSelect);

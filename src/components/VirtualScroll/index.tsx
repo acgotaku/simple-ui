@@ -1,6 +1,12 @@
 import React, { memo, useMemo, useRef } from 'react';
 import { useScrollAware } from '@/hooks/useScrollAware';
-import { IVirtualScrollProps } from './Select.types';
+
+export interface IVirtualScrollProps {
+  itemCount: number;
+  height: number;
+  childHeight: number;
+  itemData: Array<React.ReactNode>;
+}
 
 const VirtualScroll: React.FC<IVirtualScrollProps> = ({
   itemCount,
