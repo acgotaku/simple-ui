@@ -27,6 +27,7 @@ const Swiper = lazy(() => import('@/views/Swiper'));
 const Switch = lazy(() => import('@/views/Switch'));
 const Table = lazy(() => import('@/views/Table'));
 const Tabs = lazy(() => import('@/views/Tabs'));
+const TagInput = lazy(() => import('@/views/TagInput'));
 
 const AppRoutes = () => {
   return (
@@ -57,6 +58,7 @@ const AppRoutes = () => {
           <Route path="/switch" element={<Switch />} />
           <Route path="/table" element={<Table />} />
           <Route path="/tabs" element={<Tabs />} />
+          <Route path="/taginput" element={<TagInput />} />
         </Route>
       </Routes>
     </Suspense>
