@@ -8,8 +8,6 @@ import React, {
   useCallback
 } from 'react';
 import cls from 'clsx';
-import { useClickOutside } from '@/hooks/useClickOutside';
-import { useTabFocus } from '@/hooks/useTabFocus';
 import { ReactComponent as Clear } from '@/assets/icons/clear.svg';
 import styles from './input.module.css';
 import { IInputProps } from './Input.types';
@@ -46,11 +44,8 @@ const BaseInput = forwardRef<HTMLInputElement, IInputProps>(
     const wrapperRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const clearRef = useRef<HTMLButtonElement>(null);
-    const [focus, setFocus] = useState(false);
     const [selfValue, setSelfValue] = useState(defaultValue);
     const isControlledComponent = useMemo(() => value !== undefined, [value]);
-
-    useClickOutside(() => setFocus(false), [wrapperRef.current]);
 
     useImperativeHandle(ref, () => inputRef.current);
 
@@ -73,11 +68,6 @@ const BaseInput = forwardRef<HTMLInputElement, IInputProps>(
       () => clearable && !!selfValue,
       [clearable, selfValue]
     );
-    const [tabFocus, keyDownHandler] = useTabFocus(
-      showClear,
-      inputRef,
-      clearRef
-    );
 
     const changeHandler = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,7 +79,6 @@ const BaseInput = forwardRef<HTMLInputElement, IInputProps>(
 
     const focusHandler = useCallback(
       (event: React.FocusEvent<HTMLInputElement>) => {
-        setFocus(true);
         onFocus && onFocus(event);
       },
       [onFocus]
@@ -124,13 +113,11 @@ const BaseInput = forwardRef<HTMLInputElement, IInputProps>(
         className={cls(
           styles.wrapper,
           {
-            [styles.focus]: focus || tabFocus,
             [styles.disabled]: disabled,
             [styles.invalid]: invalid
           },
           className
         )}
-        onKeyDown={keyDownHandler}
         ref={wrapperRef}
       >
         {prefix && <div className={styles.prefix}>{prefix}</div>}
