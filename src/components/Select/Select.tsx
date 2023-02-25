@@ -3,7 +3,6 @@ import cls from 'clsx';
 import { noop } from '@/utils/misc';
 import { useTabFocus } from '@/hooks/useTabFocus';
 import { useListKeyboardNav } from '@/hooks/useListKeyboardNav';
-import { useClickOutside } from '@/hooks/useClickOutside';
 import styles from './select.module.css';
 import {
   ISelectProps,
@@ -47,11 +46,9 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const clearRef = useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = useState(false);
-  const [focus, setFocus] = useState(false);
   const [search, setSearch] = useState('');
   const onClose = useCallback(() => setVisible(false), []);
   const [handleKeyDown, setPopperRef] = useListKeyboardNav(visible, onClose);
-  useClickOutside(() => setFocus(false), [referenceElement]);
 
   const handleClick = useCallback(
     (optionValue: SelectValueType) => {
@@ -104,9 +101,8 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
     [onSelect]
   );
 
-  const handleButtonClick = useCallback(() => {
+  const toggleVisible = useCallback(() => {
     setVisible(visible => !visible);
-    setFocus(true);
   }, []);
 
   const selectOptions = useMemo(() => {
@@ -173,7 +169,7 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
         className={cls(
           styles.ref,
           {
-            [styles.focus]: focus || tabFocus,
+            [styles.focus]: tabFocus,
             [styles.disabled]: disabled,
             [styles.invalid]: invalid
           },
@@ -188,9 +184,8 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
           aria-haspopup="listbox"
           ref={buttonRef}
           className={styles.button}
-          onFocus={() => setFocus(true)}
           disabled={disabled}
-          onClick={handleButtonClick}
+          onClick={toggleVisible}
           onKeyDown={handleKeyDown}
         >
           <span className={styles.text}>{selectedLabel}</span>

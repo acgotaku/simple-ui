@@ -10,7 +10,8 @@
   background-color: var(--color-standard);
   cursor: pointer;
 
-  &.focus {
+  &.focus,
+  &:focus-within {
     border: 1px solid var(--color-primary);
     .clear {
       visibility: visible;
