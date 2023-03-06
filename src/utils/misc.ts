@@ -108,7 +108,7 @@ export function deepClone<T>(val: T): T {
   if (isRegExp(val)) {
     return new RegExp(val.source, val.flags) as typeof val;
   }
-  return Object.keys(val).reduce((acc, key) => {
+  return Object.keys(val as object).reduce((acc, key) => {
     acc[key as keyof T] = deepClone(val[key as keyof T]);
     return acc;
   }, {} as T);
