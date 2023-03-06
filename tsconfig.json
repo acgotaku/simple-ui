@@ -21,6 +21,6 @@
     },
     "types": ["vite-plugin-svgr/client", "jest", "@testing-library/jest-dom"]
   },
-  "include": ["src", "jest-setup.ts"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
