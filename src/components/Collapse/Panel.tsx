@@ -1,4 +1,5 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useCallback, useRef, useMemo } from 'react';
+import { Transition } from 'react-transition-group';
 import cls from 'clsx';
 import { useRandomId } from '@/hooks/useRandomId';
 import { useCollapseContext } from './context';
@@ -13,25 +14,57 @@ const Panel: React.FC<IPanelProps> = ({
   children
 }) => {
   const { currentPanel, updatePanel } = useCollapseContext();
-  const [height, setHeight] = useState(0);
+  const nodeRef = useRef<HTMLDivElement>(null);
 
-  const measuredRef = useCallback((node: Element | null) => {
-    if (node) {
-      setHeight(node.scrollHeight);
-    }
-  }, []);
   const panelName = useRandomId(name);
   const expanded = useMemo(
     () => currentPanel.includes(panelName),
     [currentPanel, panelName]
   );
 
-  const panelStyle = useMemo(
-    () => ({
-      '--height-panel': `${height}px`
-    }),
-    [height]
-  ) as React.CSSProperties;
+  const onEnter = useCallback(() => {
+    if (nodeRef.current) {
+      const node = nodeRef.current;
+      node.style.height = '0';
+    }
+  }, []);
+  const onEntering = useCallback(() => {
+    if (nodeRef.current) {
+      const node = nodeRef.current;
+      if (node.scrollHeight !== 0) {
+        node.style.height = node.scrollHeight + 'px';
+      } else {
+        node.style.height = '';
+      }
+    }
+  }, []);
+  const onEntered = useCallback(() => {
+    if (nodeRef.current) {
+      const node = nodeRef.current;
+      node.style.height = '';
+    }
+  }, []);
+
+  const onExit = useCallback(() => {
+    if (nodeRef.current) {
+      const node = nodeRef.current;
+      node.style.height = node.scrollHeight + 'px';
+    }
+  }, []);
+  const onExiting = useCallback(() => {
+    if (nodeRef.current) {
+      const node = nodeRef.current;
+      if (node.scrollHeight !== 0) {
+        node.style.height = '0';
+      }
+    }
+  }, []);
+  const onExited = useCallback(() => {
+    if (nodeRef.current) {
+      const node = nodeRef.current;
+      node.style.height = '';
+    }
+  }, []);
 
   return (
     <div className={cls(styles.panel, className)}>
@@ -50,16 +83,28 @@ const Panel: React.FC<IPanelProps> = ({
           />
         </button>
       </div>
-      <div
-        role="region"
-        className={cls(styles.panelBody, {
-          [styles.expanded]: expanded
-        })}
-        ref={measuredRef}
-        style={panelStyle}
+      <Transition
+        nodeRef={nodeRef}
+        in={expanded}
+        unmountOnExit
+        timeout={300}
+        onEnter={onEnter}
+        onEntering={onEntering}
+        onEntered={onEntered}
+        onExit={onExit}
+        onExiting={onExiting}
+        onExited={onExited}
       >
-        {children}
-      </div>
+        <div
+          role="region"
+          className={cls(styles.panelBody, {
+            [styles.expanded]: expanded
+          })}
+          ref={nodeRef}
+        >
+          {children}
+        </div>
+      </Transition>
     </div>
   );
 };
