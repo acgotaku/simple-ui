@@ -84,7 +84,7 @@
   height: 24px;
   font-size: var(--font-size-sm);
   line-height: 24px;
-  border-radius: 50%;
+  border-radius: var(--border-radius-circle);
   background-color: var(--color-standard);
 }
 

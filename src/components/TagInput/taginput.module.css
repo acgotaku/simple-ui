@@ -3,7 +3,7 @@
   align-items: center;
   width: 100%;
   min-height: 40px;
-  border-radius: 2px;
+  border-radius: var(--border-radius-medium);
   padding: 4px;
   border: 1px solid var(--color-standard-border);
   color: var(--color-standard-text);
@@ -80,7 +80,7 @@
   justify-content: center;
   padding: 4px;
   color: var(--color-standard-text);
-  border-radius: 2px;
+  border-radius: var(--border-radius-medium);
   border: 1px solid var(--color-standard-border);
   background-color: var(--color-standard);
   font-size: var(--font-size-xs);

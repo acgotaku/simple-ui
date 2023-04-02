@@ -22,6 +22,9 @@
   --color-mask-bg: rgba(0, 0, 0, 0.4);
   --color-standard-text: #262626;
   --color-secondary-text: #595959;
+  --border-radius-small: 2px;
+  --border-radius-medium: 4px;
+  --border-radius-circle: 50%;
   --font-size-xs: 0.75rem; /* 12px */
   --font-size-sm: 0.875rem; /* 14px */
   --font-size-md: 1rem; /* 16px */
