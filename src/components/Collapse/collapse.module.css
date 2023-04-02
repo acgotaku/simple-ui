@@ -39,13 +39,11 @@
   }
 
   &Body {
-    height: 0;
     opacity: 0;
     transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
     overflow: hidden;
 
     &.expanded {
-      height: var(--height-panel);
       opacity: 1;
     }
   }
