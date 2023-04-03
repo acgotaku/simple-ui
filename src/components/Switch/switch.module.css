@@ -4,7 +4,7 @@
   display: inline-flex;
   width: 32px;
   height: 16px;
-  border-radius: 16px;
+  border-radius: 8px;
   background-color: var(--color-switch-bg);
   cursor: pointer;
 
@@ -19,7 +19,7 @@
     left: 2px;
     transform: translate3d(0, -50%, 0);
     content: '';
-    border-radius: 50%;
+    border-radius: var(--border-radius-circle);
     width: 12px;
     height: 12px;
     background-color: var(--color-standard);

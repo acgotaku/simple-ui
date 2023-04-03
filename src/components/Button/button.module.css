@@ -5,7 +5,7 @@
   white-space: nowrap;
   height: 40px;
   min-width: 112px;
-  border-radius: 2px;
+  border-radius: var(--border-radius-medium);
   padding: 0 16px;
 
   &:focus-visible {

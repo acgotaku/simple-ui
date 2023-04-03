@@ -33,7 +33,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 2px;
+    border-radius: var(--border-radius-medium);
     width: 32px;
     height: 32px;
     color: var(--color-standard-text);
@@ -57,7 +57,7 @@
   &Current {
     display: flex;
     align-items: center;
-    border-radius: 2px;
+    border-radius: var(--border-radius-medium);
     margin: 0 auto;
     height: 32px;
     padding: 0 16px;
@@ -105,7 +105,7 @@
     &Button {
       width: 32px;
       height: 32px;
-      border-radius: 2px;
+      border-radius: var(--border-radius-medium);
       color: var(--color-standard-text);
 
       &.today {
@@ -146,7 +146,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 2px;
+    border-radius: var(--border-radius-medium);
     width: 32px;
     height: 32px;
     color: var(--color-standard-text);
@@ -170,7 +170,7 @@
   &Range {
     display: flex;
     align-items: center;
-    border-radius: 2px;
+    border-radius: var(--border-radius-medium);
     margin: 0 auto;
     height: 32px;
     padding: 0 16px;
@@ -204,7 +204,7 @@
     &Button {
       width: 60px;
       height: 32px;
-      border-radius: 2px;
+      border-radius: var(--border-radius-medium);
       color: var(--color-standard-text);
 
       &.current {
@@ -240,7 +240,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 2px;
+    border-radius: var(--border-radius-medium);
     width: 32px;
     height: 32px;
     color: var(--color-standard-text);
@@ -264,7 +264,7 @@
   &Current {
     display: flex;
     align-items: center;
-    border-radius: 2px;
+    border-radius: var(--border-radius-medium);
     margin: 0 auto;
     height: 32px;
     padding: 0 16px;
@@ -298,7 +298,7 @@
     &Button {
       width: 60px;
       height: 32px;
-      border-radius: 2px;
+      border-radius: var(--border-radius-medium);
       color: var(--color-standard-text);
 
       &.current {

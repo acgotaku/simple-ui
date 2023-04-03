@@ -13,7 +13,7 @@
   position: relative;
   width: 16px;
   height: 16px;
-  border-radius: 50%;
+  border-radius: var(--border-radius-circle);
   border: 1px solid var(--color-standard-border);
   cursor: pointer;
 
@@ -35,7 +35,7 @@
       position: absolute;
       width: 8px;
       height: 8px;
-      border-radius: 50%;
+      border-radius: var(--border-radius-circle);
       top: 50%;
       left: 50%;
       transform: translate3d(-50%, -50%, 0);

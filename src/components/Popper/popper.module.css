@@ -1,7 +1,7 @@
 .popper {
   display: flex;
   flex-direction: column;
-  border-radius: 2px;
+  border-radius: var(--border-radius-medium);
   box-shadow: var(--color-shadow) 0 2px 4px 0;
   z-index: var(--z-index-popper);
 
