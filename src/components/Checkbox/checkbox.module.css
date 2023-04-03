@@ -2,10 +2,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-standard-text);
+
+  &.invalid {
+    color: var(--color-standard-text);
+  }
 }
 
 .group {
   display: flex;
+  margin: 0 -4px;
+
+  .wrapper {
+    padding: 4px;
+    background-color: var(--color-standard);
+  }
 }
 
 .checkbox {
@@ -67,4 +78,8 @@
   font-size: var(--font-size-sm);
   line-height: 16px;
   cursor: pointer;
+
+  &.drag {
+    cursor: grab;
+  }
 }
