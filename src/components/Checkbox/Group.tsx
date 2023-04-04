@@ -1,4 +1,10 @@
-import React, { useMemo, useCallback, useState, useRef } from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useCallback,
+  useState,
+  useRef
+} from 'react';
 import cls from 'clsx';
 import { noop, deepClone } from '@/utils/misc';
 import styles from './checkbox.module.css';
@@ -25,6 +31,10 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
   const copyOptions = useRef<CheckboxOptionType[]>(options);
   const dragItem = useRef<number>(0);
   const dragOverItem = useRef<number>(0);
+
+  useEffect(() => {
+    setSortedOptions(options);
+  }, [options]);
 
   const dragStartHandler = useCallback(
     (event: React.DragEvent<HTMLDivElement>, index: number) => {
