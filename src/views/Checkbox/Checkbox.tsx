@@ -57,6 +57,80 @@ return (
 );
 `;
 
+const DraggableCheckboxGroup = () => {
+  const [values, setValues] = useState<CheckboxValueType[]>(['Apple']);
+
+  const options = [
+    { label: 'Apple', value: 'Apple' },
+    { label: 'Pear', value: 'Pear' },
+    { label: 'Orange', value: 'Orange' }
+  ];
+  return (
+    <Checkbox.Group
+      options={options}
+      values={values}
+      onChange={setValues}
+      draggable
+    />
+  );
+};
+
+const draggableCheckboxGroupCode = `
+const [values, setValues] = useState<CheckboxValueType[]>(['Apple']);
+
+const options = [
+  { label: 'Apple', value: 'Apple' },
+  { label: 'Pear', value: 'Pear' },
+  { label: 'Orange', value: 'Orange' }
+];
+return (
+  <Checkbox.Group
+    options={options}
+    values={values}
+    onChange={setValues}
+    draggable
+  />
+);
+`;
+
+const AdvancedCheckboxGroup = () => {
+  const [values, setValues] = useState<CheckboxValueType[]>(['Apple']);
+
+  const options = [
+    { label: 'Apple', value: 'Apple' },
+    { label: 'Pear', value: 'Pear' },
+    { label: 'Orange', value: 'Orange' }
+  ];
+  return (
+    <Checkbox.Group values={values} onChange={setValues}>
+      {options.map(option => (
+        <Checkbox value={option.value} key={option.value}>
+          {option.label}
+        </Checkbox>
+      ))}
+    </Checkbox.Group>
+  );
+};
+
+const advancedCheckboxGroupCode = `
+const [values, setValues] = useState<CheckboxValueType[]>(['Apple']);
+
+const options = [
+  { label: 'Apple', value: 'Apple' },
+  { label: 'Pear', value: 'Pear' },
+  { label: 'Orange', value: 'Orange' }
+];
+return (
+  <Checkbox.Group values={values} onChange={setValues}>
+    {options.map(option => (
+      <Checkbox value={option.value} key={option.value}>
+        {option.label}
+      </Checkbox>
+    ))}
+  </Checkbox.Group>
+);
+`;
+
 const CheckboxGroupVertical = () => {
   const [values, setValues] = useState<CheckboxValueType[]>(['Pear']);
 
@@ -175,6 +249,20 @@ const CheckboxView = () => {
         <CheckboxGroup />
         <div className={styles.code}>
           <Code code={checkboxGroupCode} />
+        </div>
+      </div>
+      <h3 className={styles.caption}>Draggable Checkbox Group</h3>
+      <div className={styles.content}>
+        <DraggableCheckboxGroup />
+        <div className={styles.code}>
+          <Code code={draggableCheckboxGroupCode} />
+        </div>
+      </div>
+      <h3 className={styles.caption}>Advanced Checkbox Group</h3>
+      <div className={styles.content}>
+        <AdvancedCheckboxGroup />
+        <div className={styles.code}>
+          <Code code={advancedCheckboxGroupCode} />
         </div>
       </div>
       <h3 className={styles.caption}>Checkbox Group (vertical)</h3>

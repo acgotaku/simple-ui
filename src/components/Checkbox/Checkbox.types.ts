@@ -1,12 +1,18 @@
 import React from 'react';
 
+export type CheckboxValueType = string | number | boolean;
+
 export interface ICheckboxProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value'> {
   /* Checkbox label */
   label?: React.ReactNode;
+  value?: CheckboxValueType;
+  invalid?: boolean;
+  draggable?: boolean;
+  dragStartHandler?: (event: React.DragEvent<HTMLDivElement>) => void;
+  dragEnterHandler?: () => void;
+  dragEndHandler?: () => void;
 }
-
-export type CheckboxValueType = string | number | boolean;
 
 export interface CheckboxOptionType {
   label: React.ReactNode;
@@ -15,10 +21,21 @@ export interface CheckboxOptionType {
 }
 
 export interface ICheckboxGroupProps {
-  options: Array<CheckboxOptionType>;
-  values: Array<CheckboxValueType>;
-  onChange: (checkedValue: Array<CheckboxValueType>) => void;
+  values?: Array<CheckboxValueType>;
+  onChange?: (checkedValue: Array<CheckboxValueType>) => void;
   className?: string;
   checkboxClassName?: string;
+  draggable?: boolean;
   disabled?: boolean;
+  invalid?: boolean;
+  options?: Array<CheckboxOptionType>;
+  children?: React.ReactNode;
+}
+
+export interface CheckboxContextProps {
+  inGroup: boolean;
+  values: Array<CheckboxValueType>;
+  updateState: (checkedValue: Array<CheckboxValueType>) => void;
+  disabled?: boolean;
+  invalid?: boolean;
 }
