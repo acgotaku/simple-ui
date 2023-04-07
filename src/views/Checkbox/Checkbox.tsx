@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Checkbox } from '@/components';
 import { useTitle } from '@/hooks/useTitle';
 import { CheckboxValueType } from '@/components/Checkbox';
@@ -60,11 +60,14 @@ return (
 const DraggableCheckboxGroup = () => {
   const [values, setValues] = useState<CheckboxValueType[]>(['Apple']);
 
-  const options = [
-    { label: 'Apple', value: 'Apple' },
-    { label: 'Pear', value: 'Pear' },
-    { label: 'Orange', value: 'Orange' }
-  ];
+  const options = useMemo(
+    () => [
+      { label: 'Apple', value: 'Apple' },
+      { label: 'Pear', value: 'Pear' },
+      { label: 'Orange', value: 'Orange' }
+    ],
+    []
+  );
   return (
     <Checkbox.Group
       options={options}
@@ -78,11 +81,14 @@ const DraggableCheckboxGroup = () => {
 const draggableCheckboxGroupCode = `
 const [values, setValues] = useState<CheckboxValueType[]>(['Apple']);
 
-const options = [
-  { label: 'Apple', value: 'Apple' },
-  { label: 'Pear', value: 'Pear' },
-  { label: 'Orange', value: 'Orange' }
-];
+const options = useMemo(
+  () => [
+    { label: 'Apple', value: 'Apple' },
+    { label: 'Pear', value: 'Pear' },
+    { label: 'Orange', value: 'Orange' }
+  ],
+  []
+);
 return (
   <Checkbox.Group
     options={options}
