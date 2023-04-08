@@ -12,13 +12,7 @@ export type FormValues = AnyLiteral;
 
 export type ValueOf<T> = T[keyof T];
 
-export interface FormContextProps {
-  values: FormValues;
-  onValuesChange: (changedValue: FormValues) => void;
-  errors: Record<string, string>;
-  updateErrors: (field: string, error: string) => void;
-  rules?: Rules;
-}
+export type Validate = (trigger: Trigger) => Promise<ValidateError[] | null>;
 
 export interface IFormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   values: FormValues;
@@ -33,9 +27,20 @@ export interface IFormItemProps {
   field?: string;
   label?: string;
   className?: string;
+  rules?: Rule[];
   disabled?: boolean;
 }
 
 export interface IFormItemRef {
-  validate: (trigger: Trigger) => Promise<ValidateError[] | null>;
+  validate: Validate;
+}
+
+export interface FormContextProps {
+  values: FormValues;
+  onValuesChange: (changedValue: FormValues) => void;
+  errors: Record<string, string>;
+  updateErrors: (field: string, error: string) => void;
+  items?: React.MutableRefObject<Record<string, IFormItemRef>>;
+  rules?: Rules;
+  disabled?: boolean;
 }

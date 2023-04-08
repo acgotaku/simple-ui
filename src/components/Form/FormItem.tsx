@@ -22,18 +22,36 @@ import {
 } from './Form.types';
 
 const FormItem = forwardRef<IFormItemRef, IFormItemProps>((props, ref) => {
-  const { children, field, label, className = '', disabled = false } = props;
-  const { values, onValuesChange, errors, updateErrors, rules } =
-    useContext(FormContext);
+  const {
+    children,
+    field,
+    label,
+    className = '',
+    disabled = false,
+    rules = []
+  } = props;
+  const {
+    values,
+    onValuesChange,
+    errors,
+    updateErrors,
+    items,
+    rules: rulesForm,
+    disabled: disabledForm
+  } = useContext(FormContext);
   const [touched, setTouched] = useState<boolean>(false);
+  const disableState = useMemo(
+    () => disabled || disabledForm,
+    [disabled, disabledForm]
+  );
 
   const fieldRules = useMemo(() => {
-    if (rules && field) {
-      return rules[field] || [];
+    if (rulesForm && field) {
+      return rulesForm[field] || [];
     } else {
-      return [];
+      return rules;
     }
-  }, [field, rules]);
+  }, [field, rulesForm, rules]);
 
   const fieldValue = useMemo(() => {
     if (field) {
@@ -103,6 +121,21 @@ const FormItem = forwardRef<IFormItemRef, IFormItemProps>((props, ref) => {
     }
   }, [touched, validate]);
 
+  useEffect(() => {
+    const currentItems = items?.current;
+    if (field && currentItems) {
+      currentItems[field] = {
+        validate
+      };
+    }
+
+    return () => {
+      if (field && currentItems) {
+        delete currentItems[field];
+      }
+    };
+  }, [field, validate, items]);
+
   useImperativeHandle(ref, () => ({
     validate
   }));
@@ -145,7 +178,7 @@ const FormItem = forwardRef<IFormItemRef, IFormItemProps>((props, ref) => {
           return React.cloneElement(children as React.ReactElement, {
             value: fieldValue,
             invalid: !!errorMessage,
-            disabled,
+            disabled: disableState,
             onChange: changeHandler,
             onBlur: blurHandler
           });
@@ -154,7 +187,7 @@ const FormItem = forwardRef<IFormItemRef, IFormItemProps>((props, ref) => {
           return React.cloneElement(children as React.ReactElement, {
             value: fieldValue,
             invalid: !!errorMessage,
-            disabled,
+            disabled: disableState,
             onSelect: selectHandler
           });
         }
@@ -173,7 +206,7 @@ const FormItem = forwardRef<IFormItemRef, IFormItemProps>((props, ref) => {
     fieldValue,
     errorMessage,
     field,
-    disabled
+    disableState
   ]);
   return (
     <div
