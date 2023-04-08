@@ -8,7 +8,6 @@ import React, {
 import cls from 'clsx';
 import { useDidUpdate } from '@/hooks/useDidUpdate';
 import styles from './form.module.css';
-import FormItem from './FormItem';
 import { FormContext } from './context';
 import { IFormProps, IFormItemRef } from './Form.types';
 
@@ -56,9 +55,11 @@ const Form: React.FC<IFormProps> = ({
       onValuesChange,
       errors,
       updateErrors,
-      rules
+      rules,
+      disabled,
+      items
     }),
-    [values, onValuesChange, errors, updateErrors, rules]
+    [values, onValuesChange, errors, updateErrors, rules, disabled]
   );
 
   const validate = useCallback(async () => {
@@ -90,25 +91,7 @@ const Form: React.FC<IFormProps> = ({
       onSubmit={handleSubmit}
       {...props}
     >
-      <FormContext.Provider value={context}>
-        {React.Children.map(children, child => {
-          if (React.isValidElement(child) && child.type === FormItem) {
-            const { field } = child.props;
-            if (field) {
-              return React.cloneElement(child as React.ReactElement, {
-                ref: (ref: IFormItemRef) => {
-                  items.current[field] = ref;
-                },
-                disabled: disabled || child.props.disabled
-              });
-            } else {
-              return child;
-            }
-          } else {
-            return child;
-          }
-        })}
-      </FormContext.Provider>
+      <FormContext.Provider value={context}>{children}</FormContext.Provider>
     </form>
   );
 };
