@@ -33,7 +33,9 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
   const dragOverItem = useRef<number>(0);
 
   useEffect(() => {
-    setSortedOptions(options);
+    if (options.length) {
+      setSortedOptions(options);
+    }
   }, [options]);
 
   const dragStartHandler = useCallback(
