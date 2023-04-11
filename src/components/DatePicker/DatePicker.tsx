@@ -90,6 +90,7 @@ const DatePicker: React.FC<IDatePickerProps> = ({
           onClick={() => setVisible(visible => !visible)}
           onBlur={checkInputDate}
           onKeyDown={handleKeyDown}
+          disabled={disabled}
           clearable={clearable}
           suffix={<Calendar className={styles.icon} />}
         />
