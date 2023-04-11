@@ -22,3 +22,4 @@ export { default as Switch } from './Switch';
 export { default as Table } from './Table';
 export { default as Tabs } from './Tabs';
 export { default as TagInput } from './TagInput';
+export { default as TimePicker } from './TimePicker';

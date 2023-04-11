@@ -28,6 +28,7 @@ const Switch = lazy(() => import('@/views/Switch'));
 const Table = lazy(() => import('@/views/Table'));
 const Tabs = lazy(() => import('@/views/Tabs'));
 const TagInput = lazy(() => import('@/views/TagInput'));
+const TimePicker = lazy(() => import('@/views/TimePicker'));
 
 const AppRoutes = () => {
   return (
@@ -59,6 +60,7 @@ const AppRoutes = () => {
           <Route path="/table" element={<Table />} />
           <Route path="/tabs" element={<Tabs />} />
           <Route path="/taginput" element={<TagInput />} />
+          <Route path="/timepicker" element={<TimePicker />} />
         </Route>
       </Routes>
     </Suspense>
