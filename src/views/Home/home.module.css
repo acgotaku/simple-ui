@@ -16,3 +16,18 @@
 .link {
   display: inline-flex;
 }
+
+.list {
+  margin: 16px;
+  list-style: none;
+  display: flex;
+  width: 160px;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 24px;
+}
+
+.item {
+  width: 32px;
+  height: 32px;
+}
