@@ -10,7 +10,9 @@ export interface IToastProps {
   toastId: string;
 }
 
-export type ToastState = Omit<IToastProps, 'remove'>;
+export interface ToastState extends Omit<IToastProps, 'remove'> {
+  nodeRef?: React.RefObject<HTMLDivElement>;
+}
 
 export type ToastConfig = Omit<ToastState, 'toastId'>;
 
