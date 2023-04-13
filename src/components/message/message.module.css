@@ -20,6 +20,28 @@
   background-color: var(--color-standard);
   will-change: transform;
   pointer-events: auto;
+
+  &Enter {
+    opacity: 0;
+    transform: translate(0, 24px);
+
+    &Active {
+      opacity: 1;
+      transform: translate(0, 0);
+      transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+    }
+  }
+
+  &Exit {
+    opacity: 1;
+    transform: translate(0, 0);
+
+    &Active {
+      opacity: 0;
+      transform: translate(0, -24px);
+      transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+    }
+  }
 }
 
 .icon {
