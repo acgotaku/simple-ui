@@ -84,6 +84,7 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
           },
           className
         )}
+        data-id={id}
         draggable={draggable}
         onDragStart={dragStartHandler}
         onDragOver={dragOverHandler}

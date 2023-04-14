@@ -27,6 +27,8 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
   onChange = noop,
   children
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const prevRects = useRef<Record<string, DOMRect>>({});
   const [sortedOptions, setSortedOptions] = useState(options);
   const copyOptions = useRef<CheckboxOptionType[]>(options);
   const dragItem = useRef<number>(0);
@@ -38,6 +40,40 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
     }
   }, [options]);
 
+  useEffect(() => {
+    if (containerRef.current) {
+      Array.from(containerRef.current.children).forEach(async node => {
+        const dom = node as HTMLElement;
+        const key = dom.dataset.id as string;
+        const prevRect = prevRects.current[key];
+        const rect = dom.getBoundingClientRect();
+        if (prevRect) {
+          const dy = prevRect.y - rect.y;
+          const dx = prevRect.x - rect.x;
+          dom.style.pointerEvents = 'none';
+          dom.animate(
+            [
+              {
+                transform: `translate(${dx}px, ${dy}px)`
+              },
+              { transform: 'translate(0, 0)' }
+            ],
+            {
+              duration: 300,
+              easing: 'linear',
+              fill: 'both'
+            }
+          );
+          await Promise.allSettled(
+            node.getAnimations().map(animation => animation.finished)
+          );
+          dom.style.pointerEvents = '';
+        }
+        prevRects.current[key] = rect;
+      });
+    }
+  }, [sortedOptions]);
+
   const dragStartHandler = useCallback(
     (event: React.DragEvent<HTMLDivElement>, index: number) => {
       event.dataTransfer.effectAllowed = 'move';
@@ -48,12 +84,14 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
   );
 
   const dragEnterHandler = useCallback((index: number) => {
-    dragOverItem.current = index;
-    const newOptions = deepClone(copyOptions.current);
-    const dragOption = newOptions[dragItem.current];
-    newOptions.splice(dragItem.current, 1);
-    newOptions.splice(dragOverItem.current, 0, dragOption);
-    setSortedOptions(newOptions);
+    if (dragItem.current !== index && dragOverItem.current !== index) {
+      dragOverItem.current = index;
+      const newOptions = deepClone(copyOptions.current);
+      const dragOption = newOptions[dragItem.current];
+      newOptions.splice(dragItem.current, 1);
+      newOptions.splice(dragOverItem.current, 0, dragOption);
+      setSortedOptions(newOptions);
+    }
   }, []);
 
   const dragEndHandler = useCallback(() => {
@@ -99,7 +137,7 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
   );
 
   return (
-    <div className={cls(styles.group, className)}>
+    <div className={cls(styles.group, className)} ref={containerRef}>
       <CheckboxContext.Provider value={context}>
         {children
           ? children
