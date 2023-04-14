@@ -4,6 +4,14 @@ import { noop } from '@/utils/misc';
 import Checkbox, { CheckboxValueType } from '.';
 
 describe('Checkbox', () => {
+  beforeAll(() => {
+    Element.prototype.animate = jest.fn();
+    Element.prototype.getAnimations = jest.fn().mockImplementation(() => [
+      {
+        animation: jest.fn()
+      }
+    ]);
+  });
   it('should render checkbox', () => {
     render(<Checkbox label={'Checkbox'} />);
     expect(screen.getByText('Checkbox')).toBeInTheDocument();
