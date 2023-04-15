@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import cls from 'clsx';
-import { noop } from '@/utils/misc';
+import { useRandomId } from '@/hooks/useRandomId';
 import { ReactComponent as Close } from '@/assets/icons/close.svg';
 import { ReactComponent as Drag } from '@/assets/icons/dots-six-vertical.svg';
 import styles from './taginput.module.css';
@@ -10,42 +10,46 @@ const Tag: React.FC<ITagProps> = ({
   disabled = false,
   draggable = false,
   children,
-  index,
+  id,
   onClose,
-  dragStartHandler = noop,
-  dragEnterHandler = noop,
-  dragEndHandler = noop
+  dragStartHandler,
+  dragOverHandler,
+  dragEnterHandler,
+  dragEndHandler,
+  dropHandler
 }) => {
+  id = useRandomId(id);
   const closeHandler = useCallback(() => {
     onClose?.();
   }, [onClose]);
 
-  const dragOverHandler = useCallback(
-    (event: React.DragEvent<HTMLDivElement>) => {
-      event.preventDefault();
-      event.dataTransfer.dropEffect = 'move';
-      return false;
-    },
-    []
-  );
-
-  const dropHandler = useCallback((event: React.DragEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-    event.preventDefault();
-    return false;
-  }, []);
+  const dragProps = useMemo(() => {
+    if (draggable) {
+      return {
+        draggable,
+        onDragStart: dragStartHandler,
+        onDragOver: dragOverHandler,
+        onDragEnter: dragEnterHandler,
+        onDragEnd: dragEndHandler,
+        onDrop: dropHandler
+      };
+    }
+  }, [
+    draggable,
+    dragStartHandler,
+    dragOverHandler,
+    dragEnterHandler,
+    dragEndHandler,
+    dropHandler
+  ]);
 
   return (
     <div
       className={cls(styles.tag, {
         [styles.disabled]: disabled
       })}
-      draggable={draggable}
-      onDragStart={event => dragStartHandler(event, index)}
-      onDragOver={dragOverHandler}
-      onDragEnter={() => dragEnterHandler(index)}
-      onDragEnd={dragEndHandler}
-      onDrop={dropHandler}
+      data-id={id}
+      {...dragProps}
     >
       {draggable && (
         <button type="button" className={styles.drag}>

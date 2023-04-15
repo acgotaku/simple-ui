@@ -1,62 +1,100 @@
-import React, { useEffect, useCallback, useRef, useState } from 'react';
-import { noop, deepClone } from '@/utils/misc';
+import React, { useEffect, useCallback, useRef } from 'react';
+import { useDraggable } from '@/hooks/useDraggable';
+import { noop } from '@/utils/misc';
 import { ITagsProps } from './TagInput.types';
 import Tag from './Tag';
 
 const Tags: React.FC<ITagsProps> = ({
+  containerRef,
   disabled = false,
   draggable = false,
   value = [],
-  onChange,
+  onChange = noop,
   removeTag = noop
 }) => {
-  const [data, setData] = useState(value);
-  const copyData = useRef<string[]>([]);
-  const dragItem = useRef<number>(0);
-  const dragOverItem = useRef<number>(0);
+  const prevRects = useRef<Record<string, DOMRect>>({});
+  const recordRect = useCallback(() => {
+    if (containerRef.current) {
+      Array.from(containerRef.current.children).forEach(async node => {
+        const dom = node as HTMLElement;
+        const key = dom.dataset.id as string;
+        if (key) {
+          const rect = dom.getBoundingClientRect();
+          prevRects.current[key] = rect;
+        }
+      });
+    }
+  }, [containerRef]);
+
+  const {
+    sortedData,
+    dragStartHandler,
+    dragOverHandler,
+    dragEnterHandler,
+    dragEndHandler,
+    dropHandler
+  } = useDraggable({
+    dataSource: value,
+    updateData: onChange,
+    onDragStart: recordRect
+  });
 
   useEffect(() => {
-    setData(value);
-  }, [value]);
+    if (containerRef.current) {
+      Array.from(containerRef.current.children).forEach(async node => {
+        const dom = node as HTMLElement;
+        const key = dom.dataset.id as string;
+        if (key) {
+          const prevRect = prevRects.current[key];
+          const rect = dom.getBoundingClientRect();
+          if (prevRect) {
+            const dy = prevRect.y - rect.y;
+            const dx = prevRect.x - rect.x;
+            dom.style.pointerEvents = 'none';
+            dom.animate(
+              [
+                {
+                  transform: `translate(${dx}px, ${dy}px)`
+                },
+                { transform: 'translate(0, 0)' }
+              ],
+              {
+                duration: 300,
+                easing: 'linear'
+              }
+            );
+            await Promise.allSettled(
+              node.getAnimations().map(animation => animation.finished)
+            );
+            dom.style.pointerEvents = '';
+          }
+          prevRects.current[key] = rect;
+        }
+      });
+    }
+  }, [sortedData, containerRef]);
 
-  const dragStartHandler = useCallback(
-    (event: React.DragEvent<HTMLDivElement>, index: number) => {
-      event.dataTransfer.effectAllowed = 'move';
-      dragItem.current = index;
-      copyData.current = deepClone(data);
+  const removeHandler = useCallback(
+    (index: number) => {
+      recordRect();
+      removeTag(index);
     },
-    [data]
+    [removeTag, recordRect]
   );
-
-  const dragEnterHandler = useCallback((index: number) => {
-    dragOverItem.current = index;
-    const newData = deepClone(copyData.current);
-    const dragData = newData[dragItem.current];
-    newData.splice(dragItem.current, 1);
-    newData.splice(dragOverItem.current, 0, dragData);
-    setData(newData);
-  }, []);
-
-  const dragEndHandler = useCallback(() => {
-    const newData = deepClone(value);
-    const dragData = newData[dragItem.current];
-    newData.splice(dragItem.current, 1);
-    newData.splice(dragOverItem.current, 0, dragData);
-    onChange?.(newData);
-  }, [value, onChange]);
 
   return (
     <>
-      {data.map((tag, index) => (
+      {sortedData.map((tag, index) => (
         <Tag
-          key={index}
-          index={index}
+          key={tag}
           disabled={disabled}
-          onClose={() => removeTag(index)}
+          onClose={() => removeHandler(index)}
           draggable={draggable}
-          dragStartHandler={dragStartHandler}
-          dragEnterHandler={dragEnterHandler}
+          dragStartHandler={event => dragStartHandler(event, index)}
+          dragEnterHandler={() => dragEnterHandler(index)}
           dragEndHandler={dragEndHandler}
+          dragOverHandler={dragOverHandler}
+          dropHandler={dropHandler}
         >
           {tag}
         </Tag>
