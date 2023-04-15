@@ -62,7 +62,8 @@ const TagInput: React.FC<ITagInputProps> = ({
         if (inputValue) {
           const splitedValue = getSplitedArray(inputValue, separator);
           const newValue = [...value, ...splitedValue];
-          onChange?.(newValue);
+          const uniqueValue = [...new Set(newValue)];
+          onChange?.(uniqueValue);
           event.currentTarget.value = '';
         }
       } else if (event.key === eventKey.Backspace) {
