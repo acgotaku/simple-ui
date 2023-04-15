@@ -60,8 +60,7 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
             ],
             {
               duration: 300,
-              easing: 'linear',
-              fill: 'both'
+              easing: 'linear'
             }
           );
           await Promise.allSettled(
@@ -74,13 +73,25 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
     }
   }, [sortedOptions]);
 
+  const recordRect = useCallback(() => {
+    if (containerRef.current) {
+      Array.from(containerRef.current.children).forEach(async node => {
+        const dom = node as HTMLElement;
+        const key = dom.dataset.id as string;
+        const rect = dom.getBoundingClientRect();
+        prevRects.current[key] = rect;
+      });
+    }
+  }, []);
+
   const dragStartHandler = useCallback(
     (event: React.DragEvent<HTMLDivElement>, index: number) => {
       event.dataTransfer.effectAllowed = 'move';
       dragItem.current = index;
       copyOptions.current = deepClone(sortedOptions);
+      recordRect();
     },
-    [sortedOptions]
+    [sortedOptions, recordRect]
   );
 
   const dragEnterHandler = useCallback((index: number) => {
@@ -144,7 +155,6 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
           : sortedOptions.map((option, index) => (
               <Checkbox
                 key={option.value.toString()}
-                id={option.value.toString()}
                 label={option.label}
                 checked={values.includes(option.value)}
                 disabled={disabled || option.disabled}
