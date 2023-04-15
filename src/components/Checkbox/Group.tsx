@@ -144,6 +144,7 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
           : sortedOptions.map((option, index) => (
               <Checkbox
                 key={option.value.toString()}
+                id={option.value.toString()}
                 label={option.label}
                 checked={values.includes(option.value)}
                 disabled={disabled || option.disabled}
