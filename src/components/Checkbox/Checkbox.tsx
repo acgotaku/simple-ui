@@ -75,6 +75,26 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
       [onChange, inGroup, checkboxValue, updateState, values]
     );
 
+    const dragProps = useMemo(() => {
+      if (draggable) {
+        return {
+          draggable,
+          onDragStart: dragStartHandler,
+          onDragOver: dragOverHandler,
+          onDragEnter: dragEnterHandler,
+          onDragEnd: dragEndHandler,
+          onDrop: dropHandler
+        };
+      }
+    }, [
+      draggable,
+      dragStartHandler,
+      dragOverHandler,
+      dragEnterHandler,
+      dragEndHandler,
+      dropHandler
+    ]);
+
     return (
       <div
         className={cls(
@@ -85,12 +105,7 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
           className
         )}
         data-id={id}
-        draggable={draggable}
-        onDragStart={dragStartHandler}
-        onDragOver={dragOverHandler}
-        onDragEnter={dragEnterHandler}
-        onDragEnd={dragEndHandler}
-        onDrop={dropHandler}
+        {...dragProps}
       >
         <input
           {...checkboxProps}
