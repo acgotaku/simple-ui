@@ -37,6 +37,7 @@ const TagInput: React.FC<ITagInputProps> = ({
 }) => {
   const [showDrag, setShowDrag] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const removeTag = useCallback(
     (index: number) => {
       const newValue = [...value];
@@ -61,7 +62,8 @@ const TagInput: React.FC<ITagInputProps> = ({
         if (inputValue) {
           const splitedValue = getSplitedArray(inputValue, separator);
           const newValue = [...value, ...splitedValue];
-          onChange?.(newValue);
+          const uniqueValue = [...new Set(newValue)];
+          onChange?.(uniqueValue);
           event.currentTarget.value = '';
         }
       } else if (event.key === eventKey.Backspace) {
@@ -89,8 +91,9 @@ const TagInput: React.FC<ITagInputProps> = ({
       onClick={clickHandler}
       ref={wrapperRef}
     >
-      <div className={styles.inner}>
+      <div className={styles.inner} ref={containerRef}>
         <Tags
+          containerRef={containerRef}
           disabled={disabled}
           draggable={showDrag}
           value={value}

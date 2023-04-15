@@ -10,19 +10,19 @@ export interface ITagInputProps {
 
 export interface ITagProps {
   children: React.ReactNode;
-  index: number;
   disabled?: boolean;
+  id?: string;
   draggable?: boolean;
   onClose?: () => void;
-  dragStartHandler?: (
-    event: React.DragEvent<HTMLDivElement>,
-    index: number
-  ) => void;
-  dragEnterHandler?: (index: number) => void;
+  dragStartHandler?: (event: React.DragEvent<HTMLElement>) => void;
+  dragEnterHandler?: () => void;
   dragEndHandler?: () => void;
+  dragOverHandler?: (event: React.DragEvent<HTMLElement>) => void;
+  dropHandler?: (event: React.DragEvent<HTMLElement>) => void;
 }
 
 export interface ITagsProps {
+  containerRef: React.RefObject<HTMLDivElement>;
   disabled?: boolean;
   draggable?: boolean;
   value?: string[];
