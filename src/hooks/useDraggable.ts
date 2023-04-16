@@ -96,6 +96,8 @@ export const useDraggable: UseDraggable = ({
   const dragStartHandler = useCallback(
     (event: React.DragEvent<HTMLElement>, index: number) => {
       event.dataTransfer.effectAllowed = 'move';
+      // set dataTransfer enable mobile drag
+      event.dataTransfer.setData('text/plain', index.toString());
       dragItem.current = index;
       copyData.current = deepClone(sortedData);
       recordRect();
