@@ -37,7 +37,7 @@ const TagInput: React.FC<ITagInputProps> = ({
 }) => {
   const [showDrag, setShowDrag] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+
   const removeTag = useCallback(
     (index: number) => {
       const newValue = [...value];
@@ -91,9 +91,9 @@ const TagInput: React.FC<ITagInputProps> = ({
       onClick={clickHandler}
       ref={wrapperRef}
     >
-      <div className={styles.inner} ref={containerRef}>
+      <div className={styles.inner}>
         <Tags
-          containerRef={containerRef}
+          containerRef={wrapperRef}
           disabled={disabled}
           draggable={showDrag}
           value={value}

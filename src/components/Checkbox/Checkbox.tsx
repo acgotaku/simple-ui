@@ -1,7 +1,6 @@
 import { forwardRef, useMemo, useCallback } from 'react';
 import cls from 'clsx';
 import { useRandomId } from '@/hooks/useRandomId';
-import { noop } from '@/utils/misc';
 import styles from './checkbox.module.css';
 import { useCheckboxContext } from './context';
 import { ICheckboxProps } from './Checkbox.types';
@@ -11,14 +10,16 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
     {
       label,
       value: checkboxValue,
+      id,
       children,
       className = '',
       invalid = false,
       draggable = false,
-      dragStartHandler = noop,
-      dragEnterHandler = noop,
-      dragEndHandler = noop,
-      id,
+      dragStartHandler,
+      dragOverHandler,
+      dragEnterHandler,
+      dragEndHandler,
+      dropHandler,
       onChange,
       ...rest
     }: ICheckboxProps,
@@ -39,24 +40,6 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
         return rest;
       }
     }, [inGroup, rest, checkboxValue, values]);
-
-    const dragOverHandler = useCallback(
-      (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
-        event.dataTransfer.dropEffect = 'move';
-        return false;
-      },
-      []
-    );
-
-    const dropHandler = useCallback(
-      (event: React.DragEvent<HTMLDivElement>) => {
-        event.stopPropagation();
-        event.preventDefault();
-        return false;
-      },
-      []
-    );
 
     const changeHandler = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {

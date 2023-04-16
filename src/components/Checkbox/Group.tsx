@@ -1,18 +1,9 @@
-import React, {
-  useEffect,
-  useMemo,
-  useCallback,
-  useState,
-  useRef
-} from 'react';
+import React, { useMemo, useCallback, useRef } from 'react';
 import cls from 'clsx';
-import { noop, deepClone } from '@/utils/misc';
+import { noop } from '@/utils/misc';
+import { useDraggable } from '@/hooks/useDraggable';
 import styles from './checkbox.module.css';
-import {
-  ICheckboxGroupProps,
-  CheckboxValueType,
-  CheckboxOptionType
-} from './Checkbox.types';
+import { ICheckboxGroupProps, CheckboxValueType } from './Checkbox.types';
 import { CheckboxContext } from './context';
 import Checkbox from './Checkbox';
 
@@ -28,93 +19,34 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
   children
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const prevRects = useRef<Record<string, DOMRect>>({});
-  const [sortedOptions, setSortedOptions] = useState(options);
-  const copyOptions = useRef<CheckboxOptionType[]>(options);
-  const dragItem = useRef<number>(0);
-  const dragOverItem = useRef<number>(0);
 
-  useEffect(() => {
-    if (options.length) {
-      setSortedOptions(options);
-    }
-  }, [options]);
+  const {
+    sortedData: sortedOptions,
+    dragStartHandler,
+    dragOverHandler,
+    dragEnterHandler,
+    dragEndHandler,
+    dropHandler
+  } = useDraggable({
+    dataSource: options,
+    draggable,
+    containerRef
+  });
 
-  useEffect(() => {
-    if (containerRef.current) {
-      Array.from(containerRef.current.children).forEach(async node => {
-        const dom = node as HTMLElement;
-        const key = dom.dataset.id as string;
-        const prevRect = prevRects.current[key];
-        const rect = dom.getBoundingClientRect();
-        if (prevRect) {
-          const dy = prevRect.y - rect.y;
-          const dx = prevRect.x - rect.x;
-          dom.style.pointerEvents = 'none';
-          dom.animate(
-            [
-              {
-                transform: `translate(${dx}px, ${dy}px)`
-              },
-              { transform: 'translate(0, 0)' }
-            ],
-            {
-              duration: 300,
-              easing: 'linear'
-            }
-          );
-          await Promise.allSettled(
-            node.getAnimations().map(animation => animation.finished)
-          );
-          dom.style.pointerEvents = '';
-        }
-        prevRects.current[key] = rect;
-      });
-    }
-  }, [sortedOptions]);
-
-  const recordRect = useCallback(() => {
-    if (containerRef.current) {
-      Array.from(containerRef.current.children).forEach(async node => {
-        const dom = node as HTMLElement;
-        const key = dom.dataset.id as string;
-        const rect = dom.getBoundingClientRect();
-        prevRects.current[key] = rect;
-      });
-    }
-  }, []);
-
-  const dragStartHandler = useCallback(
-    (event: React.DragEvent<HTMLDivElement>, index: number) => {
-      event.dataTransfer.effectAllowed = 'move';
-      dragItem.current = index;
-      copyOptions.current = deepClone(sortedOptions);
-      recordRect();
+  const sortValues = useCallback(
+    (values: Array<CheckboxValueType>) => {
+      const sortedValues = sortedOptions
+        .filter(option => values.includes(option.value))
+        .map(option => option.value);
+      onChange?.(sortedValues);
     },
-    [sortedOptions, recordRect]
+    [onChange, sortedOptions]
   );
 
-  const dragEnterHandler = useCallback((index: number) => {
-    if (dragItem.current !== index && dragOverItem.current !== index) {
-      dragOverItem.current = index;
-      const newOptions = deepClone(copyOptions.current);
-      const dragOption = newOptions[dragItem.current];
-      newOptions.splice(dragItem.current, 1);
-      newOptions.splice(dragOverItem.current, 0, dragOption);
-      setSortedOptions(newOptions);
-    }
-  }, []);
-
-  const dragEndHandler = useCallback(() => {
-    // update values
-    const newValues = [...values];
-    const sortedValues = newValues.sort((a, b) => {
-      const indexA = sortedOptions.findIndex(opt => opt.value === a);
-      const indexB = sortedOptions.findIndex(opt => opt.value === b);
-      return indexA - indexB;
-    });
-    onChange?.(sortedValues);
-  }, [values, sortedOptions, onChange]);
+  const dragEnd = useCallback(() => {
+    dragEndHandler();
+    sortValues(values);
+  }, [dragEndHandler, sortValues, values]);
 
   const onCheckboxChange = useCallback(
     (value: CheckboxValueType) => {
@@ -126,14 +58,9 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
         newValues.splice(optionIndex, 1);
       }
 
-      const sortedValues = newValues.sort((a, b) => {
-        const indexA = sortedOptions.findIndex(opt => opt.value === a);
-        const indexB = sortedOptions.findIndex(opt => opt.value === b);
-        return indexA - indexB;
-      });
-      onChange?.(sortedValues);
+      sortValues(newValues);
     },
-    [values, sortedOptions, onChange]
+    [values, sortValues]
   );
 
   const context = useMemo(
@@ -164,7 +91,9 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
                 draggable={draggable && !disabled}
                 dragStartHandler={event => dragStartHandler(event, index)}
                 dragEnterHandler={() => dragEnterHandler(index)}
-                dragEndHandler={dragEndHandler}
+                dragEndHandler={dragEnd}
+                dragOverHandler={dragOverHandler}
+                dropHandler={dropHandler}
               />
             ))}
       </CheckboxContext.Provider>

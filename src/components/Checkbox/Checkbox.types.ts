@@ -9,9 +9,11 @@ export interface ICheckboxProps
   value?: CheckboxValueType;
   invalid?: boolean;
   draggable?: boolean;
-  dragStartHandler?: (event: React.DragEvent<HTMLDivElement>) => void;
+  dragStartHandler?: (event: React.DragEvent<HTMLElement>) => void;
   dragEnterHandler?: () => void;
   dragEndHandler?: () => void;
+  dragOverHandler?: (event: React.DragEvent<HTMLElement>) => void;
+  dropHandler?: (event: React.DragEvent<HTMLElement>) => void;
 }
 
 export interface CheckboxOptionType {
