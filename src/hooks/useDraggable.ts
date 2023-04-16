@@ -8,9 +8,6 @@ interface DraggableOptions {
   updateData?: (data: AnyArray) => void;
   draggable?: boolean;
   containerRef?: React.RefObject<HTMLElement>;
-  onDragStart?: () => void;
-  onDragEnter?: () => void;
-  onDragEnd?: () => void;
 }
 
 type UseDraggable = (options: DraggableOptions) => {
@@ -30,10 +27,7 @@ export const useDraggable: UseDraggable = ({
   dataSource,
   updateData,
   draggable = false,
-  containerRef,
-  onDragStart,
-  onDragEnter,
-  onDragEnd
+  containerRef
 }) => {
   const [sortedData, setSortedData] = useState(dataSource);
   const prevRects = useRef<Record<string, DOMRect>>({});
@@ -105,28 +99,22 @@ export const useDraggable: UseDraggable = ({
       dragItem.current = index;
       copyData.current = deepClone(sortedData);
       recordRect();
-      onDragStart?.();
     },
-    [sortedData, recordRect, onDragStart]
+    [sortedData, recordRect]
   );
-  const dragEnterHandler = useCallback(
-    (index: number) => {
-      if (dragItem.current !== index && dragOverItem.current !== index) {
-        dragOverItem.current = index;
-        const newData = deepClone(copyData.current);
-        const dragData = newData[dragItem.current];
-        newData.splice(dragItem.current, 1);
-        newData.splice(dragOverItem.current, 0, dragData);
-        setSortedData(newData);
-        onDragEnter?.();
-      }
-    },
-    [onDragEnter]
-  );
+  const dragEnterHandler = useCallback((index: number) => {
+    if (dragOverItem.current !== index) {
+      dragOverItem.current = index;
+      const newData = deepClone(copyData.current);
+      const dragData = newData[dragItem.current];
+      newData.splice(dragItem.current, 1);
+      newData.splice(dragOverItem.current, 0, dragData);
+      setSortedData(newData);
+    }
+  }, []);
   const dragEndHandler = useCallback(() => {
     updateData?.(sortedData);
-    onDragEnd?.();
-  }, [sortedData, updateData, onDragEnd]);
+  }, [sortedData, updateData]);
   const dragOverHandler = useCallback((event: React.DragEvent<HTMLElement>) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
