@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { deepClone } from '@/utils/misc';
+import { looseEqual, deepClone } from '@/utils/misc';
 
 const TIMEOUT = 300;
 
@@ -36,9 +36,10 @@ export const useDraggable: UseDraggable = ({
   const dragOverItem = useRef<number>(0);
 
   useEffect(() => {
-    if (dataSource.length) {
+    if (!looseEqual(dataSource, sortedData)) {
       setSortedData(dataSource);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSource]);
 
   const recordRect = useCallback(() => {
