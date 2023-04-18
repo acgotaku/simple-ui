@@ -13,7 +13,12 @@ import { HOUR_COUNTS, MIN_COUNTS, SEC_COUNTS } from './constants';
 import { isValidTime, parseTime, timeToString } from './utils';
 import styles from './timepicker.module.css';
 
-const TimePanel: React.FC<ITimePanelProps> = ({ value, onChange, onClose }) => {
+const TimePanel: React.FC<ITimePanelProps> = ({
+  value,
+  onChange,
+  onClose,
+  withSeconds = false
+}) => {
   const panelRef = useRef<HTMLDivElement>(null);
   const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
@@ -49,13 +54,13 @@ const TimePanel: React.FC<ITimePanelProps> = ({ value, onChange, onClose }) => {
   );
 
   useEffect(() => {
-    if (isValidTime(value)) {
+    if (isValidTime(value, withSeconds)) {
       const [hour, min, sec] = parseTime(value);
       setHour(hour);
       setMinute(min);
       setSecond(sec);
     }
-  }, [value]);
+  }, [value, withSeconds]);
 
   useEffect(() => {
     const scrollTime = async () => {
@@ -77,10 +82,10 @@ const TimePanel: React.FC<ITimePanelProps> = ({ value, onChange, onClose }) => {
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, hour: number) => {
       scorllToCenter(event.target as HTMLElement);
       setHour(hour);
-      const time = timeToString(hour, minute, second);
+      const time = timeToString(hour, minute, second, withSeconds);
       onChange(time);
     },
-    [scorllToCenter, minute, second, onChange]
+    [scorllToCenter, minute, second, withSeconds, onChange]
   );
 
   const selectMinute = useCallback(
@@ -90,10 +95,10 @@ const TimePanel: React.FC<ITimePanelProps> = ({ value, onChange, onClose }) => {
     ) => {
       scorllToCenter(event.target as HTMLElement);
       setMinute(minute);
-      const time = timeToString(hour, minute, second);
+      const time = timeToString(hour, minute, second, withSeconds);
       onChange(time);
     },
-    [scorllToCenter, hour, second, onChange]
+    [scorllToCenter, hour, second, withSeconds, onChange]
   );
 
   const selectSecond = useCallback(
@@ -103,16 +108,16 @@ const TimePanel: React.FC<ITimePanelProps> = ({ value, onChange, onClose }) => {
     ) => {
       scorllToCenter(event.target as HTMLElement);
       setSecond(second);
-      const time = timeToString(hour, minute, second);
+      const time = timeToString(hour, minute, second, withSeconds);
       onChange(time);
     },
-    [scorllToCenter, hour, minute, onChange]
+    [scorllToCenter, hour, minute, withSeconds, onChange]
   );
 
   return (
     <div className={styles.panel} ref={panelRef} onKeyDown={handleKeyDown}>
       <div className={styles.panelInner}>
-        <div className={styles.panelHour}>
+        <div className={styles.panelContent}>
           <ul role="listbox" className={styles.panelList}>
             {hours.map(h => (
               <li key={h} role="option" className={styles.panelItem}>
@@ -130,7 +135,7 @@ const TimePanel: React.FC<ITimePanelProps> = ({ value, onChange, onClose }) => {
             ))}
           </ul>
         </div>
-        <div className={styles.panelMinute}>
+        <div className={styles.panelContent}>
           <ul role="listbox" className={styles.panelList}>
             {minutes.map(min => (
               <li key={min} role="option" className={styles.panelItem}>
@@ -148,24 +153,26 @@ const TimePanel: React.FC<ITimePanelProps> = ({ value, onChange, onClose }) => {
             ))}
           </ul>
         </div>
-        <div className={styles.panelSecond}>
-          <ul role="listbox" className={styles.panelList}>
-            {seconds.map(sec => (
-              <li key={sec} role="option" className={styles.panelItem}>
-                <button
-                  type="button"
-                  className={cls(styles.panelButton, {
-                    [styles.selected]: sec === second
-                  })}
-                  data-selected={sec === second ? '' : null}
-                  onClick={event => selectSecond(event, sec)}
-                >
-                  {sec.toString().padStart(2, '0')}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {withSeconds && (
+          <div className={styles.panelContent}>
+            <ul role="listbox" className={styles.panelList}>
+              {seconds.map(sec => (
+                <li key={sec} role="option" className={styles.panelItem}>
+                  <button
+                    type="button"
+                    className={cls(styles.panelButton, {
+                      [styles.selected]: sec === second
+                    })}
+                    data-selected={sec === second ? '' : null}
+                    onClick={event => selectSecond(event, sec)}
+                  >
+                    {sec.toString().padStart(2, '0')}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

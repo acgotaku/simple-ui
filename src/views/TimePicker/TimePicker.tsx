@@ -23,6 +23,25 @@ return (
     <TimePicker value={time} onChange={setTime} clearable />
   </div>
 );
+`;
+
+const WithSecondsTimePicker = () => {
+  const [time, setTime] = useState('');
+
+  return (
+    <div className={datepickerStyles.picker}>
+      <TimePicker value={time} onChange={setTime} withSeconds clearable />
+    </div>
+  );
+};
+
+const withSecondsTimePickerCode = `
+const [time, setTime] = useState('');
+
+return (
+  <div className={datepickerStyles.picker}>
+    <TimePicker value={time} onChange={setTime} withSeconds clearable />
+  </div>
 );
 `;
 
@@ -62,6 +81,13 @@ const TimePickerView = () => {
         <BasicTimePicker />
         <div className={styles.code}>
           <Code code={basicTimePickerCode} />
+        </div>
+      </div>
+      <h3 className={styles.caption}>With seconds TimePicker</h3>
+      <div className={styles.content}>
+        <WithSecondsTimePicker />
+        <div className={styles.code}>
+          <Code code={withSecondsTimePickerCode} />
         </div>
       </div>
       <h3 className={styles.caption}>Disabled TimePicker</h3>
