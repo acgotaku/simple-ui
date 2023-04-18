@@ -1,9 +1,8 @@
 import React, { memo, useCallback, useRef, useMemo, useState } from 'react';
 import cls from 'clsx';
 import { noop } from '@/utils/misc';
-import { useTabFocus } from '@/hooks/useTabFocus';
 import { useListKeyboardNav } from '@/hooks/useListKeyboardNav';
-import { useClickOutside } from '@/hooks/useClickOutside';
+import { eventKey } from '@/constants/keyboard';
 import styles from './select.module.css';
 import {
   ISelectProps,
@@ -44,14 +43,11 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
   } = props;
   const [referenceElement, setReferenceElement] =
     useState<HTMLDivElement | null>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
   const clearRef = useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = useState(false);
-  const [focus, setFocus] = useState(false);
   const [search, setSearch] = useState('');
   const onClose = useCallback(() => setVisible(false), []);
   const [handleKeyDown, setPopperRef] = useListKeyboardNav(visible, onClose);
-  useClickOutside(() => setFocus(false), [referenceElement]);
 
   const handleClick = useCallback(
     (optionValue: SelectValueType) => {
@@ -89,25 +85,31 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
     () => clearable && !!selectedLabel,
     [clearable, selectedLabel]
   );
-  const [tabFocus, keyDownHandler] = useTabFocus(
-    showClear,
-    buttonRef,
-    clearRef
-  );
 
   const handleClear = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
       onSelect('');
-      buttonRef.current?.focus();
+      referenceElement?.focus();
     },
-    [onSelect]
+    [onSelect, referenceElement]
   );
 
-  const handleButtonClick = useCallback(() => {
-    setVisible(visible => !visible);
-    setFocus(true);
-  }, []);
+  const handleSelectedClick = useCallback(() => {
+    if (!disabled) {
+      setVisible(visible => !visible);
+    }
+  }, [disabled]);
+
+  const handleSelectedKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLElement>) => {
+      handleKeyDown(event);
+      if (event.key === eventKey.Enter || event.key === eventKey.Space) {
+        handleSelectedClick();
+      }
+    },
+    [handleKeyDown, handleSelectedClick]
+  );
 
   const selectOptions = useMemo(() => {
     if (filterable && search) {
@@ -129,6 +131,7 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
           selected={option.value === value}
         >
           <button
+            type="button"
             disabled={option.disabled}
             className={cls(styles.menuItemButton, {
               [styles.selected]: option.value === value
@@ -170,31 +173,24 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
     <>
       <div
         ref={setReferenceElement}
+        tabIndex={disabled ? undefined : 0}
+        role="combobox"
+        aria-expanded={visible}
+        aria-haspopup="listbox"
+        onClick={handleSelectedClick}
+        onKeyDown={handleSelectedKeyDown}
         className={cls(
           styles.ref,
           {
-            [styles.focus]: focus || tabFocus,
             [styles.disabled]: disabled,
             [styles.invalid]: invalid
           },
           className
         )}
-        onKeyDown={keyDownHandler}
       >
-        <button
-          type="button"
-          role="combobox"
-          aria-expanded={visible}
-          aria-haspopup="listbox"
-          ref={buttonRef}
-          className={styles.button}
-          onFocus={() => setFocus(true)}
-          disabled={disabled}
-          onClick={handleButtonClick}
-          onKeyDown={handleKeyDown}
-        >
-          <span className={styles.text}>{selectedLabel}</span>
-        </button>
+        <div className={styles.selection}>
+          <span className={styles.selectionText}>{selectedLabel}</span>
+        </div>
         <div className={styles.icon}>
           <Down className={styles.down} />
           {showClear && (
@@ -202,6 +198,7 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
               type="button"
               ref={clearRef}
               onClick={handleClear}
+              onKeyDown={e => e.stopPropagation()}
               className={styles.clear}
             >
               <Clear className={styles.clearIcon} />
@@ -225,9 +222,9 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
             onKeyDown={handleKeyDown}
           >
             {filterable && (
-              <div className={styles.input}>
+              <div className={styles.search}>
                 <Input
-                  suffix={<Search className={styles.search} />}
+                  suffix={<Search className={styles.searchIcon} />}
                   value={search}
                   clearable
                   onChange={e => setSearch(e.target.value)}

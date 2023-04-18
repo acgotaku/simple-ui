@@ -1,9 +1,7 @@
 import React, { memo, useCallback, useRef, useMemo, useState } from 'react';
 import cls from 'clsx';
 import { noop } from '@/utils/misc';
-import { useTabFocus } from '@/hooks/useTabFocus';
 import { useListKeyboardNav } from '@/hooks/useListKeyboardNav';
-import { useClickOutside } from '@/hooks/useClickOutside';
 import { eventKey } from '@/constants/keyboard';
 import styles from './select.module.css';
 import {
@@ -44,30 +42,11 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
   } = props;
   const [referenceElement, setReferenceElement] =
     useState<HTMLDivElement | null>(null);
-  const selectedRef = useRef<HTMLDivElement>(null);
   const clearRef = useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = useState(false);
-  const [focus, setFocus] = useState(false);
   const [search, setSearch] = useState('');
   const onClose = useCallback(() => setVisible(false), []);
   const [handleKeyDown, setPopperRef] = useListKeyboardNav(visible, onClose);
-  useClickOutside(() => setFocus(false), [referenceElement]);
-
-  const handleClick = useCallback(
-    (optionValue: SelectValueType) => {
-      const newValue = [...value];
-
-      const optionIndex = newValue.indexOf(optionValue);
-      if (optionIndex === -1) {
-        newValue.push(optionValue);
-      } else {
-        newValue.splice(optionIndex, 1);
-      }
-
-      onSelect(newValue);
-    },
-    [onSelect, value]
-  );
 
   const mergedOptions: Array<SelectOptionType> = useMemo(() => {
     if (isBasicProps(props)) {
@@ -97,36 +76,72 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
     () => clearable && !!selectedOptions.length,
     [clearable, selectedOptions]
   );
-  const [tabFocus, keyDownHandler] = useTabFocus(
-    showClear,
-    selectedRef,
-    clearRef
+
+  const isSelectAll = useMemo(() => {
+    return mergedOptions.every(option => {
+      if (option.disabled) {
+        return true;
+      } else {
+        return value.includes(option.value);
+      }
+    });
+  }, [mergedOptions, value]);
+
+  const toggleSelectAll = useCallback(() => {
+    if (isSelectAll) {
+      onSelect([]);
+    } else {
+      const sortedValues = mergedOptions
+        .filter(option => !option.disabled)
+        .map(option => option.value);
+      onSelect(sortedValues);
+    }
+  }, [isSelectAll, mergedOptions, onSelect]);
+
+  const handleClick = useCallback(
+    (optionValue: SelectValueType) => {
+      const newValues = [...value];
+
+      const optionIndex = newValues.indexOf(optionValue);
+      if (optionIndex === -1) {
+        newValues.push(optionValue);
+      } else {
+        newValues.splice(optionIndex, 1);
+      }
+
+      const sortedValues = mergedOptions
+        .filter(option => newValues.includes(option.value))
+        .map(option => option.value);
+
+      onSelect(sortedValues);
+    },
+    [onSelect, value, mergedOptions]
   );
 
   const handleClear = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
       onSelect([]);
-      selectedRef.current?.focus();
+      referenceElement?.focus();
     },
-    [onSelect]
+    [onSelect, referenceElement]
   );
 
   const handleSelectedClick = useCallback(() => {
-    setVisible(visible => !visible);
-    setFocus(true);
-  }, []);
+    if (!disabled) {
+      setVisible(visible => !visible);
+    }
+  }, [disabled]);
 
   const handleSelectedKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLElement>) => {
       handleKeyDown(event);
-      if (event.key === eventKey.Enter) {
+      if (event.key === eventKey.Enter || event.key === eventKey.Space) {
         handleSelectedClick();
       }
     },
     [handleKeyDown, handleSelectedClick]
   );
-
   const removeOption = useCallback(
     (optionValue: SelectValueType) => {
       const newValue = value.filter(key => key !== optionValue);
@@ -160,6 +175,7 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
           onClick={handleClick}
         >
           <button
+            type="button"
             disabled={option.disabled}
             className={cls(styles.menuItemButton, {
               [styles.selected]: value.includes(option.value)
@@ -207,28 +223,22 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
     <>
       <div
         ref={setReferenceElement}
+        tabIndex={disabled ? undefined : 0}
+        role="combobox"
+        aria-expanded={visible}
+        aria-haspopup="listbox"
+        onClick={handleSelectedClick}
+        onKeyDown={handleSelectedKeyDown}
         className={cls(
           styles.ref,
           {
-            [styles.focus]: focus || tabFocus,
             [styles.disabled]: disabled,
             [styles.invalid]: invalid
           },
           className
         )}
-        onKeyDown={keyDownHandler}
       >
-        <div
-          tabIndex={0}
-          role="combobox"
-          aria-expanded={visible}
-          aria-haspopup="listbox"
-          ref={selectedRef}
-          className={styles.button}
-          onFocus={() => setFocus(true)}
-          onClick={handleSelectedClick}
-          onKeyDown={handleSelectedKeyDown}
-        >
+        <div className={styles.selection}>
           {selectedOptions.map(option => (
             <Tag
               key={option.value}
@@ -246,6 +256,7 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
               type="button"
               ref={clearRef}
               onClick={handleClear}
+              onKeyDown={e => e.stopPropagation()}
               className={styles.clear}
             >
               <Clear className={styles.clearIcon} />
@@ -269,9 +280,14 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
             onKeyDown={handleKeyDown}
           >
             {filterable && (
-              <div className={styles.input}>
+              <div className={styles.search}>
+                <Checkbox
+                  checked={isSelectAll}
+                  onChange={toggleSelectAll}
+                  className={styles.checkbox}
+                />
                 <Input
-                  suffix={<Search className={styles.search} />}
+                  suffix={<Search className={styles.searchIcon} />}
                   value={search}
                   clearable
                   onChange={e => setSearch(e.target.value)}

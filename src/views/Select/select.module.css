@@ -10,6 +10,8 @@
 
 .country {
   width: 208px;
+  max-height: 68px;
+  overflow: hidden;
 
   &Item {
     display: flex;

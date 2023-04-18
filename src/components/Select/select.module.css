@@ -10,7 +10,11 @@
   background-color: var(--color-standard);
   cursor: pointer;
 
-  &.focus {
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-within {
     border: 1px solid var(--color-primary);
     .clear {
       visibility: visible;
@@ -38,21 +42,19 @@
   }
 }
 
-.button {
-  display: inline-flex;
+.selection {
+  display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 4px;
   padding: 4px 0 4px 8px;
-  width: calc(100% - 24px);
-  color: var(--color-standard-text);
+  width: calc(100% - 32px);
 
-  &:focus {
-    outline: none;
-  }
-
-  &:disabled {
-    cursor: not-allowed;
+  &Text {
+    font-size: var(--font-size-sm);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
 
@@ -67,7 +69,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin-right: 8px;
+  margin: 0 8px;
   flex: none;
 }
 
@@ -90,9 +92,19 @@
 }
 
 .search {
-  width: 20px;
-  height: 20px;
-  margin-right: 4px;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+
+  .checkbox {
+    margin: 0 4px;
+  }
+
+  &Icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+  }
 }
 
 .down {
@@ -102,10 +114,6 @@
 
 .select {
   width: 100%;
-}
-
-.input {
-  padding: 4px;
 }
 
 .checkbox {
