@@ -16,6 +16,7 @@ const TimePicker: React.FC<ITimePickerProps> = ({
   clearable = false,
   className = '',
   placement = 'bottom',
+  withSeconds = false,
   withArrow = false,
   withinPortal = true,
   sameWidth = false
@@ -35,12 +36,12 @@ const TimePicker: React.FC<ITimePickerProps> = ({
   );
 
   const checkInputTime = useCallback(() => {
-    if (isValidTime(inputTime)) {
+    if (isValidTime(inputTime, withSeconds)) {
       selectTime(inputTime);
     } else {
       setInputTime(value);
     }
-  }, [inputTime, selectTime, value]);
+  }, [inputTime, withSeconds, selectTime, value]);
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,7 +99,12 @@ const TimePicker: React.FC<ITimePickerProps> = ({
           visible={visible}
           onClose={onClose}
         >
-          <TimePanel value={value} onChange={selectTime} onClose={onClose} />
+          <TimePanel
+            value={value}
+            onChange={selectTime}
+            onClose={onClose}
+            withSeconds={withSeconds}
+          />
         </Popper>
       )}
     </>
