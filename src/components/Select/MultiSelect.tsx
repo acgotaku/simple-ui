@@ -172,6 +172,8 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
         <Option
           key={option.value.toString()}
           value={option.value}
+          selected={value.includes(option.value)}
+          disabled={option.disabled}
           onClick={handleClick}
         >
           <button
@@ -188,7 +190,7 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
               disabled={option.disabled}
               className={styles.checkbox}
             />
-            {option.label}
+            <span className={styles.menuItemText}>{option.label}</span>
           </button>
         </Option>
       ));

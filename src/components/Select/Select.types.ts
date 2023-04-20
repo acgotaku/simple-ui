@@ -66,7 +66,7 @@ export interface IOptionProps {
   label?: string;
   selected?: boolean;
   onClick?: (optionValue: SelectValueType) => void;
-  style?: React.CSSProperties;
+  disabled?: boolean;
 }
 
 export interface ITagProps {
