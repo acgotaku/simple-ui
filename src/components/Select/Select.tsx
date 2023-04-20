@@ -127,8 +127,9 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
         <Option
           key={option.value.toString()}
           value={option.value}
-          onClick={handleClick}
           selected={option.value === value}
+          disabled={option.disabled}
+          onClick={handleClick}
         >
           <button
             type="button"
@@ -137,7 +138,7 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
               [styles.selected]: option.value === value
             })}
           >
-            {option.label}
+            <span className={styles.menuItemText}>{option.label}</span>
           </button>
         </Option>
       ));

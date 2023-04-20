@@ -6,19 +6,18 @@ const Option: React.FC<IOptionProps> = ({
   value,
   onClick,
   selected,
-  style,
+  disabled = false,
   children
 }) => {
   const handleClick = useCallback(() => {
-    if (onClick) {
+    if (onClick && !disabled) {
       onClick(value);
     }
-  }, [value, onClick]);
+  }, [value, disabled, onClick]);
   return (
     <div
       className={styles.menuItem}
       onClick={handleClick}
-      style={style}
       role="option"
       aria-selected={selected}
     >
