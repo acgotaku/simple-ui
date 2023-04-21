@@ -12,6 +12,7 @@ export interface SelectOptionType {
 
 export interface IBaseSelectProps {
   className?: string;
+  placeholder?: string;
   disabled?: boolean;
   clearable?: boolean;
   filterable?: boolean;

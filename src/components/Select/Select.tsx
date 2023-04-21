@@ -31,6 +31,7 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
     value = '',
     onSelect = noop,
     className = '',
+    placeholder = '',
     disabled = false,
     clearable = false,
     filterable = false,
@@ -84,6 +85,11 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
   const showClear = useMemo(
     () => clearable && !!selectedLabel,
     [clearable, selectedLabel]
+  );
+
+  const showPlaceholder = useMemo(
+    () => placeholder && !selectedLabel,
+    [placeholder, selectedLabel]
   );
 
   const handleClear = useCallback(
@@ -190,7 +196,13 @@ const SingleSelect: React.FC<ISingleSelectProps> = props => {
         )}
       >
         <div className={styles.selection}>
-          <span className={styles.selectionText}>{selectedLabel}</span>
+          {showPlaceholder ? (
+            <span className={cls(styles.selectionText, styles.placeholder)}>
+              {placeholder}
+            </span>
+          ) : (
+            <span className={styles.selectionText}>{selectedLabel}</span>
+          )}
         </div>
         <div className={styles.icon}>
           <Down className={styles.down} />
