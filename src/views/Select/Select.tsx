@@ -21,6 +21,7 @@ const BasicSingleSelect = () => {
       value={value}
       onSelect={setValue}
       clearable
+      placeholder="Please select fruit"
       className={selectStyles.select}
     />
   );
@@ -59,6 +60,7 @@ return (
     value={value}
     onSelect={setValue}
     clearable
+    placeholder="Please select fruit"
     className={selectStyles.select}
   />
 );
@@ -233,6 +235,7 @@ const BasicMultipleSelect = () => {
       multiSelect
       clearable
       filterable
+      placeholder="Please select country"
       className={selectStyles.country}
     />
   );
@@ -261,6 +264,7 @@ return (
     multiSelect
     clearable
     filterable
+    placeholder="Please select country"
     className={selectStyles.country}
   />
 );

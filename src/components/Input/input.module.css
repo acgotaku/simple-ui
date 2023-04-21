@@ -57,6 +57,10 @@
   &:read-only {
     user-select: none;
   }
+
+  &::placeholder {
+    color: var(--color-secondary-text);
+  }
 }
 
 .prefix,

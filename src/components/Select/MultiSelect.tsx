@@ -30,6 +30,7 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
     value = [],
     onSelect = noop,
     className = '',
+    placeholder = '',
     disabled = false,
     clearable = false,
     filterable = false,
@@ -75,6 +76,11 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
   const showClear = useMemo(
     () => clearable && !!selectedOptions.length,
     [clearable, selectedOptions]
+  );
+
+  const showPlaceholder = useMemo(
+    () => placeholder && !selectedOptions.length,
+    [placeholder, selectedOptions]
   );
 
   const isSelectAll = useMemo(() => {
@@ -241,15 +247,21 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
         )}
       >
         <div className={styles.selection}>
-          {selectedOptions.map(option => (
-            <Tag
-              key={option.value}
-              disabled={disabled}
-              onClose={() => removeOption(option.value)}
-            >
-              {option.label}
-            </Tag>
-          ))}
+          {showPlaceholder ? (
+            <span className={cls(styles.selectionText, styles.placeholder)}>
+              {placeholder}
+            </span>
+          ) : (
+            selectedOptions.map(option => (
+              <Tag
+                key={option.value}
+                disabled={disabled}
+                onClose={() => removeOption(option.value)}
+              >
+                {option.label}
+              </Tag>
+            ))
+          )}
         </div>
         <div className={styles.icon}>
           <Down className={styles.down} />
