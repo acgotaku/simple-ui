@@ -1,4 +1,4 @@
-import { forwardRef, useMemo, useCallback } from 'react';
+import { forwardRef, memo, useMemo, useCallback } from 'react';
 import cls from 'clsx';
 import { useRandomId } from '@/hooks/useRandomId';
 import styles from './checkbox.module.css';
@@ -115,4 +115,4 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
 
 Checkbox.displayName = 'Checkbox';
 
-export default Checkbox;
+export default memo(Checkbox);

@@ -2,6 +2,7 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
+  memo,
   useRef,
   useState
 } from 'react';
@@ -96,4 +97,4 @@ const Form: React.FC<IFormProps> = ({
   );
 };
 
-export default Form;
+export default memo(Form);

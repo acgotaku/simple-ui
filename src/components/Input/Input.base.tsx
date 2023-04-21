@@ -2,6 +2,7 @@ import React, {
   forwardRef,
   useImperativeHandle,
   useMemo,
+  memo,
   useEffect,
   useState,
   useRef,
@@ -150,4 +151,4 @@ const BaseInput = forwardRef<HTMLInputElement, IInputProps>(
 
 BaseInput.displayName = 'BaseInput';
 
-export default BaseInput;
+export default memo(BaseInput);
