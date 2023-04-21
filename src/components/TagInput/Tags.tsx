@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useDraggable } from '@/hooks/useDraggable';
 import { noop } from '@/utils/misc';
 import { ITagsProps } from './TagInput.types';
@@ -14,7 +14,7 @@ const Tags: React.FC<ITagsProps> = ({
 }) => {
   const {
     sortedData,
-    recordRect,
+
     dragStartHandler,
     dragOverHandler,
     dragEnterHandler,
@@ -27,21 +27,13 @@ const Tags: React.FC<ITagsProps> = ({
     containerRef
   });
 
-  const removeHandler = useCallback(
-    (index: number) => {
-      recordRect();
-      removeTag(index);
-    },
-    [removeTag, recordRect]
-  );
-
   return (
     <>
       {sortedData.map((tag, index) => (
         <Tag
           key={tag}
           disabled={disabled}
-          onClose={() => removeHandler(index)}
+          onClose={() => removeTag(index)}
           draggable={draggable}
           dragStartHandler={event => dragStartHandler(event, index)}
           dragEnterHandler={() => dragEnterHandler(index)}
