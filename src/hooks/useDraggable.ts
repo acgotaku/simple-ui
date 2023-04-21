@@ -3,6 +3,11 @@ import { looseEqual, deepClone } from '@/utils/misc';
 
 const TIMEOUT = 300;
 
+interface Rect {
+  x: number;
+  y: number;
+}
+
 interface DraggableOptions {
   dataSource: AnyArray;
   updateData?: (data: AnyArray) => void;
@@ -12,7 +17,6 @@ interface DraggableOptions {
 
 type UseDraggable = (options: DraggableOptions) => {
   sortedData: AnyArray;
-  recordRect: () => void;
   dragStartHandler: (
     event: React.DragEvent<HTMLElement>,
     index: number
@@ -30,7 +34,7 @@ export const useDraggable: UseDraggable = ({
   containerRef
 }) => {
   const [sortedData, setSortedData] = useState(dataSource);
-  const prevRects = useRef<Record<string, DOMRect>>({});
+  const prevRects = useRef<Record<string, Rect>>({});
   const copyData = useRef<AnyArray>(dataSource);
   const dragItem = useRef<number>(0);
   const dragOverItem = useRef<number>(0);
@@ -42,21 +46,6 @@ export const useDraggable: UseDraggable = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSource]);
 
-  const recordRect = useCallback(() => {
-    if (draggable && containerRef?.current) {
-      Array.from(containerRef.current.querySelectorAll('[data-id]')).forEach(
-        async node => {
-          const dom = node as HTMLElement;
-          const key = dom.dataset.id as string;
-          const rect = dom.getBoundingClientRect();
-          if (key) {
-            prevRects.current[key] = rect;
-          }
-        }
-      );
-    }
-  }, [draggable, containerRef]);
-
   useEffect(() => {
     if (draggable && containerRef?.current) {
       Array.from(containerRef.current.querySelectorAll('[data-id]')).forEach(
@@ -65,7 +54,10 @@ export const useDraggable: UseDraggable = ({
           const key = dom.dataset.id as string;
           const prevRect = prevRects.current[key];
           if (key) {
-            const rect = dom.getBoundingClientRect();
+            const rect = {
+              x: dom.offsetLeft,
+              y: dom.offsetTop
+            };
             if (prevRect) {
               const dy = prevRect.y - rect.y;
               const dx = prevRect.x - rect.x;
@@ -101,9 +93,8 @@ export const useDraggable: UseDraggable = ({
       event.dataTransfer.setData('text/plain', index.toString());
       dragItem.current = index;
       copyData.current = deepClone(sortedData);
-      recordRect();
     },
-    [sortedData, recordRect]
+    [sortedData]
   );
   const dragEnterHandler = useCallback((index: number) => {
     if (dragOverItem.current !== index) {
@@ -131,7 +122,6 @@ export const useDraggable: UseDraggable = ({
 
   return {
     sortedData,
-    recordRect,
     dragStartHandler,
     dragOverHandler,
     dragEnterHandler,
