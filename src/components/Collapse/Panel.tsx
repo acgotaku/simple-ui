@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useMemo } from 'react';
+import React, { useCallback, useRef, useMemo, memo } from 'react';
 import { Transition } from 'react-transition-group';
 import cls from 'clsx';
 import { useRandomId } from '@/hooks/useRandomId';
@@ -109,4 +109,4 @@ const Panel: React.FC<IPanelProps> = ({
   );
 };
 
-export default Panel;
+export default memo(Panel);

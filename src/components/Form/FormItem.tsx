@@ -1,5 +1,6 @@
 import React, {
   useMemo,
+  memo,
   useContext,
   useCallback,
   useState,
@@ -233,4 +234,4 @@ const FormItem = forwardRef<IFormItemRef, IFormItemProps>((props, ref) => {
 
 FormItem.displayName = 'FormItem';
 
-export default FormItem;
+export default memo(FormItem);

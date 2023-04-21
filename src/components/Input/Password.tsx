@@ -1,4 +1,4 @@
-import { useState, useMemo, forwardRef } from 'react';
+import { useState, useMemo, memo, forwardRef } from 'react';
 import { ReactComponent as ShowPassword } from '@/assets/icons/eye.svg';
 import { ReactComponent as HidePassword } from '@/assets/icons/eye-closed.svg';
 import styles from './input.module.css';
@@ -32,4 +32,4 @@ const Password = forwardRef<HTMLInputElement, IPasswordProps>((props, ref) => {
 
 Password.displayName = 'Password';
 
-export default Password;
+export default memo(Password);

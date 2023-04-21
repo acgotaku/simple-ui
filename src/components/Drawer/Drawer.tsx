@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import cls from 'clsx';
 import { useScrollLock } from '@/hooks/useScrollLock';
@@ -62,4 +62,4 @@ const Drawer: React.FC<IDrawerProps> = ({
   );
 };
 
-export default Drawer;
+export default memo(Drawer);

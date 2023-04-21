@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import cls from 'clsx';
 import styles from './link.module.css';
@@ -48,4 +48,4 @@ const Link: React.FC<ILinkProps> = ({
   }
 };
 
-export default Link;
+export default memo(Link);

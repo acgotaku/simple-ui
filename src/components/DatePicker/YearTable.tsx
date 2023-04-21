@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useRef } from 'react';
+import React, { useState, useCallback, useMemo, memo, useRef } from 'react';
 import cls from 'clsx';
 import styles from './datepicker.module.css';
 import { YEAR_COUNTS } from './constants';
@@ -87,4 +87,4 @@ const YearTable: React.FC<IYearTableProps> = () => {
   );
 };
 
-export default YearTable;
+export default memo(YearTable);

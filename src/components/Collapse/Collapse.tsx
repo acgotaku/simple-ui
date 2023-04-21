@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, memo, useState } from 'react';
 import cls from 'clsx';
 import { CollapseContext } from './context';
 import styles from './collapse.module.css';
@@ -53,4 +53,4 @@ const Collapse: React.FC<ICollapseProps> = ({
   );
 };
 
-export default Collapse;
+export default memo(Collapse);
