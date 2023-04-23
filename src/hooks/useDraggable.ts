@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { looseEqual, deepClone } from '@/utils/misc';
 
+function isNumber(value: unknown): value is number {
+  return typeof value === 'number';
+}
+
 const TIMEOUT = 300;
 
 interface Rect {
@@ -36,8 +40,8 @@ export const useDraggable: UseDraggable = ({
   const [sortedData, setSortedData] = useState(dataSource);
   const prevRects = useRef<Record<string, Rect>>({});
   const copyData = useRef<AnyArray>(dataSource);
-  const dragItem = useRef<number>(0);
-  const dragOverItem = useRef<number>(0);
+  const dragItem = useRef<number | null>(null);
+  const dragEnterItem = useRef<number>(0);
 
   useEffect(() => {
     if (!looseEqual(dataSource, sortedData)) {
@@ -97,17 +101,20 @@ export const useDraggable: UseDraggable = ({
     [sortedData]
   );
   const dragEnterHandler = useCallback((index: number) => {
-    if (dragOverItem.current !== index) {
-      dragOverItem.current = index;
+    if (dragEnterItem.current !== index && isNumber(dragItem.current)) {
+      dragEnterItem.current = index;
       const newData = deepClone(copyData.current);
       const dragData = newData[dragItem.current];
       newData.splice(dragItem.current, 1);
-      newData.splice(dragOverItem.current, 0, dragData);
+      newData.splice(dragEnterItem.current, 0, dragData);
       setSortedData(newData);
     }
   }, []);
   const dragEndHandler = useCallback(() => {
-    updateData?.(sortedData);
+    dragItem.current = null;
+    if (!looseEqual(copyData.current, sortedData)) {
+      updateData?.(sortedData);
+    }
   }, [sortedData, updateData]);
   const dragOverHandler = useCallback((event: React.DragEvent<HTMLElement>) => {
     event.preventDefault();
