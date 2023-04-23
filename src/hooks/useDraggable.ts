@@ -41,7 +41,7 @@ export const useDraggable: UseDraggable = ({
   const prevRects = useRef<Record<string, Rect>>({});
   const copyData = useRef<AnyArray>(dataSource);
   const dragItem = useRef<number | null>(null);
-  const dragEnterItem = useRef<number>(0);
+  const dragEnterItem = useRef<number>(-1);
 
   useEffect(() => {
     if (!looseEqual(dataSource, sortedData)) {
@@ -112,6 +112,7 @@ export const useDraggable: UseDraggable = ({
   }, []);
   const dragEndHandler = useCallback(() => {
     dragItem.current = null;
+    dragEnterItem.current = -1;
     if (!looseEqual(copyData.current, sortedData)) {
       updateData?.(sortedData);
     }
