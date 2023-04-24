@@ -1,0 +1,16 @@
+.grid {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  border: none;
+
+  &Item {
+    width: 120px;
+    height: 60px;
+    border: 1px solid var(--color-standard-border);
+
+    &:last-child {
+      border-bottom: 1px solid var(--color-standard-border);
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.list {
+  width: 100%;
+
+  &Inner {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    border: 1px solid var(--color-standard-border);
+    overflow: auto;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  flex: none;
+  width: 100%;
+  padding: 8px 16px;
+  min-height: 40px;
+  font-size: var(--font-size-sm);
+  border-bottom: 1px solid var(--color-standard-border);
+  background-color: var(--color-standard);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
