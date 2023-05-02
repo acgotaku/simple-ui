@@ -1,5 +1,4 @@
-import React, { useCallback, useRef, useMemo, memo } from 'react';
-import { Transition } from 'react-transition-group';
+import React, { useRef, useMemo, memo } from 'react';
 import cls from 'clsx';
 import { useRandomId } from '@/hooks/useRandomId';
 import { useCollapseContext } from './context';
@@ -22,50 +21,6 @@ const Panel: React.FC<IPanelProps> = ({
     [currentPanel, panelName]
   );
 
-  const onEnter = useCallback(() => {
-    if (nodeRef.current) {
-      const node = nodeRef.current;
-      node.style.height = '0';
-    }
-  }, []);
-  const onEntering = useCallback(() => {
-    if (nodeRef.current) {
-      const node = nodeRef.current;
-      if (node.scrollHeight !== 0) {
-        node.style.height = node.scrollHeight + 'px';
-      } else {
-        node.style.height = '';
-      }
-    }
-  }, []);
-  const onEntered = useCallback(() => {
-    if (nodeRef.current) {
-      const node = nodeRef.current;
-      node.style.height = '';
-    }
-  }, []);
-
-  const onExit = useCallback(() => {
-    if (nodeRef.current) {
-      const node = nodeRef.current;
-      node.style.height = node.scrollHeight + 'px';
-    }
-  }, []);
-  const onExiting = useCallback(() => {
-    if (nodeRef.current) {
-      const node = nodeRef.current;
-      if (node.scrollHeight !== 0) {
-        node.style.height = '0';
-      }
-    }
-  }, []);
-  const onExited = useCallback(() => {
-    if (nodeRef.current) {
-      const node = nodeRef.current;
-      node.style.height = '';
-    }
-  }, []);
-
   return (
     <div className={cls(styles.panel, className)}>
       <div className={styles.panelHeader}>
@@ -83,28 +38,15 @@ const Panel: React.FC<IPanelProps> = ({
           />
         </button>
       </div>
-      <Transition
-        nodeRef={nodeRef}
-        in={expanded}
-        unmountOnExit
-        timeout={300}
-        onEnter={onEnter}
-        onEntering={onEntering}
-        onEntered={onEntered}
-        onExit={onExit}
-        onExiting={onExiting}
-        onExited={onExited}
+      <div
+        role="region"
+        className={cls(styles.panelBody, {
+          [styles.expanded]: expanded
+        })}
+        ref={nodeRef}
       >
-        <div
-          role="region"
-          className={cls(styles.panelBody, {
-            [styles.expanded]: expanded
-          })}
-          ref={nodeRef}
-        >
-          {children}
-        </div>
-      </Transition>
+        <div className={styles.panelInner}>{children}</div>
+      </div>
     </div>
   );
 };
