@@ -39,12 +39,18 @@
   }
 
   &Body {
+    display: grid;
+    grid-template-rows: 0fr;
     opacity: 0;
-    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    overflow: hidden;
+    transition: grid-template-rows 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
     &.expanded {
+      grid-template-rows: 1fr;
       opacity: 1;
     }
+  }
+
+  &Inner {
+    overflow: hidden;
   }
 }
