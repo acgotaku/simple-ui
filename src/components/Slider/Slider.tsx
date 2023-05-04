@@ -50,11 +50,13 @@ const Slider: React.FC<ISliderProps> = ({
   );
   const checkInputValue = useCallback(() => {
     if (validInputValue) {
-      setRangeValue(Number(inputValue));
+      const value = Number(inputValue);
+      setRangeValue(value);
+      onChange?.(value);
     } else {
       setInputValue(rangeValue);
     }
-  }, [inputValue, validInputValue, rangeValue]);
+  }, [inputValue, validInputValue, rangeValue, onChange]);
   const blurInputHandler = useCallback(() => {
     checkInputValue();
   }, [checkInputValue]);
