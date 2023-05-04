@@ -9,7 +9,7 @@ import React, {
 import { eventKey } from '@/constants/keyboard';
 import styles from './datepicker.module.css';
 import { IDatePanelProps, PanelView } from './DatePicker.types';
-import { isValidDate } from './utils';
+import { isValidDate, covertToDate } from './utils';
 import { DateContext } from './context';
 import DateTable from './DateTable';
 import MonthTable from './MonthTable';
@@ -18,12 +18,7 @@ import YearTable from './YearTable';
 const DatePanel: React.FC<IDatePanelProps> = ({ value, onChange, onClose }) => {
   const [view, setView] = useState<PanelView>('date');
   const [initialFocus, setInitialFocus] = useState(false);
-  const initDate = useMemo(() => {
-    if (isValidDate(value)) {
-      return new Date(value);
-    }
-    return new Date();
-  }, [value]);
+  const initDate = useMemo(() => covertToDate(value), [value]);
   const [currentDate, setCurrentDate] = useState(initDate);
   const currentYear = useMemo(() => currentDate.getFullYear(), [currentDate]);
   const currentMonth = useMemo(() => currentDate.getMonth(), [currentDate]);

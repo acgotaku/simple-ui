@@ -1,6 +1,6 @@
 import { Placement } from '@/floating';
 
-export type DatePickerValueType = string | number | Date;
+export type DatePickerValueType = string | Date;
 export type PanelView = 'date' | 'month' | 'year';
 
 export interface IDatePickerProps {

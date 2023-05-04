@@ -6,7 +6,7 @@ import Input from '../Input';
 import Popper from '../Popper';
 import { IDatePickerProps } from './DatePicker.types';
 import DatePanel from './DatePanel';
-import { isValidDate, dateToString } from './utils';
+import { isValidDate, dateToString, isDate, parseDate } from './utils';
 import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg';
 
 const DatePicker: React.FC<IDatePickerProps> = ({
@@ -26,7 +26,11 @@ const DatePicker: React.FC<IDatePickerProps> = ({
   const onClose = useCallback(() => setVisible(false), []);
   const strDate = useMemo(() => {
     if (isValidDate(value)) {
-      return dateToString(new Date(value));
+      if (isDate(value)) {
+        return dateToString(value);
+      } else {
+        return value;
+      }
     } else {
       return '';
     }
@@ -43,7 +47,7 @@ const DatePicker: React.FC<IDatePickerProps> = ({
 
   const checkInputDate = useCallback(() => {
     if (isValidDate(inputDate)) {
-      selectDate(new Date(inputDate));
+      selectDate(parseDate(inputDate));
     } else {
       setInputDate(strDate);
     }
@@ -54,7 +58,7 @@ const DatePicker: React.FC<IDatePickerProps> = ({
       const value = event.target.value;
       setInputDate(value);
       if (clearable && !value) {
-        onChange && onChange();
+        onChange?.();
       }
     },
     [onChange, clearable]
