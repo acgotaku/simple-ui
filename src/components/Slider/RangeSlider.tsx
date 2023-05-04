@@ -76,24 +76,28 @@ const RangeSlider: React.FC<IRangeSliderProps> = ({
   );
   const checkInputStartValue = useCallback(() => {
     if (validInputStartValue) {
-      setRangeValue({
+      const newRangeValue = {
         start: Number(inputStartValue),
         end: rangeValue.end
-      });
+      };
+      setRangeValue(newRangeValue);
+      onChange?.(newRangeValue);
     } else {
       setInputStartValue(rangeValue.start);
     }
-  }, [inputStartValue, validInputStartValue, rangeValue]);
+  }, [inputStartValue, validInputStartValue, rangeValue, onChange]);
   const checkInputEndValue = useCallback(() => {
     if (validInputEndValue) {
-      setRangeValue({
+      const newRangeValue = {
         start: rangeValue.start,
         end: Number(inputEndValue)
-      });
+      };
+      setRangeValue(newRangeValue);
+      onChange?.(newRangeValue);
     } else {
       setInputEndValue(rangeValue.end);
     }
-  }, [inputEndValue, validInputEndValue, rangeValue]);
+  }, [inputEndValue, validInputEndValue, rangeValue, onChange]);
 
   const blurInputStartHandler = useCallback(() => {
     checkInputStartValue();
@@ -143,7 +147,7 @@ const RangeSlider: React.FC<IRangeSliderProps> = ({
         };
         setRangeValue(newRangeValue);
         setInputStartValue(value);
-        onChange && onChange(newRangeValue);
+        onChange?.(newRangeValue);
       }
     },
     [rangeValue, onChange]
@@ -159,7 +163,7 @@ const RangeSlider: React.FC<IRangeSliderProps> = ({
         };
         setRangeValue(newRangeValue);
         setInputEndValue(value);
-        onChange && onChange(newRangeValue);
+        onChange?.(newRangeValue);
       }
     },
     [rangeValue, onChange]
