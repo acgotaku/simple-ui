@@ -1,6 +1,8 @@
 import { DatePickerValueType, Cell } from './DatePicker.types';
 import { ROW, COL } from './constants';
 
+export const DATE_REGEX = /^[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
 export function isDate(date: DatePickerValueType): date is Date {
   return date instanceof Date;
 }
@@ -12,7 +14,7 @@ export function isValidDate(
     if (isDate(date)) {
       return !Number.isNaN(+date);
     } else {
-      return !Number.isNaN(+new Date(date));
+      return DATE_REGEX.test(date);
     }
   } else {
     return false;
@@ -79,6 +81,27 @@ export function dateToString(date?: Date) {
   }
 }
 
+export function parseDate(date: string): Date {
+  if (DATE_REGEX.test(date)) {
+    const [year, month, day] = date.split('-');
+    return new Date(Number(year), Number(month) - 1, Number(day));
+  } else {
+    return new Date();
+  }
+}
+
+export function covertToDate(date?: DatePickerValueType): Date {
+  if (date) {
+    if (isDate(date)) {
+      return date;
+    } else {
+      return parseDate(date);
+    }
+  } else {
+    return new Date();
+  }
+}
+
 export function prevMonth(year: number, month: number) {
   return month === 0 ? new Date(year - 1, 11, 1) : new Date(year, month - 1, 1);
 }
@@ -93,6 +116,7 @@ export default {
   getDefaultTableCell,
   isToday,
   dateToString,
+  parseDate,
   prevMonth,
   nextMonth
 };
