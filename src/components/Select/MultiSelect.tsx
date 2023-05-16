@@ -73,6 +73,25 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
     [mergedOptions, value]
   );
 
+  const selectOptions = useMemo(() => {
+    if (filterable && search) {
+      const keywords = search
+        .split(' ')
+        .filter(x => x)
+        .map(x => x.toLowerCase());
+      if (keywords.length) {
+        return mergedOptions.filter(option => {
+          const label = option.label?.toString().toLowerCase() || '';
+          return keywords.some(key => label.includes(key));
+        });
+      } else {
+        return mergedOptions;
+      }
+    } else {
+      return mergedOptions;
+    }
+  }, [mergedOptions, filterable, search]);
+
   const showClear = useMemo(
     () => clearable && !!selectedOptions.length,
     [clearable, selectedOptions]
@@ -84,25 +103,25 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
   );
 
   const isSelectAll = useMemo(() => {
-    return mergedOptions.every(option => {
+    return selectOptions.every(option => {
       if (option.disabled) {
         return true;
       } else {
         return value.includes(option.value);
       }
     });
-  }, [mergedOptions, value]);
+  }, [selectOptions, value]);
 
   const toggleSelectAll = useCallback(() => {
     if (isSelectAll) {
       onSelect([]);
     } else {
-      const sortedValues = mergedOptions
+      const sortedValues = selectOptions
         .filter(option => !option.disabled)
         .map(option => option.value);
       onSelect(sortedValues);
     }
-  }, [isSelectAll, mergedOptions, onSelect]);
+  }, [isSelectAll, selectOptions, onSelect]);
 
   const handleClick = useCallback(
     (optionValue: SelectValueType) => {
@@ -155,22 +174,6 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
     },
     [onSelect, value]
   );
-
-  const selectOptions = useMemo(() => {
-    if (filterable && search) {
-      const keywords = search.split(' ').filter(x => x);
-      if (keywords.length) {
-        return mergedOptions.filter(option => {
-          const label = option.label?.toString().toLowerCase() || '';
-          return keywords.some(key => label.includes(key));
-        });
-      } else {
-        return mergedOptions;
-      }
-    } else {
-      return mergedOptions;
-    }
-  }, [mergedOptions, filterable, search]);
 
   const listView = useMemo(() => {
     if (isBasicProps(props)) {
