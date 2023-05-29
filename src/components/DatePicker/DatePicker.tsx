@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, memo } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import cls from 'clsx';
 import { eventKey } from '@/constants/keyboard';
 import styles from './datepicker.module.css';
@@ -116,4 +116,4 @@ const DatePicker: React.FC<IDatePickerProps> = ({
   );
 };
 
-export default memo(DatePicker);
+export default DatePicker;

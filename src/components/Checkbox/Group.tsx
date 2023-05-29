@@ -1,4 +1,4 @@
-import React, { useMemo, memo, useCallback, useRef } from 'react';
+import React, { useMemo, useCallback, useRef } from 'react';
 import cls from 'clsx';
 import { noop } from '@/utils/misc';
 import { useDraggable } from '@/hooks/useDraggable';
@@ -101,4 +101,4 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
   );
 };
 
-export default memo(CheckboxGroup);
+export default CheckboxGroup;

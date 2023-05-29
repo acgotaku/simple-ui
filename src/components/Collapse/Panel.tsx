@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, memo } from 'react';
+import React, { useRef, useMemo } from 'react';
 import cls from 'clsx';
 import { useRandomId } from '@/hooks/useRandomId';
 import { useCollapseContext } from './context';
@@ -51,4 +51,4 @@ const Panel: React.FC<IPanelProps> = ({
   );
 };
 
-export default memo(Panel);
+export default Panel;

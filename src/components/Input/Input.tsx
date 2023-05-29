@@ -1,4 +1,4 @@
-import { memo, forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 import { IInputProps } from './Input.types';
 import BaseInput from './Input.base';
@@ -15,4 +15,4 @@ const Input = forwardRef<HTMLInputElement, IInputProps>((props, ref) => {
 
 Input.displayName = 'Input';
 
-export default memo(Input);
+export default Input;

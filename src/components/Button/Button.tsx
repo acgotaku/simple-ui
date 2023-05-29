@@ -1,4 +1,4 @@
-import React, { forwardRef, memo } from 'react';
+import React, { forwardRef } from 'react';
 import cls from 'clsx';
 import styles from './button.module.css';
 import { IButtonProps } from './Button.types';
@@ -42,4 +42,4 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
 
 Button.displayName = 'Button';
 
-export default memo(Button);
+export default Button;

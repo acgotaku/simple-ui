@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, memo, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import cls from 'clsx';
 import styles from './datepicker.module.css';
@@ -194,4 +194,4 @@ const DateTable: React.FC<IDateTableProps> = ({
   );
 };
 
-export default memo(DateTable);
+export default DateTable;

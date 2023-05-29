@@ -2,7 +2,6 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
-  memo,
   useRef,
   useState
 } from 'react';
@@ -94,4 +93,4 @@ const DatePanel: React.FC<IDatePanelProps> = ({ value, onChange, onClose }) => {
   );
 };
 
-export default memo(DatePanel);
+export default DatePanel;
