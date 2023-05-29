@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useRef, useMemo, useState } from 'react';
+import React, { useCallback, useRef, useMemo, useState } from 'react';
 import cls from 'clsx';
 import { noop } from '@/utils/misc';
 import { useListKeyboardNav } from '@/hooks/useListKeyboardNav';
@@ -265,4 +265,4 @@ const Select: React.FC<ISelectProps> = props => {
   }
 };
 
-export default memo(Select);
+export default Select;

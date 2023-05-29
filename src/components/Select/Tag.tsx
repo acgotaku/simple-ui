@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import cls from 'clsx';
 import { ReactComponent as Close } from '@/assets/icons/close.svg';
 import styles from './select.module.css';
@@ -33,4 +33,4 @@ const Tag: React.FC<ITagProps> = ({ disabled = false, children, onClose }) => {
   );
 };
 
-export default memo(Tag);
+export default Tag;

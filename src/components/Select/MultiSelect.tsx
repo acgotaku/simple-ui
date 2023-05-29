@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useRef, useMemo, useState } from 'react';
+import React, { useCallback, useRef, useMemo, useState } from 'react';
 import cls from 'clsx';
 import { noop } from '@/utils/misc';
 import { useListKeyboardNav } from '@/hooks/useListKeyboardNav';
@@ -321,4 +321,4 @@ const MultiSelect: React.FC<IMultiSelectProps> = props => {
   );
 };
 
-export default memo(MultiSelect);
+export default MultiSelect;

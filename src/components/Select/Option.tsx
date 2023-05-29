@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import styles from './select.module.css';
 import { IOptionProps } from './Select.types';
 
@@ -26,4 +26,4 @@ const Option: React.FC<IOptionProps> = ({
   );
 };
 
-export default memo(Option);
+export default Option;
