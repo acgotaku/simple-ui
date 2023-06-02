@@ -65,23 +65,25 @@ export const useDraggable: UseDraggable = ({
             if (prevRect) {
               const dy = prevRect.y - rect.y;
               const dx = prevRect.x - rect.x;
-              dom.style.pointerEvents = 'none';
-              dom.animate(
-                [
+              if (dy || dx) {
+                dom.style.pointerEvents = 'none';
+                dom.animate(
+                  [
+                    {
+                      transform: `translate(${dx}px, ${dy}px)`
+                    },
+                    { transform: 'translate(0, 0)' }
+                  ],
                   {
-                    transform: `translate(${dx}px, ${dy}px)`
-                  },
-                  { transform: 'translate(0, 0)' }
-                ],
-                {
-                  duration: TIMEOUT,
-                  easing: 'linear'
-                }
-              );
-              await Promise.allSettled(
-                node.getAnimations().map(animation => animation.finished)
-              );
-              dom.style.pointerEvents = '';
+                    duration: TIMEOUT,
+                    easing: 'linear'
+                  }
+                );
+                await Promise.allSettled(
+                  node.getAnimations().map(animation => animation.finished)
+                );
+                dom.style.pointerEvents = '';
+              }
             }
             prevRects.current[key] = rect;
           }
