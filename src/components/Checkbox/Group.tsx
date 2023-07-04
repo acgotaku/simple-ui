@@ -29,7 +29,6 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = ({
     dropHandler
   } = useDraggable({
     dataSource: options,
-    draggable,
     containerRef
   });
 

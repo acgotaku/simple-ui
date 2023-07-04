@@ -23,7 +23,6 @@ const Tags: React.FC<ITagsProps> = ({
   } = useDraggable({
     dataSource: value,
     updateData: onChange,
-    draggable,
     containerRef
   });
 
