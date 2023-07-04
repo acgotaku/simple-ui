@@ -27,7 +27,6 @@ const List: React.FC<IListProps> = ({
   } = useDraggable({
     dataSource,
     updateData: setList,
-    draggable,
     containerRef
   });
 

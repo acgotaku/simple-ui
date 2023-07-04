@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { looseEqual, deepClone } from '@/utils/misc';
+import { looseEqual } from '@/utils/misc';
 
 function isNumber(value: unknown): value is number {
   return typeof value === 'number';
@@ -15,7 +15,6 @@ interface Rect {
 interface DraggableOptions {
   dataSource: AnyArray;
   updateData?: (data: AnyArray) => void;
-  draggable?: boolean;
   containerRef?: React.RefObject<HTMLElement>;
 }
 
@@ -34,7 +33,6 @@ type UseDraggable = (options: DraggableOptions) => {
 export const useDraggable: UseDraggable = ({
   dataSource,
   updateData,
-  draggable = false,
   containerRef
 }) => {
   const [sortedData, setSortedData] = useState(dataSource);
@@ -50,8 +48,25 @@ export const useDraggable: UseDraggable = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSource]);
 
+  const recordRect = useCallback(() => {
+    if (containerRef?.current) {
+      Array.from(containerRef.current.querySelectorAll('[data-id]')).forEach(
+        node => {
+          const dom = node as HTMLElement;
+          const key = dom.dataset.id as string;
+          if (key) {
+            prevRects.current[key] = {
+              x: dom.offsetLeft,
+              y: dom.offsetTop
+            };
+          }
+        }
+      );
+    }
+  }, [containerRef]);
+
   useEffect(() => {
-    if (draggable && containerRef?.current) {
+    if (isNumber(dragItem.current) && containerRef?.current) {
       Array.from(containerRef.current.querySelectorAll('[data-id]')).forEach(
         async node => {
           const dom = node as HTMLElement;
@@ -90,7 +105,7 @@ export const useDraggable: UseDraggable = ({
         }
       );
     }
-  }, [draggable, sortedData, containerRef]);
+  }, [sortedData, containerRef]);
 
   const dragStartHandler = useCallback(
     (event: React.DragEvent<HTMLElement>, index: number) => {
@@ -98,14 +113,15 @@ export const useDraggable: UseDraggable = ({
       // set dataTransfer enable mobile drag
       event.dataTransfer.setData('text/plain', index.toString());
       dragItem.current = index;
-      copyData.current = deepClone(sortedData);
+      copyData.current = [...sortedData];
+      recordRect();
     },
-    [sortedData]
+    [sortedData, recordRect]
   );
   const dragEnterHandler = useCallback((index: number) => {
     if (dragEnterItem.current !== index && isNumber(dragItem.current)) {
       dragEnterItem.current = index;
-      const newData = deepClone(copyData.current);
+      const newData = [...copyData.current];
       const dragData = newData[dragItem.current];
       newData.splice(dragItem.current, 1);
       newData.splice(dragEnterItem.current, 0, dragData);
