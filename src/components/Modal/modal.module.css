@@ -1,7 +1,6 @@
 .modal {
   max-height: 100vh;
   min-width: min(440px, 90vw);
-  transition: transform 0.3s;
 
   .inner {
     display: flex;
@@ -59,10 +58,9 @@
   align-items: center;
   justify-content: center;
   background-color: var(--color-mask-bg);
-  transition: opacity 0.3s;
   z-index: var(--z-index-modal);
 
-  &.mask-enter {
+  &Enter {
     opacity: 0;
 
     .modal {
@@ -70,7 +68,16 @@
     }
   }
 
-  &.mask-enter-active {
+  &EnterActive {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    .modal {
+      transform: scale(1);
+      transition: transform 0.3s ease;
+    }
+  }
+
+  &Exit {
     opacity: 1;
 
     .modal {
@@ -78,19 +85,13 @@
     }
   }
 
-  &.mask-exit {
-    opacity: 1;
-
-    .modal {
-      transform: scale(1);
-    }
-  }
-
-  &.mask-exit-active {
+  &ExitActive {
     opacity: 0;
+    transition: opacity 0.3s ease;
 
     .modal {
       transform: scale(0.9);
+      transition: transform 0.3s ease;
     }
   }
 }
