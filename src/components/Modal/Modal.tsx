@@ -5,9 +5,11 @@ import { useWindowEvent } from '@/hooks/useWindowEvent';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 import { eventKey } from '@/constants/keyboard';
 import { ReactComponent as Close } from '@/assets/icons/close.svg';
-import styles from './modal.module.css';
 import { IModalProps } from './Modal.types';
 import Portal from '../Portal';
+import styles from './modal.module.css';
+
+const TIMEOUT = 300;
 
 const Modal: React.FC<IModalProps> = ({
   children,
@@ -39,12 +41,12 @@ const Modal: React.FC<IModalProps> = ({
         nodeRef={nodeRef}
         in={visible}
         unmountOnExit
-        timeout={300}
+        timeout={TIMEOUT}
         classNames={{
-          enter: styles['mask-enter'],
-          enterActive: styles['mask-enter-active'],
-          exit: styles['mask-exit'],
-          exitActive: styles['mask-exit-active']
+          enter: styles.maskEnter,
+          enterActive: styles.maskEnterActive,
+          exit: styles.maskExit,
+          exitActive: styles.maskExitActive
         }}
       >
         <div
