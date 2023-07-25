@@ -5,7 +5,6 @@
   max-width: 100vw;
   max-height: 100vh;
   background-color: var(--color-standard);
-  transition: transform 0.3s;
 
   &.left,
   &.right {
@@ -40,11 +39,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  transition: opacity 0.3s;
   background-color: var(--color-mask-bg);
   z-index: var(--z-index-drawer);
 
-  &.mask-enter {
+  &Enter {
     opacity: 0;
 
     .drawer {
@@ -63,7 +61,23 @@
     }
   }
 
-  &.mask-enter-active {
+  &EnterActive {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+
+    .drawer {
+      transition: transform 0.3s ease;
+
+      &.left,
+      &.right,
+      &.top,
+      &.bottom {
+        transform: translate(0, 0);
+      }
+    }
+  }
+
+  &Exit {
     opacity: 1;
 
     .drawer {
@@ -76,23 +90,13 @@
     }
   }
 
-  &.mask-exit {
-    opacity: 1;
-
-    .drawer {
-      &.left,
-      &.right,
-      &.top,
-      &.bottom {
-        transform: translate(0, 0);
-      }
-    }
-  }
-
-  &.mask-exit-active {
+  &ExitActive {
     opacity: 0;
+    transition: opacity 0.3s ease;
 
     .drawer {
+      transition: transform 0.3s ease;
+
       &.left {
         transform: translate(-100%, 0);
       }

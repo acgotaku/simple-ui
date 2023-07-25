@@ -9,6 +9,8 @@ import styles from './drawer.module.css';
 import { IDrawerProps } from './Drawer.types';
 import Portal from '../Portal';
 
+const TIMEOUT = 300;
+
 const Drawer: React.FC<IDrawerProps> = ({
   children,
   visible,
@@ -38,12 +40,12 @@ const Drawer: React.FC<IDrawerProps> = ({
         nodeRef={nodeRef}
         in={visible}
         unmountOnExit
-        timeout={300}
+        timeout={TIMEOUT}
         classNames={{
-          enter: styles['mask-enter'],
-          enterActive: styles['mask-enter-active'],
-          exit: styles['mask-exit'],
-          exitActive: styles['mask-exit-active']
+          enter: styles.maskEnter,
+          enterActive: styles.maskEnterActive,
+          exit: styles.maskExit,
+          exitActive: styles.maskExitActive
         }}
       >
         <div className={styles.mask} ref={nodeRef} onClick={handleClose}>
